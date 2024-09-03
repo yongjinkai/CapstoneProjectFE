@@ -1,0 +1,55 @@
+class Mock{
+
+    constructor(){
+        // TODO: WIP
+    }
+    
+    // Static variables
+    /* ************** */
+    
+    // !! Mock response 200 SUCCESS (akin to response.status === 200)
+    static successResponse = {                                  
+        ok: true,                                               // Indicates the response was successful
+        status: 200,                                            // HTTP status code for Not Found
+        statusText: 'OK',                                       // Corresponding status text
+        json: async () => ({ message: 'Success!' }),            // Mocked JSON response
+        text: async () => 'Success!',                           // Mocked plain text response
+        headers: new Headers({
+            'Content-Type': 'application/json'
+        })
+    };
+
+    // !! Mock response 404 NOT_FOUND (akin to response.status === 400)
+    static notFoundResponse = {                                 
+        ok: false,                                              // Indicates the response was NOT successful
+        status: 404,                                            // HTTP status code for Not Found
+        statusText: 'Not Found',                                // Corresponding status text
+        json: async () => ({ error: 'Resource not found' }),    // Mocked JSON response
+        text: async () => 'Resource not found',                 // Mocked plain text response
+        headers: new Headers({
+            'Content-Type': 'application/json'
+        })
+    };
+
+    // !! Mock token containing the subscriber (sub: martin@example.com), and Unix Timestamps: issued at (iat: 1st Sept 2024) and expiry (exp: 1st Sept 2025)
+    static mockToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJtYXJ0aW5AZXhhbXBsZS5jb20iLCJpYXQiOjE3MjUxNTQzNzEsImV4cCI6MTc1NjY5MDM3M30.h2f3qzjWuDFq3p1kPqY7yFbZ5iy5XqFMRScztyL5F0k";
+
+    // Static methods
+    /* ************** */
+
+    static getMockSuccess(){                                    // Returns mock OK status
+        return this.successResponse;
+    }
+
+    static getMockNotFound(){                                   // Returns mock NOT_FOUND status
+        return this.successResponse;
+    }
+
+    static getToken(status = false){                            // Returns mock NOT_FOUND status
+        return status ? this.mockToken : status;
+    }
+
+    // Class methods (TBC)
+    /* **************** */
+
+}

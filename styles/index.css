@@ -1,0 +1,346 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+/* universal settings */
+*,*::before,*::after{
+  margin:0;
+  padding:0;
+  /* outline: 1px dashed #ffffff20; */  /* temporary outline */
+}
+
+/* start of general section */
+
+/* * {
+    margin: 0px;
+    padding: 0px;
+} */
+
+html,
+body {
+  height: 100dvh;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  color: #fff;
+  background-image: url("../img/Home_background.png");
+  background-repeat: no-repeat;
+  background-position: top center;
+  background-size:cover;
+  background-attachment: fixed;
+}
+
+.about-us {
+  padding-top: 5rem;
+  padding-bottom: 5rem;
+}
+
+/* end of general section */
+
+/* start of navigation section */
+
+.navbar-toggler,
+.btn-close {
+  &:focus{
+    box-shadow: none;
+  } 
+}
+
+.navbar-default {
+  background-color: #9ac7c8 !important;
+  color: #fff !important;
+  font-family: "Poppins", Arial;
+  font-size: 1.125rem;
+  font-weight: 600;
+} 
+
+.offcanvas-body {
+  background-color: #9ac7c8 !important;
+  color: #fff !important;
+}
+
+/* .offcanvas-header  {
+  background-color: #393939 !important;
+  color: #fff !important;
+}  */
+
+.navbar-brand {
+  font-family: "Poppins", Arial;
+  font-size: 1.5rem;
+  font-weight: 200;
+}
+
+.navbar-brand:hover {
+  color: #fff;
+}
+
+.nav-link {
+  color: #5b5b5b
+}
+
+.active {
+  color: #ffffff;
+}
+
+.menu {
+  display: flex;   
+  justify-content: end;
+}
+
+/* end of navigation section */
+
+/* start of home section */
+
+/* .logo {
+  background-color: #000;
+  border-radius: 50%;
+  box-shadow: 0px 0px 20px black  ;
+} */
+
+.home-content {
+  padding-top: 10rem;
+}
+
+.home-header {
+  background-color: #74dadc5e;
+  border-radius: 1rem;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}
+
+.home-top-section h1 {
+  padding-bottom: 1rem;
+  font-family: "Poppins", Arial;
+  font-size: 7rem;
+  font-weight: 400;
+}
+
+.home-middle-section h3 {
+  padding-bottom: 2rem;
+  font-family: "Poppins", Arial;
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: #495048;
+}
+
+.btn-register {
+  font-family: "Poppins", Arial;
+  font-size: 1.1rem;
+  font-weight: 500;
+  background-color: #50B5D2;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 2rem;
+  padding: 0.5rem 1.3rem;
+}
+
+/* for image placeholder */
+/* .img-placeholder {
+  width: 100%;
+  height: 500px;
+  background-size: cover;
+  background-position-x: center;
+  background-position-y: center;
+  background-repeat: no-repeat;
+  background-image: url("img/imgplaceholder.png");
+  text-indent: -9999px;  */
+  /* remove or comment out text indent if all images are available */
+  /* padding-bottom: 1rem;
+} */
+
+.card-section {
+  padding-top: 5rem;
+  padding-bottom: 5rem;
+}
+
+.cardInfo {
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: top;
+  align-items: center;
+  width: 18rem;
+  height: 28rem;
+  margin-bottom: 1rem;
+  border-radius: 10px;
+
+}
+
+.cardInfo h5 {
+  font-family: "Poppins", Arial;
+  font-size: 1.1rem;
+  font-weight: 600;
+  text-align: center;
+  width: 18rem;
+  color: #50B5D2;
+  padding-top: 1rem;
+}
+
+.cardInfo p {
+  font-family: "Poppins", Arial;
+  font-size: 1.2rem;
+  font-weight: 200;
+  color: #495048;
+  text-align: center;
+  width: 18rem;
+  padding: 0 1rem 0 1rem;
+}
+
+.cardInfo img {
+  width: 18rem;
+  height: 18rem;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+/* end of home section */
+
+/* start of footer section */
+
+
+/* end of footer */
+
+/* start of about us section */
+
+.about-us-section {
+  padding-top: 5rem;
+  padding-left: 4rem;
+  margin-bottom: 5rem;
+  margin-right: 5rem;
+}
+
+.about-us-header {
+  margin-right: 5rem;
+  margin-bottom: 5rem;
+  border-right: 1px solid #787878;
+}
+
+.about-us-header h2 {
+  font-size: 6rem; 
+}
+
+.about-us-subTitle {
+  font-size: 2rem;
+}
+
+.about-us-description {
+  font-size: 1.2rem;
+  color: #787878;
+}
+
+/* end of about us section */
+
+/* start of team member */
+
+.team-details {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-bottom: 2rem;
+}
+
+.team-member-name {
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  background-color: #c8c8c8;
+}
+
+.team-member-name h4 {
+  text-align: center;
+  font-size: 1.2rem;
+}
+
+.team-img {
+  width: 6.25rem;
+  height: 6.25rem;
+  border-radius: 50%;
+  padding: 1rem;
+}
+
+.team-info {
+  background-color: #fff;
+  color: #000;
+  font-size: 0.8rem;
+  height: 12rem;
+  padding: 1rem 1rem;
+}
+
+/* end of team member */
+
+/* start of services section */
+
+/* .services-section {
+  display: flex;
+  justify-content: space-between;
+} */
+
+.services-details {
+  background-color: #2a2a2a;
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+  align-items: center; 
+  padding-bottom: 2rem;
+  width: 16rem;
+  height: 25rem;
+  margin-bottom: 1rem;
+  margin-right: 2rem;
+}
+
+.services-info, .services-type {
+  width: 15rem;
+  text-align: left;
+  color: #787878;
+}
+
+.services-type h4 {
+  padding-bottom: 1rem;
+  color: #889ce7;
+}
+
+/* end of services section */
+
+/* start of login section */
+
+.login-section h2 {
+  display: flex;
+  justify-content: center;
+  padding-bottom: 1rem;
+}
+
+.login-section {
+  margin-top: 6rem;
+  margin-bottom: 2rem;
+  padding: 3rem;
+  background-color: #7aa5b286;
+  color: #fff;
+  border-radius: 8px;
+  width: 70%;
+}
+
+.login-subsection {
+  padding-bottom: 1rem;
+}
+
+.login-btn {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 1rem;
+}
+
+.login-left-section {
+  display: flex;
+  justify-content: left;
+}
+
+.login-right-section {
+  display: flex;
+  justify-content: right;
+}
+
+.login-reset-btn {
+  margin-right: 2rem;
+}
+
+/* end of login section */
+
