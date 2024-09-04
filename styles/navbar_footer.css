@@ -30,7 +30,6 @@ body {
 
 .navbar-default, .offcanvas-body {
     background-color: #9ac7c8 !important;
-    /* background-color: #000 !important; */
     color: #fff !important;
     font-family: "Poppins", Arial;
     font-size: 1.125rem;
