@@ -62,7 +62,7 @@
 
     <!-- start of login -->
 
-    <form class="needs-validation" novalidate onsubmit="submitForm();">
+    <form id="formLogin" class="needs-validation" novalidate> 
         <div class="container login-section">            
             <div>
                 <h2>Login</h2>
@@ -81,7 +81,7 @@
             <!-- submit button -->
             <div class="login-btn">                 
                 <div class="login-submit-btn">
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="submit" id="btnLogin" class="btn btn-primary">Submit</button>
                 </div> 
             </div>                
         </div>       
@@ -137,6 +137,7 @@
     
     <script src="/scripts/auth.js"></script>
     <script src="/scripts/components/NavController.js"></script>
+    <script src="/scripts/components/Spinner.js"></script>
     <script src="/scripts/loader.js"></script>
     
     <script src="/scripts/boostrap-ftns.js"></script>
@@ -152,7 +153,8 @@
     <script>
 
         // Custom JS statement and function
-        function submitForm() {
+        document.getElementById("formLogin").addEventListener("submit", async(event) => {
+
             event.preventDefault(); /* prevent default browser events from happening */
             
             // create constant variables to capture form inputs
@@ -171,19 +173,20 @@
             }
 
             // trap unsuccessful event for invalid inputUsername using a regex
-            const usernameRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
-            if(!usernameRegex.test(username.value)) {
+            if(!isUsername(username.value)) {
                 showToast({toastElement, toastBodyElement, bgColor: "danger", msg: "Username is invalid."});
                 return;
             }
 
             // trap unsuccessful event for invalid inputPassword using a regex
             // only allow specific characters as per the description on the regex 
-            const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
-            if(!passwordRegex.test(password.value)) {
+            if(!isPassword(password.value)) {
                 showToast({toastElement, toastBodyElement, bgColor: "danger", msg: "Incorrectly password entered."});
                 return;
             }
+
+            spinner.createSpinner("btnLogin");
+            spinner.displaySpinner(true);
 
             // FETCH request - send data or retrieve data by calling an api endpoint
             // create Javascript Object to store the form data 
@@ -193,7 +196,7 @@
             };
 
             // showToast for successful submission of the login form
-            showToast({toastElement, toastBodyElement, bgColor: "success", msg: "Login successful."});
+            // showToast({toastElement, toastBodyElement, bgColor: "success", msg: "Login successful."});
             
             // implement a try/catch block (exception handling) to send our message data to an enpoint
             /*
@@ -234,8 +237,19 @@
             }
             */
             
-            return login(formData);                                                 // Invoke login() function, and end (return)
-        }
+            // return login(formData);                                                 // Invoke login() function, and end (return)
+
+            const loginSuccess = await login(formData);
+            if (!loginSuccess) {
+                spinner.displaySpinner(false);                                      // if login unsuccessful, hid spinner
+                // if login unsuccessful, provide feedback
+                showToast({toastElement, toastBodyElement, bgColor: "danger", msg: "Unable to log in. Try again."});
+                document.getElementById("formLogin").classList.remove("was-validated");
+                username.value = "";
+                password.value = "";
+            }
+
+        });
     </script>  
 </body>
 </html>

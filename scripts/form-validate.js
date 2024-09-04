@@ -4,6 +4,18 @@ function isEmail(value){
     return emailRegex.test(value);
 }
 
+// Function to validate username using regex 
+function isUsername(value){
+    const usernameRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+    return usernameRegex.test(value);
+}
+
+// Function to validate password using regex 
+function isPassword(value){
+    const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
+    return passwordRegex.test(value);
+}
+
 // Function to validate empty values
 function isEmpty(value){
     return value === "";

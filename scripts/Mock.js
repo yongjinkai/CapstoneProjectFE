@@ -31,6 +31,18 @@ class Mock{
         })
     };
 
+    // !! Mock response 403 FORBIDDEN (akin to response.status === 403)
+    static forbiddenResponse = {                                 
+        ok: false,                                              // Indicates the response was NOT successful
+        status: 403,                                            // HTTP status code for forbidden
+        statusText: 'FORBIDDEN',                                // Corresponding status text
+        json: async () => ({ error: 'Forbidden' }),             // Mocked JSON response
+        text: async () => 'Forbidden',                          // Mocked plain text response
+        headers: new Headers({
+            'Content-Type': 'application/json'
+        })
+    };
+
     // !! Mock token containing the subscriber (sub: martin@example.com), and Unix Timestamps: issued at (iat: 1st Sept 2024) and expiry (exp: 1st Sept 2025)
     static mockToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJtYXJ0aW5AZXhhbXBsZS5jb20iLCJpYXQiOjE3MjUxNTQzNzEsImV4cCI6MTc1NjY5MDM3M30.h2f3qzjWuDFq3p1kPqY7yFbZ5iy5XqFMRScztyL5F0k";
 
@@ -43,6 +55,10 @@ class Mock{
 
     static getMockNotFound(){                                   // Returns mock NOT_FOUND status
         return this.successResponse;
+    }
+
+    static getMockForbidden(){                                  // Returns mock FORBIDDEN status
+        return this.forbiddenResponse;
     }
 
     static getToken(status = false){                            // Returns mock NOT_FOUND status

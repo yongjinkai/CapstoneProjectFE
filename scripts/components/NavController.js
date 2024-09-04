@@ -32,10 +32,10 @@ class NavController {
                     this.displayNavItem(item);                                                                  // Display the link to register for new users
                     break;
                 case (!token && item.title.toLowerCase() === _LOGIN_TITLE):
-                    this.displayNavItem(item);                                                  // Display the link to login for UNauthenticated users
+                    this.displayNavItem(item);                                                                  // Display the link to login for UNauthenticated users
                     break;
                 case (token && item.title.toLowerCase() === _LOGOUT_TITLE):             
-                    this.displayNavItem(item)                                                   // Display the link to logout for authenticated users
+                    this.displayNavItem(item)                                                                   // Display the link to logout for authenticated users
                     break;
                 default:                                                                                        // For anything else, include statements to create additional links
                     break;
@@ -59,8 +59,8 @@ class NavController {
         navItem.className = "nav-item text-nowrap"; 
         
         const navLink = document.createElement("a");                                                            // Append link to menu item
-        navItem.appendChild(navLink);                   
-        
+        navItem.appendChild(navLink);  
+
         if(underLinedLink !== null)                                                                             // Change the navLinks's class if parameter underLinedLink is NOT equals to null 
             navLink.className = underLinedLink;
         else
@@ -98,5 +98,6 @@ class NavController {
 
         const tooltipProifleLink = navLink;                                                                     // Set a new instance of the tooltip for the profile
         const tooltipProfile =  new bootstrap.Tooltip(tooltipProifleLink);
+        
     }
 }
