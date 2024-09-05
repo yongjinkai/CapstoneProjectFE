@@ -40,7 +40,6 @@ class NavController {
                 default:                                                                                        // For anything else, include statements to create additional links
                     break;
             }
-
         });
         
         if(token){
@@ -59,7 +58,7 @@ class NavController {
         navItem.className = "nav-item text-nowrap"; 
         
         const navLink = document.createElement("a");                                                            // Append link to menu item
-        navItem.appendChild(navLink);  
+        navItem.appendChild(navLink);      
 
         if(underLinedLink !== null)                                                                             // Change the navLinks's class if parameter underLinedLink is NOT equals to null 
             navLink.className = underLinedLink;
