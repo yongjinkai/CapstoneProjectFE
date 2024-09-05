@@ -46,9 +46,34 @@
     </nav>
     <!-- end of offcanvasnavigation -->
 
-    <!-- remove this divider when insert relevant page -->
-    <!-- divider -->
-    <div class="divider"></div>
+    <!-- start of register -->
+
+    <form id="formLogin" class="needs-validation" novalidate> 
+        <div class="container login-section">            
+            <div>
+                <h2>Register</h2>
+            </div>
+            <!-- username input (email) -->
+            <div class="col login-subsection">
+                <label for="inputUsername" class="form-label">Username &#40;email&#41;</label>
+                <input type="email" class="form-control" id="inputUsername" aria-describedby="usrnameHelp" placeholder="e.g. username@mail.com" required />
+                <div id="usernameHelp" class="form-text">We'll never share your username with anyone else.</div>
+            </div>
+            <!-- password input -->
+            <div class="col login-subsection">
+                <label for="inputPassword" class="form-label">Password</label>
+                <input type="password" class="form-control" id="inputPassword" placeholder="Minimum eight characters, at least one letter and one number" required />
+            </div>
+            <!-- submit button -->
+            <div class="login-btn">                 
+                <div class="login-submit-btn">
+                    <button type="submit" id="btnLogin" class="btn btn-primary">Submit</button>
+                </div> 
+            </div>                
+        </div>       
+    </form>
+
+    <!-- end of register -->
 
     <!-- start of footer -->
 
