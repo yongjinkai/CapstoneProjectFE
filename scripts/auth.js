@@ -75,7 +75,7 @@ async function login(formData = {}){
          // const loginSuccess = await login(formData);
             // if (!loginSuccess) {
             //     spinner.displaySpinner(false);                                           // if login unsuccessful, hid spinner
-            //     // if login unsuccessful, provide feedback
+            // if login unsuccessful, provide feedback
             //     showToast({toastElement, toastBodyElement, bgColor: "danger", msg: "Unable to log in. Try again."});
             //     document.getElementById("formLogin").classList.remove("was-validated");
             //     username.value = "";
