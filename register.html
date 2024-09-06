@@ -17,6 +17,20 @@
     <link rel="stylesheet" href="/styles/footer.css">
 </head>
 <body>
+
+    <!-- toast -->
+        <!-- https://getbootstrap.com/docs/5.3/components/toasts/ --> 
+        <div class="toast-container p-3 top-0 start-50 translate-middle-x">
+            <!-- Put toasts within -->
+            <div id="msg-toast" class="toast align-items-center mt-2" role="alert" aria-live="assertive" aria-atomic="true" data-bs-autohide="true" data-bs-delay="4000">
+                <div class="d-flex">
+                    <div id="msg-toast-body" class="toast-body ms-auto"> 
+                    <!-- Message to be added here -->
+                    </div>
+                    <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+                </div>
+            </div>
+        </div>
     
     <!-- start of offcanvas navigation -->
     <nav class="navbar navbar-default navbar-expand-sm fixed-top" style="width: 100%">
@@ -139,6 +153,7 @@
      
      <script src="/scripts/auth.js"></script>
      <script src="/scripts/components/NavController.js"></script>
+     <script src="/scripts/components/Spinner.js"></script>
      <script src="/scripts/loader.js"></script>
      
      <script src="/scripts/boostrap-ftns.js"></script>
@@ -151,5 +166,62 @@
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous">
     </script>
+
+        <!-- Internal Custome Script -->
+    <script>
+
+        // Custom JS statement and function
+        document.getElementById("formLogin").addEventListener("submit", async(event) => {
+
+            event.preventDefault(); /* prevent default browser events from happening */
+            
+            // create constant variables to capture form inputs
+            // call the document object of the file 'login.html' to refer to inputs objects 'inputUsername' and 'inputPassword'
+            const username = document.getElementById("inputUsername");
+            const password = document.getElementById("inputPassword");
+
+            // get the toast elements as objects
+            const toastElement = document.getElementById("msg-toast");
+            const toastBodyElement = document.getElementById("msg-toast-body");
+
+            // trap unsuccesful event for inputUsername and inputPassword
+            if (isEmpty(username.value) || isEmpty(password.value)) {
+                showToast({toastElement, toastBodyElement, bgColor: "danger", msg: "All inputs must not be empty."});
+                return;
+            }
+
+            // trap unsuccessful event for invalid inputUsername using a regex
+            if(!isUsername(username.value)) {
+                showToast({toastElement, toastBodyElement, bgColor: "danger", msg: "Username is invalid."});
+                return;
+            }
+
+            // trap unsuccessful event for invalid inputPassword using a regex
+            // only allow specific characters as per the description on the regex 
+            if(!isPassword(password.value)) {
+                showToast({toastElement, toastBodyElement, bgColor: "danger", msg: "Incorrectly password entered."});
+                return;
+            }
+
+            // Implement spinner
+            spinner.createSpinner("btnRegister");
+            spinner.displaySpinner(true);
+
+            // FETCH request - send data or retrieve data by calling an api endpoint
+            // create Javascript Object to store the form data 
+            const formData = {
+                        username: username.value,
+                        password: password.value
+            };
+
+            // showToast for successful submission of the login form
+            showToast({toastElement, toastBodyElement, bgColor: "success", msg: "Processing registration...."});
+
+            // Invoke login() function, and end (return)
+            return register(formData);                                                 
+
+        });
+    </script>
+
 </body>
 </html>
