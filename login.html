@@ -62,41 +62,48 @@
 
     <!-- start of login -->
 
-    <div class="container-fluid row">
-        <div class="col-sm-0 col-lg-3">
-            <!-- empty column -->
-        </div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-0 col-lg-4">
+                <!-- empty column -->
+            </div>
 
-        <div class="co-sm-12 col-lg-6">
-            <form id="formLogin" class="needs-validation" novalidate> 
-                <div class="container login-section">            
-                    <div>
-                        <h2>Login</h2>
-                    </div>
-                    <!-- username input (email) -->
-                    <div class="col login-subsection">
-                        <label for="inputUsername" class="form-label">Username &#40;email&#41;</label>
-                        <input type="email" class="form-control" id="inputUsername" aria-describedby="usrnameHelp" placeholder="e.g. username@mail.com" required />
-                        <div id="usernameHelp" class="form-text">We'll never share your username with anyone else.</div>
-                    </div>
-                    <!-- password input -->
-                    <div class="col login-subsection">
-                        <label for="inputPassword" class="form-label">Password</label>
-                        <input type="password" class="form-control" id="inputPassword" placeholder="Minimum eight characters, at least one letter and one number" required />
-                    </div>
-                    <!-- submit button -->
-                    <div class="login-btn">                 
-                        <div class="login-submit-btn">
-                            <button type="submit" id="btnLogin" class="btn btn-primary">Submit</button>
-                        </div> 
-                    </div>                
-                </div>       
-            </form>
-        </div>
+            <div class="col-sm-12 col-lg-4">
+                <form id="formLogin" class="needs-validation" novalidate> 
+                    <div class="container login-section">            
+                        <div>
+                            <h2>Login</h2>
+                        </div>
+                        <!-- username input (email) -->
+                        <div class="col login-subsection">
+                            <label for="inputUsername" class="form-label">Username &#40;email&#41;</label>
+                            <input type="email" class="form-control" id="inputUsername" aria-describedby="usrnameHelp" placeholder="e.g. username@mail.com" required />
+                            <div id="usernameHelp" class="form-text">
+                                We'll never share your username with anyone else.                             
+                            </div>
+                        </div>
+                        <!-- password input -->
+                        <div class="col login-subsection">
+                            <label for="inputPassword" class="form-label">Password</label>
+                            <input type="password" class="form-control" id="inputPassword" placeholder="Min 8 characters, at least 1 letter and 1 number" required />
+                            <div class="form-text">
+                                Min 8 characters, at least 1 letter and 1 number
+                            </div>
+                        </div>
+                        <!-- submit button -->
+                        <div class="login-btn">                 
+                            <div class="login-submit-btn">
+                                <button type="submit" id="btnLogin" class="btn btn-primary">Submit</button>
+                            </div> 
+                        </div>                
+                    </div>       
+                </form>
+            </div>
 
-        <div class="col-sm-0 col-lg-3">
-            <!-- empty column -->
-        </div>
+            <div class="col-sm-0 col-lg-4">
+                <!-- empty column -->
+            </div>
+        </div>    
     </div>
 
     <!-- end of login -->

@@ -12,6 +12,7 @@
   />
     <!-- <link rel="stylesheet" href="../styles/index.css"> -->
     <link rel="stylesheet" href="/styles/index.css">
+    <link rel="stylesheet" href="/styles//register.css">
     <link rel="stylesheet" href="/styles/navbar.css">
     <link rel="stylesheet" href="/styles/footer.css">
 </head>
@@ -46,9 +47,52 @@
     </nav>
     <!-- end of offcanvasnavigation -->
 
-    <!-- remove this divider when insert relevant page -->
-    <!-- divider -->
-    <div class="divider"></div>
+    <!-- start of register -->
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-0 col-lg-4">
+                <!-- empty column -->
+            </div>
+    
+            <div class="col-sm-12 col-lg-4">
+                <form id="formLogin" class="needs-validation" novalidate> 
+                    <div class="container register-section">            
+                        <div>
+                            <h2>Create my account</h2>
+                            <p>Please fill in the information below</p>
+                        </div>
+                        <!-- username input (email) -->
+                        <div class="col register-subsection">
+                            <label for="inputUsername" class="form-label">Username &#40;email&#41;</label>
+                            <input type="email" class="form-control" id="inputUsername" aria-describedby="usrnameHelp" placeholder="e.g. username@mail.com" required />
+                            <div id="usernameHelp" class="form-text">We'll never share your username with anyone else.</div>
+                        </div>
+                        <!-- password input -->
+                        <div class="col register-subsection">
+                            <label for="inputPassword" class="form-label">Password</label>
+                            <input type="password" class="form-control" id="inputPassword" placeholder="Min 8 characters, at least 1 letter and 1 number" required />
+                            <div class="form-text">
+                                Min 8 characters, at least 1 letter and 1 number
+                            </div>
+                        </div>
+                        <!-- submit button -->
+                        <div class="register-btn">                 
+                            <div class="login-submit-btn">
+                                <button type="submit" id="btnRegister" class="btn btn-danger">Register</button>
+                            </div> 
+                        </div>                
+                    </div>       
+                </form>
+            </div>
+    
+            <div class="col-sm-0 col-lg-4">
+                <!-- empty column -->
+            </div>
+        </div>
+    </div>
+    
+
+    <!-- end of register -->
 
     <!-- start of footer -->
 
