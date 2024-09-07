@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
     const navLink = navController.navItems;
 
     for (let index = 0; index < navLink.length; index++) {
-        if ('/' + navLink[index].url === currentPage) {
+            if (currentPage.includes(navLink[index].url)) {
             activeLink[index].classList.add('active');
         }   
     }

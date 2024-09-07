@@ -60,5 +60,9 @@ body {
     justify-content: end;
     padding-top: 1rem;
   }
+
+  .spinnerRegister {
+    text-align: center;
+  }
   
   /* end of register section */
