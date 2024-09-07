@@ -22,34 +22,41 @@ body {
 
 /* start of login section */
 
+.login-section {
+  margin-top: 6rem;
+  margin-bottom: 2rem;
+  padding: 3rem;
+  background-color: #7aa5b286;
+  color: #fff;
+  border-radius: 8px;
+}
+
+.login-section ::placeholder {
+  font-size: 0.8rem;
+}
+
 .login-section h2 {
-    font-size: 2rem;
-    font-weight: 600;
-    display: flex;
-    justify-content: center;
-    padding-bottom: 1rem;
-  }
-  
-  .login-section {
-    margin-top: 6rem;
-    margin-bottom: 2rem;
-    padding: 3rem;
-    background-color: #7aa5b286;
-    color: #fff;
-    border-radius: 8px;
-    width: 70%;
-  }
-  
-  .login-subsection {
-    font-size: 1rem;
-    font-weight: 400;
-    padding-bottom: 1rem;
-  }
-  
-  .login-btn {
-    display: flex;
-    justify-content: end;
-    padding-top: 1rem;
-  }
+  font-size: 2rem;
+  font-weight: 600;
+  display: flex;
+  justify-content: center;
+  padding-bottom: 1rem;
+}
+
+.login-subsection {
+  font-size: 1rem;
+  font-weight: 600;
+  padding-bottom: 1rem;
+}
+
+.login-btn {
+  display: flex;
+  justify-content: end;
+  padding-top: 1rem;
+}
+
+.spinnerLogin {
+  text-align: center;
+}
   
   /* end of login section */
