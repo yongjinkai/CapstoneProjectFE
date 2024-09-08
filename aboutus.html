@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="/styles/index.css">
     <link rel="stylesheet" href="/styles/navbar.css">
     <link rel="stylesheet" href="/styles/footer.css">
+    <link rel="stylesheet" href="styles/about.css">
 </head>
 <body>
    
@@ -50,7 +51,88 @@
 
     <!-- remove this divider when insert relevant page -->
     <!-- divider -->
-    <div class="divider"></div>
+    <div class="about-container">
+        <div class="d-flex flex-column align-items-center about-text mx-5">
+            <h1 class="mt-5">About</h1>
+            <p class="poppins-semibold"><strong>REBOUND</strong> is a VIP Concierge Nursing Care company.</p>
+            <p class="poppins-semibold">Our vision is to empower at-home patients to gain independence and quality
+                lifestyle.</p>
+        </div>
+        <div class="our-team mt-5">
+            <h1 class="text-center">Our Team</h1>
+        </div>
+        <div class="d-flex flex-wrap justify-content-center our-team-container ">
+            <div class="position-relative img-container col-5 col-sm-5 col-md-auto">
+                <img src="Images/imgplaceholder.png" alt="">
+                <div class="our-team-text-container d-flex flex-column position-absolute bottom-0 end-0">
+                    <p class="name ">Cheryl Loh</p>
+                    <p class="job">Full-Stack Developer</p>
+                </div>
+            </div>
+            <div class="position-relative img-container col-5 col-sm-5 col-md-auto">
+                <img src="Images/imgplaceholder.png" alt="">
+                <div class="our-team-text-container d-flex flex-column position-absolute bottom-0 end-0">
+                    <p class="name">Bong Chong Hiang</p>
+                    <p class="job">Full-Stack Developer</p>
+                </div>
+            </div>
+            <div class="position-relative img-container col-5 col-sm-5 col-md-auto">
+                <img src="Images/imgplaceholder.png" alt="">
+                <div class="our-team-text-container d-flex flex-column position-absolute bottom-0 end-0">
+                    <p class="name">Keh Yi Cheng</p>
+                    <p class="job">Full-Stack Developer</p>
+                </div>
+            </div>
+            <div class="position-relative img-container col-5 col-sm-5 col-md-auto">
+                <img src="Images/imgplaceholder.png" alt="">
+                <div class="our-team-text-container d-flex flex-column position-absolute bottom-0 end-0">
+                    <p class="name">Yong Jin Kai</p>
+                    <p class="job">Full-Stack Developer</p>
+                </div>
+            </div>
+            <div class="position-relative img-container col-5 col-sm-5 col-md-auto">
+                <img src="Images/imgplaceholder.png" alt="">
+                <div class="our-team-text-container d-flex flex-column position-absolute bottom-0 end-0">
+                    <p class="name">Yao Kan</p>
+                    <p class="job">Full-Stack Developer</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="our-services-container d-flex justify-content-between">
+        <div class="our-services-text">
+            <h1 class="poppins-extralight">Our Services</h1>
+            <p class="poppins-semibold"><strong>REBOUND</strong> provides caring and attentive expert nurses to lead</p>
+            <ul class="poppins-semibold">
+                <li>patient care at home</li>
+                <li>patient care customisation</li>
+                <li>patient care networking</li>
+            </ul>
+        </div>
+        <div class="d-flex">
+            <div class="card-group d-flex flex-wrap package-cards gap-4 align-items-center">
+                <div class="card rounded-3 package-card">
+                    <h5 id="halfdayhire" class="card-title">Half Day Hire</h5>
+                    <p>Customised care in your home guided by a licensed professional nurse for 4 hours per day.
+                        24/7 live chat service available for all patients.</p>
+                    <hr>
+                    <a href="#" class="register-button container">
+                        <p class="text-center my-auto poppins-semibold">Register</p>
+                    </a>
+                </div>
+                <div class="card rounded-3 package-card">
+                    <h5 class="card-title">Full Day Hire</h5>
+                    <p>Customised care in your home guided by a licensed professional nurse for 4 hours per day.
+                        24/7 live chat service available for all patients.</p>
+                    <hr>
+                    <a href="#" class="register-button container">
+                        <p class="text-center my-auto poppins-semibold">Register</p>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- start of footer -->
 
@@ -58,24 +140,24 @@
 
         <div class="row py-3 pt-4 footer-top-section">
             <div class="row">
-                <div class="col-sm-4 col-md-3 col-lg-3 footer-image-section">
+                <div class="col-md-3 footer-image-section">
                     <img src="/img/footer/logo-footer.svg" alt="logo" style="width: 40px; height: 40px; object-fit: cover" class="rounded-pill" />&nbsp;REBOUND>
                     <p class="footer-description-section">We a VIP Concierge Nursing Care company. Our vision is to empower at-home patients to gain independence and quality lifestyle.
                     </p>
                 </div>
 
-                <div class="col-sm-0 col-md-1 col-lg-1">
-                    <!-- empty slot -->
+                <div class="col-md-1">
+                    <!-- empty column -->
                 </div>
 
-                <div class="col-sm-4 col-md-4 col-lg-4 social-media-icon justify-content-center align-content-center text-center">
+                <div class="col-md-4 social-media-icon justify-content-center align-content-center text-center">
                     <img src="/img/footer/instagram_icon.webp" alt="instagram">
                     <img src="/img/footer/fb_icon.webp" alt="facebook">
                     <img src="/img/footer/youtube_icon.webp" alt="youtube">
                     <img src="/img/footer/titok_icon.webp" alt="titok">
                 </div>
 
-                <div class="col-sm-4 col-md-4 col-lg-4 footer-contact-section">
+                <div class="col-md-4 footer-contact-section">
                     <p>Contact</p>
                     <a href="#"><img src="/img/footer/phone_icon.png" alt="phone"><span>+(65) 6877 7788</span></a>
                     <a href="#"><img src="/img/footer/message_icon.png" alt="message"><span>Info@rebound.com</span></a>
