@@ -13,8 +13,10 @@
     <!-- Import fonts awesome stylesheet -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="/styles/index.css">
+    <link rel="stylesheet" href="/styles/profile.css">
     <link rel="stylesheet" href="/styles/navbar.css">
     <link rel="stylesheet" href="/styles/footer.css">
+    <!-- <link rel="stylesheet" href="/styles/profile.css"> -->
 </head>
 <body>
     
@@ -47,10 +49,146 @@
     </nav>
     <!-- end of offcanvasnavigation -->
 
-    <!-- remove this divider when insert relevant page -->
-    <!-- divider -->
-    <div class="divider"></div>
+    <!-- start of profile -->
+   
+    <div class="container-fluid"></div>
+        <div class="row">
+    
+            <div class="col-md-4">
+                <form id="formLogin" class="needs-validation" novalidate> 
+                    <div class="container profile-section">            
+                        <div>
+                            <h2>Profile</h2>
+                        </div>
+                        <!-- firstname -->
+                        <div class="col profile-subsection">
+                            <label for="firstName" class="form-label">First Name</label>
+                            <input type="text" class="form-control" id="firstName" required />   
+                        </div>
+                        <!-- lastname -->
+                        <div class="col profile-subsection">
+                            <label for="lastName" class="form-label">Last/SurName</label>
+                            <input type="text" class="form-control" id="lastName" required />   
+                        </div>
+                        <!-- username/email -->
+                        <div class="col profile-subsection">
+                            <label for="userName" class="form-label">Username &#40;email&#41;</label>
+                            <input type="email" class="form-control" id="userName" placeholder="e.g. username@mail.com" required />
+                        </div>
+                        <!-- mobile number -->
+                        <div class="col profile-subsection">
+                            <label for="mobileNumber" class="form-label">Mobile Number</label>
+                            <input type="number" class="form-control" id="mobileNumber" required /> 
+                        </div>
 
+                        <div class="col profile-subsection" id="staff-license">
+                            <!-- for staff license number input -->
+                        </div>
+
+                        <div class="spinnerProfile" id="spinnerProfile">
+                            <!-- spinner -->
+                        </div>
+                        <!-- </div> -->
+                        <!-- edit button -->
+                        <div class="edit-btn-section">  
+                            <div id="txtUserrole" class="role">
+                                <p></p>
+                            </div>               
+                            <div class="edit-btn">
+                                <button type="submit" id="btnEdit" class="btn btn-danger">Edit</button>
+                            </div> 
+                        </div>                         
+                    </div>       
+                </form>
+            </div>
+    
+            <div class="col-md-8">
+                <form id="formLogin" class="needs-validation" novalidate> 
+                    <div class="container profile-section">            
+                        
+                        <div class="col profile-subsection" id="customerFirstName">
+                            <!-- firstname -->
+                        </div>
+
+                        <div class="col profile-subsection" id="customerLastName">
+                            <!-- lastname -->    
+                        </div>
+                        
+                        <div class="col profile-subsection" id="customerEmail">
+                            <!-- username/email -->    
+                        </div>
+                        
+                        <div class="col profile-subsection" id="customerMobileNumber">
+                            <!-- mobile number -->
+                        </div>
+
+                        
+                        <!-- <div class="divider"> -->
+                            <!-- divider -->
+                        <!-- </div> -->
+                    
+
+                        <!-- package type -->
+                        <div id="packageType" class="d-flex justify-content-sm-start">
+                            <p>Type of packages</p>
+                        
+                            <div class="form-check package-radio-btn">
+                                <input class="form-check-input" type="radio" name="Radios" id="Radios1" value="option1" checked>
+                                <label class="form-check-label" for="Radios1">
+                                Half Day Package
+                                </label>
+                            </div>
+                            <div class="form-check package-radio-btn">
+                                <input class="form-check-input" type="radio" name="Radios" id="Radios2" value="option2">
+                                <label class="form-check-label" for="Radios2">
+                                    Full Day Package
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- NOK name -->
+                        <div class="col profile-subsection">
+                            <label for="firstName" class="form-label">Next-of-kin Name</label>
+                            <input type="text" class="form-control" id="next-of-kin-name" required />   
+                        </div>
+
+                        <!-- NOK mobile number -->
+                        <div class="col profile-subsection">
+                            <label for="mobileNumber" class="form-label">Next-of-kin Mobile Number</label>
+                            <input type="number" class="form-control" id="next-of-kin-mobile" required />
+                        </div>
+
+                        <div>
+                            <select class="form-select medical-condition" id="medical-condition" aria-label="Default select">
+                                <option selected>Medical Conditions</option>
+                                <option value="1">One</option>
+                                <option value="2">Two</option>
+                                <option value="3">Three</option>
+                            </select>
+                        </div>
+
+                        <div class="form-floating text-black">
+                            <textarea class="form-control doctor-prescription" style="height: 10rem" placeholder="Leave a comment here" id="doctor-prescription"></textarea>
+                            <label for="doctor-prescription">Doctor's Prescreiptions</label>
+                        </div>
+                        
+                        <div class="col profile-subsection" id="nurse-in-charge">
+                            <!-- Nurse in charge -->
+                        </div>
+
+                        <div class="spinnerRegister" id="spinnerRegister">
+                            <!-- spinner -->
+                        </div>
+                    
+                    </div>       
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- end of profile -->
+
+    
     <!-- start of footer -->
 
     <footer class="col footer-section">
@@ -108,5 +246,19 @@
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous">
     </script> 
+
+    <!-- Internal Custom Script -->
+    <script>
+        const token = isAuthenticated();
+
+        if(!token)
+          window.location = _HOME_URL;
+
+        const user = decodeUser(token);
+        const profileEmail = document.getElementById("txtEmail");
+        const profileUsername = document.getElementById("txtUsername");
+        profileEmail.innerText = user.email;
+        profileUsername.innerText = user.uname;
+    </script>
 </body>
 </html>

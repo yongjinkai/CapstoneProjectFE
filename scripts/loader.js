@@ -31,16 +31,13 @@ document.addEventListener("DOMContentLoaded", (event) => {
             window.location = _HOME_URL;
 
         const user = decodeUser(token);
-        const profileEmail = document.getElementById("txtEmail");
-        const profileUsername = document.getElementById("txtUsername");
-        const profileRole = document.getElementById("txtUserrole");
-        profileUsername.classList.add("fw-bold");
-        profileEmail.innerText = user.email;
-        profileUsername.innerText = user.username;
         
-        if(user.role === "ADMIN")
-            profileRole.innerText = user.role.charAt(0).toUpperCase() 
-                                    + user.role.slice(1).toLowerCase();
-    }
-
+        if (user.role === "ADMIN") {
+            adminProfile(user.role, user.username);
+        } else if (user.role === "STAFF") {
+            staffProfile(user.role, user.username);
+        } else {
+            customerProfile(user.role, user.username);
+        }
+    }    
 });

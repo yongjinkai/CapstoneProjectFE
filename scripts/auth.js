@@ -59,7 +59,6 @@ async function login(formData = {}){
             });
         */
 
-        
         const response = Mock.getMockSuccess();                                             // TODO: remove when endpoint request is available (remove in production env.)  
 
         if(response.ok){                                                                    // If response is ok
