@@ -31,6 +31,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
             window.location = _HOME_URL;
 
         const user = decodeUser(token);
+        console.log(user.role);
         
         if (user.role === "ADMIN") {
             adminProfile(user.role, user.username);

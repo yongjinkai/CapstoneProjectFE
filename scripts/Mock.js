@@ -49,7 +49,7 @@ class Mock{
     // static mockToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im1vbW9ydW5uZXIiLCJlbWFpbCI6Im1hcnRpbkBleGFtcGxlLmNvbSIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTcyNTU5MDQwNywiZXhwIjoxNzU3MTI2NDA3fQ.zXMOdhfVq4ILL0JLKq0Iq2zR3f2fBdJA37F9dSQYSm4";
         
     // Staff token
-    static mockToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im1vbW9ydW5uZXIiLCJlbWFpbCI6Im1hcnRpbkBleGFtcGxlLmNvbSIsInJvbGUiOiJTVEFGRiIsImlhdCI6MTcyNTk0NDI4NywiZXhwIjoxNzU3NDgwMjg3fQ._HgaqW1v4Vwf6gwG15b6iA7e-PYpXX05xQjNXZudyyQ"
+    static mockToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im1vbW9ydW5uZXIiLCJlbWFpbCI6Im1hcnRpbkBleGFtcGxlLmNvbSIsInJvbGUiOiJTVEFGRiIsImlhdCI6MTcyNTk0NDI4NywiZXhwIjoxNzU3NDgwMjg3fQ._HgaqW1v4Vwf6gwG15b6iA7e-PYpXX05xQjNXZudyyQ";
     
     //Customer token
     // static mockToken = "eyJhbGciOiAiSFMyNTYiLCAidHlwIjogIkpXVCJ9.eyJ1bmFtZSI6ICJtb21vcnVubmVyIiwgInN1YiI6ICJtYXJ0aW5AZXhhbXBsZS5jb20iLCAiaWF0IjogMTcyNTE1NDM3MSwgImV4cCI6IDE3NTY2OTAzNzN9.dBjftJeZ4CVP-mB92K27uhbUJU1p1r_wW1gFWFOEjXk";
