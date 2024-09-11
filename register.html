@@ -12,10 +12,25 @@
   />
     <!-- <link rel="stylesheet" href="../styles/index.css"> -->
     <link rel="stylesheet" href="/styles/index.css">
+    <link rel="stylesheet" href="/styles//register.css">
     <link rel="stylesheet" href="/styles/navbar.css">
     <link rel="stylesheet" href="/styles/footer.css">
 </head>
 <body>
+
+    <!-- toast -->
+        <!-- https://getbootstrap.com/docs/5.3/components/toasts/ --> 
+        <div class="toast-container p-3 top-0 start-50 translate-middle-x">
+            <!-- Put toasts within -->
+            <div id="msg-toast" class="toast align-items-center mt-2" role="alert" aria-live="assertive" aria-atomic="true" data-bs-autohide="true" data-bs-delay="4000">
+                <div class="d-flex">
+                    <div id="msg-toast-body" class="toast-body ms-auto"> 
+                    <!-- Message to be added here -->
+                    </div>
+                    <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+                </div>
+            </div>
+        </div>
     
     <!-- start of offcanvas navigation -->
     <nav class="navbar navbar-default navbar-expand-sm fixed-top" style="width: 100%">
@@ -46,9 +61,55 @@
     </nav>
     <!-- end of offcanvasnavigation -->
 
-    <!-- remove this divider when insert relevant page -->
-    <!-- divider -->
-    <div class="divider"></div>
+    <!-- start of register -->
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-0 col-lg-4">
+                <!-- empty column -->
+            </div>
+    
+            <div class="col-md-12 col-lg-4">
+                <form id="formLogin" class="needs-validation" novalidate> 
+                    <div class="container register-section">            
+                        <div>
+                            <h2>Create my account</h2>
+                            <p>Please fill in the information below</p>
+                        </div>
+                        <!-- username input (email) -->
+                        <div class="col register-subsection">
+                            <label for="inputUsername" class="form-label">Username &#40;email&#41;</label>
+                            <input type="email" class="form-control" id="inputUsername" aria-describedby="usrnameHelp" placeholder="e.g. username@mail.com" required />
+                            <div id="usernameHelp" class="form-text">We'll never share your username with anyone else.</div>
+                        </div>
+                        <!-- password input -->
+                        <div class="col register-subsection">
+                            <label for="inputPassword" class="form-label">Password</label>
+                            <input type="password" class="form-control" id="inputPassword" placeholder="Min 8 characters, at least 1 letter and 1 number" required />
+                            <div class="form-text">
+                                Min 8 characters, at least 1 letter and 1 number
+                            </div>
+                            <div class="spinnerRegister" id="spinnerRegister">
+                                <!-- spinner -->
+                            </div>
+                        </div>
+                        <!-- submit button -->
+                        <div class="register-btn">                 
+                            <div class="login-submit-btn">
+                                <button type="submit" id="btnRegister" class="btn btn-danger">Register</button>
+                            </div> 
+                        </div>                
+                    </div>       
+                </form>
+            </div>
+    
+            <div class="col-md-0 col-lg-4">
+                <!-- empty column -->
+            </div>
+        </div>
+    </div>
+    
+
+    <!-- end of register -->
 
     <!-- start of footer -->
 
@@ -56,24 +117,24 @@
 
         <div class="row py-3 pt-4 footer-top-section">
             <div class="row">
-                <div class="col-sm-4 col-md-3 col-lg-3 footer-image-section">
+                <div class="col-md-3 footer-image-section">
                     <img src="/img/footer/logo-footer.svg" alt="logo" style="width: 40px; height: 40px; object-fit: cover" class="rounded-pill" />&nbsp;REBOUND>
                     <p class="footer-description-section">We a VIP Concierge Nursing Care company. Our vision is to empower at-home patients to gain independence and quality lifestyle.
                     </p>
                 </div>
 
-                <div class="col-sm-0 col-md-1 col-lg-1">
-                    <!-- empty slot -->
+                <div class="col-md-1">
+                    <!-- empty column -->
                 </div>
 
-                <div class="col-sm-4 col-md-4 col-lg-4 social-media-icon justify-content-center align-content-center text-center">
+                <div class="col-md-4 social-media-icon justify-content-center align-content-center text-center">
                     <img src="/img/footer/instagram_icon.webp" alt="instagram">
                     <img src="/img/footer/fb_icon.webp" alt="facebook">
                     <img src="/img/footer/youtube_icon.webp" alt="youtube">
                     <img src="/img/footer/titok_icon.webp" alt="titok">
                 </div>
 
-                <div class="col-sm-4 col-md-4 col-lg-4 footer-contact-section">
+                <div class="col-md-4 footer-contact-section">
                     <p>Contact</p>
                     <a href="#"><img src="/img/footer/phone_icon.png" alt="phone"><span>+(65) 6877 7788</span></a>
                     <a href="#"><img src="/img/footer/message_icon.png" alt="message"><span>Info@rebound.com</span></a>
@@ -95,6 +156,7 @@
      
      <script src="/scripts/auth.js"></script>
      <script src="/scripts/components/NavController.js"></script>
+     <script src="/scripts/components/Spinner.js"></script>
      <script src="/scripts/loader.js"></script>
      
      <script src="/scripts/boostrap-ftns.js"></script>
@@ -107,5 +169,64 @@
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous">
     </script>
+
+        <!-- Internal Custome Script -->
+    <script>
+
+        // Custom JS statement and function
+        document.getElementById("formLogin").addEventListener("submit", async(event) => {
+
+            event.preventDefault(); /* prevent default browser events from happening */
+            
+            // create constant variables to capture form inputs
+            // call the document object of the file 'login.html' to refer to inputs objects 'inputUsername' and 'inputPassword'
+            const username = document.getElementById("inputUsername");
+            const password = document.getElementById("inputPassword");
+
+            // get the toast elements as objects
+            const toastElement = document.getElementById("msg-toast");
+            const toastBodyElement = document.getElementById("msg-toast-body");
+
+            // trap unsuccesful event for inputUsername and inputPassword
+            if (isEmpty(username.value) || isEmpty(password.value)) {
+                showToast({toastElement, toastBodyElement, bgColor: "danger", msg: "All inputs must not be empty."});
+                return;
+            }
+
+            // trap unsuccessful event for invalid inputUsername using a regex
+            if(!isUsername(username.value)) {
+                showToast({toastElement, toastBodyElement, bgColor: "danger", msg: "Username is invalid."});
+                return;
+            }
+
+            // trap unsuccessful event for invalid inputPassword using a regex
+            // only allow specific characters as per the description on the regex 
+            if(!isPassword(password.value)) {
+                showToast({toastElement, toastBodyElement, bgColor: "danger", msg: "Incorrectly password entered."});
+                return;
+            }
+
+            // Implement spinner
+            spinner.createSpinner("spinnerRegister");
+            spinner.displaySpinner(true);
+
+            // FETCH request - send data or retrieve data by calling an api endpoint
+            // create Javascript Object to store the form data 
+            const formData = {
+                        username: username.value,
+                        password: password.value
+            };
+
+            // showToast for successful submission of the login form
+            showToast({toastElement, toastBodyElement, bgColor: "success", msg: "Processing registration...."});
+
+            // Invoke login() function, and end (return)
+            return register(formData);                                                 
+
+        });
+
+        
+    </script>
+
 </body>
 </html>

@@ -93,6 +93,57 @@ async function login(formData = {}){
     
 }
 
+// Funtion to login
+async function register(formData = {}){
+    
+    if(Object.entries(formData).length === 0)                                               // Return if the object is empty
+        return;
+
+    // !! Try/catch block (exception handling) to send data to login enpoint
+    try {
+        // FETCH requests - send data or retrive data by calling an API endpoint            // TODO: refactor when end-point is available
+        /* 
+            const response = await fetch(_ENDPOINT_LOGIN, {                                 // Perform an async POST request to process the form data
+                method: "POST",
+                headers: {"Content-Type": "application/json"},
+                body: JSON.stringify(formData)
+            });
+        */
+
+        
+        const response = Mock.getMockSuccess();                                             // TODO: remove when endpoint request is available (remove in production env.)  
+
+        if(response.ok){                                                                    // If response is ok
+            
+            // const token = Mock.getToken(true);                                              // TODO: refactor when token is retrieved from response, (remove in production env.) 
+            // window.localStorage.setItem(_USERTOKEN, token);                                 // Store the string in localStorage with the key 'usertoken'
+
+            const sleep = (delay) => new Promise((resolve) => setTimeout(resolve, delay));  // TODO: remove delay when endpoint is instated
+            await sleep(2000);
+
+            window.location = _LOGIN_URL;                                                 // Redirect the user to homepage
+
+        }
+
+         // const loginSuccess = await login(formData);
+            // if (!loginSuccess) {
+            //     spinner.displaySpinner(false);                                             // if login unsuccessful, hid spinner
+            // if login unsuccessful, provide feedback
+            //     showToast({toastElement, toastBodyElement, bgColor: "danger", msg: "Unable to log in. Try again."});
+            //     document.getElementById("formLogin").classList.remove("was-validated");
+            //     username.value = "";
+            //     password.value = "";
+            // }
+        
+        return;                                                                              // Else return false
+
+    } catch (error) {
+        console.log("Exception error gotten is: ", error.message);
+        return;
+    }
+    
+}
+
 // Function to logout
 function logout(){
     window.localStorage.removeItem(_USERTOKEN);                                             // Store the string in localStorage with the key 'token'
