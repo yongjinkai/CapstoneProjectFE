@@ -20,36 +20,49 @@ body {
     background-attachment: fixed;
 }
 
-/* start of login section */
+/* start of register section */
 
-.login-section h2 {
-    font-size: 2rem;
-    font-weight: 600;
-    display: flex;
-    justify-content: center;
-    padding-bottom: 1rem;
-  }
-  
-  .login-section {
+.register-section {
     margin-top: 6rem;
     margin-bottom: 2rem;
     padding: 3rem;
     background-color: #7aa5b286;
     color: #fff;
     border-radius: 8px;
-    width: 70%;
+}
+
+.register-section ::placeholder {
+  font-size: 0.8rem;
+}
+
+.register-section h2 {
+    font-size: 2rem;
+    font-weight: 600;
+    display: flex;
+    justify-content: center;
+    padding-bottom: 1rem;
   }
-  
-  .login-subsection {
-    font-size: 1rem;
-    font-weight: 400;
+
+  .register-section p {
+    display: flex;
+    justify-content: center;
     padding-bottom: 1rem;
   }
   
-  .login-btn {
+  .register-subsection {
+    font-size: 1rem;
+    font-weight: 600;
+    padding-bottom: 1rem;
+  }
+  
+  .register-btn {
     display: flex;
     justify-content: end;
     padding-top: 1rem;
   }
+
+  .spinnerRegister {
+    text-align: center;
+  }
   
-  /* end of login section */
+  /* end of register section */

@@ -14,21 +14,19 @@ document.addEventListener("DOMContentLoaded", (event) => {
     const navLink = navController.navItems;
 
     for (let index = 0; index < navLink.length; index++) {
-        // console.log(navLink[index].url);
-        if ('/' + navLink[index].url === currentPage) {
+        if (currentPage.includes(navLink[index].url)) {
             activeLink[index].classList.add('active');
         }   
     }
 
-     // Instantiate a spinner, currently used in login.html and register.html
+    // Instantiate a spinner, currently used in login.html and register.html
     spinner = new Spinner();
 
     const profilePageExists = window.location.pathname.includes(_PROFILE_URL);     // If _PROFILE_URL exists
-   
+    
     if(profilePageExists){                                                         // If _PROFILE_URL exists, profilePageExists = true
-  
         const token = isAuthenticated();                                           // Redirect the user to index.html if token does not exist
-       
+
         if(!token)                                                                 // Otherwise, set up and display authenticated user in the profile page
             window.location = _HOME_URL;
 
@@ -42,5 +40,4 @@ document.addEventListener("DOMContentLoaded", (event) => {
             customerProfile(user.role, user.username);
         }
     }    
-
 });

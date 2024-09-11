@@ -1,0 +1,119 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+.poppins-extralight {
+  font-family: "Poppins", sans-serif;
+  font-weight: bold;
+  font-style: normal;
+}
+
+.poppins-semibold {
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  font-style: normal;
+}
+
+.about-container {
+  /* height: 100dvh; */
+  font-family: "Poppins", sans-serif;
+  color: #4fb5d2;
+  font-weight: bold;
+  font-style: normal;
+}
+
+.img-container {
+  margin-bottom: 3rem;
+  margin: 0rem 1rem 2rem 0rem;
+  
+}
+
+.img-container img {
+  width: 90%;
+  height: 90%;
+}
+
+.our-team-text-container {
+  height: 25%;
+  width: 80%;
+  padding-left: 0.2rem;
+  background-color: #e8f3ea;
+
+}
+
+.our-team-text-container > * {
+  font-size: small;
+  margin: 0;
+  font-weight: 600;
+}
+
+.our-team-text-container > .name {
+  padding: 0.4rem 0rem 0.2rem 0rem;
+}
+
+.our-services-container {
+  background-image: url("../Images/About_background.webp");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  padding: 1.5rem;
+  background-color: rgba(0, 0, 0, 0.2);
+  background-blend-mode: overlay;
+  min-height: 27rem;
+  max-width: 100%;
+  /* width: 100%; */
+  height: auto;
+  width: 100dvw !important;
+}
+
+.our-services-text {
+  color: white;
+}
+
+.our-services-text h1 {
+  font-weight: 500;
+}
+
+.package-cards p {
+  color: #286b6c !important;
+  font-size: small;
+}
+
+.card-title {
+  color: #4fb5d2 !important;
+}
+
+.package-card {
+  width: 13rem !important;
+  padding: 1.5rem;
+  height: auto !important;
+  background-color: #eff6ef !important;
+  max-width: 100% !important;
+}
+
+.register-button {
+  background-color: #73dadc;
+  padding: 0.4rem 0rem;
+  /* min-width: 40%; */
+  width: 90% !important;
+  text-decoration: none;
+}
+.register-button p {
+  color: #e6f3ea !important;
+  font-size: 0.9rem;
+}
+
+.register-button:hover {
+  background-color: #eff6ef;
+  outline: 1px solid #73dadc;
+}
+.register-button:hover p {
+  color: #73dadc !important;
+}
+@media (max-width: 700px) {
+  .our-services-container {
+    flex-direction: column;
+  }
+  .package-cards {
+    display: flex;
+    justify-content: center;
+  }
+}
