@@ -43,8 +43,8 @@ class NavController {
         });
         
         if(token){
-            const userEmail = decodeUser(token);
-            const userItem = {"title": userEmail, "url": _PROFILE_URL};
+            const user = decodeUser(token);
+            const userItem = {"title": user.email, "url": _PROFILE_URL};
             this.displayNavProfile(userItem);
         }
 
