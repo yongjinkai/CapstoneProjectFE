@@ -82,7 +82,7 @@
                         </div>
 
                         <div class="col profile-subsection" id="staff-license">
-                            <!-- for staff license number input -->
+                            <!-- for staff license number input from JS -->
                         </div>
 
                         <div class="spinnerProfile" id="spinnerProfile">
@@ -95,39 +95,21 @@
                                 <p></p>
                             </div>               
                             <div class="edit-btn">
-                                <button type="submit" id="btnEdit" class="btn btn-danger">Edit</button>
+                                <button type="submit" id="btnEdit" class="btn btnEdit btn-danger">Edit</button>
                             </div> 
                         </div>                         
                     </div>       
                 </form>
             </div>
     
-            <div class="col-md-8">
-                <form id="formLogin" class="needs-validation" novalidate> 
+            <div class="col-md-8" id="patientdetail" style="display: none;">
+                <form class="needs-validation" novalidate> 
                     <div class="container profile-section">            
-                        
-                        <div class="col profile-subsection" id="customerFirstName">
-                            <!-- firstname -->
-                        </div>
-
-                        <div class="col profile-subsection" id="customerLastName">
-                            <!-- lastname -->    
-                        </div>
-                        
-                        <div class="col profile-subsection" id="customerEmail">
-                            <!-- username/email -->    
-                        </div>
-                        
-                        <div class="col profile-subsection" id="customerMobileNumber">
-                            <!-- mobile number -->
-                        </div>
-
                         
                         <!-- <div class="divider"> -->
                             <!-- divider -->
                         <!-- </div> -->
-                    
-
+                        
                         <!-- package type -->
                         <div id="packageType" class="d-flex justify-content-sm-start">
                             <p>Type of packages</p>
@@ -171,10 +153,29 @@
                             <textarea class="form-control doctor-prescription" style="height: 10rem" placeholder="Leave a comment here" id="doctor-prescription"></textarea>
                             <label for="doctor-prescription">Doctor's Prescreiptions</label>
                         </div>
-                        
-                        <div class="col profile-subsection" id="nurse-in-charge">
-                            <!-- Nurse in charge -->
+
+                        <div class="edit-btn">
+                            <button type="submit" id="btnEditDetail" class="btn btnEdit btn-danger">Edit</button>
+                        </div> 
+
+                        <!-- <div class="container">
+                            <div class="accordion accordion-flush" id="dynamicAccordion">
+                            Dynamic content will be inserted here
+                            </div>
                         </div>
+
+                        package type
+                        <div id="packageType" class="d-flex justify-content-sm-start">
+                           for radio input from JS
+                        </div>
+
+                        <div class="profile-subsection" id="nokName">
+                            for nok full name and mobile, medical condition and doctor prescription from JS
+                        </div>
+ 
+                        <div class="col profile-subsection" id="nurse-in-charge">
+                            Nurse in charge
+                        </div> -->
 
                         <div class="spinnerRegister" id="spinnerRegister">
                             <!-- spinner -->
@@ -182,6 +183,67 @@
                     
                     </div>       
                 </form>
+            </div>
+
+            <div class="col-md-8" id="admin-staff-section" style="display: none;">
+
+                <div class="accordion profile-section" id="accordionExample">
+                    <div class="accordion-item">
+                      <h2 class="accordion-header">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                          Patient A
+                        </button>
+                      </h2>
+                      <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                          <span>First Name : </span><br>
+                          <span>Last  Name : </span><br>
+                          <span>Email      : </span><br>
+                          <span>Mobile No. : </span><br>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="accordion-item">
+                      <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                          Patient B
+                        </button>
+                      </h2>
+                      <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                            <span>First Name : </span><br>
+                            <span>Last  Name : </span><br>
+                            <span>Email      : </span><br>
+                            <span>Mobile No. : </span><br>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="accordion-item">
+                      <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                          Patient C
+                        </button>
+                      </h2>
+                      <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                            <span>First Name : </span><br>
+                            <span>Last  Name : </span><br>
+                            <span>Email      : </span><br>
+                            <span>Mobile No. : </span><br>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="admin-staff-edit-btn">
+                        <div class="edit-btn">
+                            <button type="submit" id="btnDetail" class="btn btnDetail btn-danger">Edit</button>
+                        </div>
+                    </div>  
+
+                </div>
+
+                 
+
             </div>
         </div>
     </div>
@@ -250,17 +312,6 @@
     </script> 
 
     <!-- Internal Custom Script -->
-    <!-- <script>
-        const token = isAuthenticated();
 
-        if(!token)
-          window.location = _HOME_URL;
-
-        const user = decodeUser(token);
-        const profileEmail = document.getElementById("txtEmail");
-        const profileUsername = document.getElementById("txtUsername");
-        profileEmail.innerText = user.email;
-        profileUsername.innerText = user.uname;
-    </script> -->
 </body>
 </html>
