@@ -82,4 +82,18 @@ body {
   margin-top: 2rem;
 }
 
+.accordion {
+  --bs-accordion-btn-bg:#fff;
+  --bs-accordion-active-bg:#9ac7c8;
+  --bs-accordion-active-color:#000;
+  --bs-accordion-btn-focus-box-shadow: none;
+  --bs-accordion-bg: #f2fddd;
+  --bs-accordion-color: #000;
+  
+}
+
+.accordion-button::after {
+  box-shadow: none;
+}
+
 /* end of profile section */

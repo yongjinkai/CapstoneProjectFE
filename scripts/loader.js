@@ -31,7 +31,6 @@ document.addEventListener("DOMContentLoaded", (event) => {
             window.location = _HOME_URL;
 
         const user = decodeUser(token);
-        console.log(user.role);
 
         window.onload = () => {
             if (user.role === "ADMIN") {
@@ -39,7 +38,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
             } else if (user.role === "STAFF") {
                 staffProfile(user.role, user.username);
             } else {
-                customerProfile(user.role, user.username);
+                customerProfile(user.role);
             }
         }   
     }    
