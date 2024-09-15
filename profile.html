@@ -72,8 +72,8 @@
                         </div>
                         <!-- username/email -->
                         <div class="col profile-subsection">
-                            <label for="userName" class="form-label">Username &#40;email&#41;</label>
-                            <input type="email" class="form-control" id="userName" placeholder="e.g. username@mail.com" required />
+                            <label for="email" class="form-label">Username &#40;email&#41;</label>
+                            <input type="email" class="form-control" id="email" placeholder="e.g. username@mail.com" required />
                         </div>
                         <!-- mobile number -->
                         <div class="col profile-subsection">
@@ -82,52 +82,30 @@
                         </div>
 
                         <div class="col profile-subsection" id="staff-license">
-                            <!-- for staff license number input -->
+                            <!-- for staff license number input from JS -->
                         </div>
 
                         <div class="spinnerProfile" id="spinnerProfile">
                             <!-- spinner -->
                         </div>
-                        <!-- </div> -->
+
                         <!-- edit button -->
                         <div class="edit-btn-section">  
                             <div id="txtUserrole" class="role">
                                 <p></p>
                             </div>               
                             <div class="edit-btn">
-                                <button type="submit" id="btnEdit" class="btn btn-danger">Edit</button>
+                                <button type="submit" id="btnEdit" class="btn btnEdit btn-danger">Edit</button>
                             </div> 
                         </div>                         
                     </div>       
                 </form>
             </div>
     
-            <div class="col-md-8">
-                <form id="formLogin" class="needs-validation" novalidate> 
+            <div class="col-md-8" id="patientdetail" style="display: none;">
+                <form class="needs-validation" novalidate> 
                     <div class="container profile-section">            
                         
-                        <div class="col profile-subsection" id="customerFirstName">
-                            <!-- firstname -->
-                        </div>
-
-                        <div class="col profile-subsection" id="customerLastName">
-                            <!-- lastname -->    
-                        </div>
-                        
-                        <div class="col profile-subsection" id="customerEmail">
-                            <!-- username/email -->    
-                        </div>
-                        
-                        <div class="col profile-subsection" id="customerMobileNumber">
-                            <!-- mobile number -->
-                        </div>
-
-                        
-                        <!-- <div class="divider"> -->
-                            <!-- divider -->
-                        <!-- </div> -->
-                    
-
                         <!-- package type -->
                         <div id="packageType" class="d-flex justify-content-sm-start">
                             <p>Type of packages</p>
@@ -146,13 +124,13 @@
                             </div>
                         </div>
 
-                        <!-- NOK name -->
+                        <!-- Next-Of-Kin full name -->
                         <div class="col profile-subsection">
                             <label for="firstName" class="form-label">Next-of-kin Name</label>
                             <input type="text" class="form-control" id="next-of-kin-name" required />   
                         </div>
 
-                        <!-- NOK mobile number -->
+                        <!-- Next-Of-Kin mobile number -->
                         <div class="col profile-subsection">
                             <label for="mobileNumber" class="form-label">Next-of-kin Mobile Number</label>
                             <input type="number" class="form-control" id="next-of-kin-mobile" required />
@@ -161,19 +139,15 @@
                         <div>
                             <select class="form-select medical-condition" id="medical-condition" aria-label="Default select">
                                 <option selected>Medical Conditions</option>
-                                <option value="1">One</option>
-                                <option value="2">Two</option>
-                                <option value="3">Three</option>
+                                <option value="1">High Blood Pressure</option>
+                                <option value="2">High Cholesterol</option>
+                                <option value="3">Diabetes</option>
                             </select>
                         </div>
 
                         <div class="form-floating text-black">
                             <textarea class="form-control doctor-prescription" style="height: 10rem" placeholder="Leave a comment here" id="doctor-prescription"></textarea>
                             <label for="doctor-prescription">Doctor's Prescreiptions</label>
-                        </div>
-                        
-                        <div class="col profile-subsection" id="nurse-in-charge">
-                            <!-- Nurse in charge -->
                         </div>
 
                         <div class="spinnerRegister" id="spinnerRegister">
@@ -182,13 +156,23 @@
                     
                     </div>       
                 </form>
+            </div> 
+
+            <div class="col-md-8 d-flex">
+                <div class="col-6" id="admin-patient-section" style="display: none;">
+                    <div class="accordion" id="patientAccordion"></div>                             
+                </div>
+    
+                <div class="col-6" id="admin-staff-section" style="display: none;">
+                    <div class="accordion" id="staffAccordion"></div>    
+                </div>   
             </div>
+            
         </div>
     </div>
-
+        
     <!-- end of profile -->
 
-    
     <!-- start of footer -->
 
     <footer class="col footer-section">
@@ -250,17 +234,6 @@
     </script> 
 
     <!-- Internal Custom Script -->
-    <!-- <script>
-        const token = isAuthenticated();
 
-        if(!token)
-          window.location = _HOME_URL;
-
-        const user = decodeUser(token);
-        const profileEmail = document.getElementById("txtEmail");
-        const profileUsername = document.getElementById("txtUsername");
-        profileEmail.innerText = user.email;
-        profileUsername.innerText = user.uname;
-    </script> -->
 </body>
 </html>
