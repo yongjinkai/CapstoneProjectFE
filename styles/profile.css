@@ -96,4 +96,35 @@ body {
   box-shadow: none;
 }
 
+.patient-summary-section {
+  display: block;
+  
+}
+
+.patient-summary-header-section, .patient-summary-detail-section {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  font-size: 1rem;
+  font-weight: 600;
+  background-color: #fff; 
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.patient-summary-header-section {
+  border-top-left-radius: 0.5rem;
+  border-top-right-radius: 0.5rem;
+  color: #a0a0a0;
+}
+
+.patient-summary-detail-section {
+  border-bottom: 1px solid #000;
+  color: #000;
+}
+.patient-summary-bottom-section {
+  background-color: #fff;
+  border-bottom-left-radius: 0.5rem;
+  border-bottom-right-radius: 0.5rem;
+}
+
 /* end of profile section */
