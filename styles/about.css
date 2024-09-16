@@ -18,17 +18,23 @@
   color: #4fb5d2;
   font-weight: bold;
   font-style: normal;
+  /* background-image: none !important; */
+  background-color: white;
 }
 
 .img-container {
   margin-bottom: 3rem;
   margin: 0rem 1rem 2rem 0rem;
-  
+  max-width: 14rem;
 }
 
 .img-container img {
   width: 90%;
   height: 90%;
+}
+
+.img-cheryl{
+  object-fit: cover;
 }
 
 .our-team-text-container {

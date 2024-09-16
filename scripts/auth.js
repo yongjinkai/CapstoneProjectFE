@@ -57,25 +57,32 @@ async function login(formData = {}){
             });
         */
 
-        // const response = Mock.getMockSuccess
-        const response = Mock.getMockForbidden();                                             // TODO: remove when endpoint request is available (remove in production env.)  
-
-        const sleep = (delay) => new Promise((resolve) => setTimeout(resolve, delay));  // TODO: remove delay when endpoint is instated
-            await sleep(2000);
+        
+        const response = Mock.getMockSuccess();                                             // TODO: remove when endpoint request is available (remove in production env.)  
 
         if(response.ok){                                                                    // If response is ok
             
             const token = Mock.getToken(true);                                              // TODO: refactor when token is retrieved from response, (remove in production env.) 
             window.localStorage.setItem(_USERTOKEN, token);                                 // Store the string in localStorage with the key 'usertoken'
 
-            // const sleep = (delay) => new Promise((resolve) => setTimeout(resolve, delay));  // TODO: remove delay when endpoint is instated
-            // await sleep(2000);
+            const sleep = (delay) => new Promise((resolve) => setTimeout(resolve, delay));  // TODO: remove delay when endpoint is instated
+            await sleep(2000);
 
-            window.location = _PROFILE_URL;                                                        // Redirect the user to homepage
+            window.location = _PROFILE_URL;                                                 // Redirect the user to homepage
 
         }
+
+         // const loginSuccess = await login(formData);
+            // if (!loginSuccess) {
+            //     spinner.displaySpinner(false);                                           // if login unsuccessful, hid spinner
+            //     // if login unsuccessful, provide feedback
+            //     showToast({toastElement, toastBodyElement, bgColor: "danger", msg: "Unable to log in. Try again."});
+            //     document.getElementById("formLogin").classList.remove("was-validated");
+            //     username.value = "";
+            //     password.value = "";
+            // }
         
-        return;                                                                             // Else return false
+        return;                                                                              // Else return false
 
     } catch (error) {
         console.log("Exception error gotten is: ", error.message);
