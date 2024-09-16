@@ -18,12 +18,15 @@
   color: #4fb5d2;
   font-weight: bold;
   font-style: normal;
+  /* background-image: none !important; */
+  background-color: white;
 }
 
 .img-container {
   margin-bottom: 3rem;
   margin: 0rem 1rem 2rem 0rem;
-  
+  max-width: 12rem;
+  /* max-height: 12rem; */
 }
 
 .img-container img {
@@ -50,7 +53,7 @@
 }
 
 .our-services-container {
-  background-image: url("../Images/About_background.webp");
+  background-image: url("../img/About_background.webp");
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
