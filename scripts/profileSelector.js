@@ -1,4 +1,112 @@
 
+
+// Simulating data retrieved from a database
+let persons = [
+    {
+        id: '001',
+        firstName: 'John',
+        lastName: 'Doe',
+        email: 'john.doe@example.com',
+        mobile: '123-456-7890',
+        packageType: 'Half Day',
+        nokFullName: 'Mary',
+        nokMobile: '90908878',
+        medicalRecord: 'High Blood Pressure',
+        prescript: 'TBA',
+        nurse: 'Joe',
+        license: ''
+    },
+    {
+        id: '002',
+        firstName: 'Jane',
+        lastName: 'Smith',
+        email: 'jane.smith@example.com',
+        mobile: '987-654-3210',
+        packageType: 'Full Day',
+        nokFullName: 'Mary',
+        nokMobile: '90908878',
+        medicalRecord: 'High Cholesterol',
+        prescript: 'TBA',
+        nurse: 'May',
+        license: ''
+    },
+    {
+        id: '003',
+        firstName: 'Alice',
+        lastName: 'Johnson',
+        email: 'alice.johnson@example.com',
+        mobile: '555-123-4567',
+        packageType: 'Half Day',
+        nokFullName: 'Mary',
+        nokMobile: '90908878',
+        medicalRecord: 'Diabetes',
+        prescript: 'TBA',
+        nurse: 'momorunner',
+        license: ''
+    },
+    {
+        id: '004',
+        firstName: 'momorunner',
+        lastName: 'Lee',
+        email: 'momorunner.lee@example.com',
+        mobile: '444-987-1111',
+        packageType: '',
+        nokFullName: '',
+        nokMobile: '',
+        medicalRecord: '',
+        prescript: '',
+        nurse: '',
+        license: '123-456-789'
+    },
+    {
+        id: '005',
+        firstName: 'Robert',
+        lastName: 'Brown',
+        email: 'robert.brown@example.com',
+        mobile: '444-987-6543',
+        packageType: 'Half Day',
+        nokFullName: 'Mary',
+        nokMobile: '90908878',
+        medicalRecord: 'High Blood Pressure',
+        prescript: 'TBA',
+        nurse: 'Max',
+        license: ''
+    },
+    {
+        id: '006',
+        firstName: 'Max',
+        lastName: 'Stone',
+        email: 'Max.stone@example.com',
+        mobile: '444-987-1133',
+        packageType: '',
+        nokFullName: '',
+        nokMobile: '',
+        medicalRecord: '',
+        prescript: '',
+        nurse: '',
+        license: '123-456-888'
+    }
+];
+
+// Disable all fields for the initial launch of the page
+const ftnInitDisabledAll = () => {
+    document.getElementById('firstName').disabled = true;
+    document.getElementById('lastName').disabled = true;
+    document.getElementById('email').disabled = true;
+    document.getElementById('mobileNumber').disabled = true;
+    document.getElementById('Radios1').disabled = true;
+    document.getElementById('Radios2').disabled = true;
+    document.getElementById('next-of-kin-name').disabled = true;
+    document.getElementById('next-of-kin-mobile').disabled = true;
+    document.getElementById('medical-condition').disabled = true;
+    document.getElementById('doctor-prescription').disabled = true;
+
+    const inputs = document.querySelectorAll('.accordionInput');
+    inputs.forEach((input) => {
+        input.disabled = true;
+    })
+}
+
 const ftnEditSave = (role, username) => {
     // Toggle betwen edit and save mode for profile section
     const editBtnElement = document.getElementById('btnEdit');
@@ -49,329 +157,104 @@ const ftnEditSave = (role, username) => {
     })
 }
 
-// Disable all fields for the initial launch of the page
-const ftnInitDisabledAll = () => {
-    document.getElementById('firstName').disabled = true;
-    document.getElementById('lastName').disabled = true;
-    document.getElementById('email').disabled = true;
-    document.getElementById('mobileNumber').disabled = true;
-    document.getElementById('Radios1').disabled = true;
-    document.getElementById('Radios2').disabled = true;
-    document.getElementById('next-of-kin-name').disabled = true;
-    document.getElementById('next-of-kin-mobile').disabled = true;
-    document.getElementById('medical-condition').disabled = true;
-    document.getElementById('doctor-prescription').disabled = true;
+// populate patient information based on assigned nurse
+const ftnAddPatient = (role, username) => {
+    
+    const patientRecordstbodyElement = document.getElementById("patientRecordstbody");
 
-    const inputs = document.querySelectorAll('.accordionInput');
-    inputs.forEach((input) => {
-        input.disabled = true;
-    })
+    for (let index = 0; index < persons.length; index++) {
+
+        if (username === persons[index].nurse || (role === 'ADMIN' && !persons[index].license)) {
+           
+            const patientRecordstrElement = document.createElement("tr");
+
+            const patientRecordstd1Element = document.createElement("td");
+            patientRecordstd1Element.id = "patientRecordtd1" + index;
+            patientRecordstd1Element.innerHTML = persons[index].id;
+
+            const patientRecordstd2Element = document.createElement("td");
+            patientRecordstd2Element.id = "patientRecordtd2" + index;
+            patientRecordstd2Element.innerHTML = persons[index].firstName + " " + persons[index].lastName;
+
+            const patientRecordstd3Element = document.createElement("td");
+            patientRecordstd3Element.id = "patientRecordtd3" + index;
+            const patientRecordsbtn1Element = document.createElement("button");
+            patientRecordsbtn1Element.className = "btn btn-danger";
+            patientRecordsbtn1Element.style = "font-size: 0.7rem";
+            patientRecordsbtn1Element.setAttribute("data-bs-toggle", "modal");
+            patientRecordsbtn1Element.setAttribute("data-bs-target", "#staticBackdrop");
+            patientRecordsbtn1Element.textContent = "View Details";
+
+            patientRecordstd3Element.appendChild(patientRecordsbtn1Element);
+            
+            const patientRecordstd4Element = document.createElement("td");
+            patientRecordstd4Element.id = "patientRecordtd4" + index;
+            const patientRecordsa2Element = document.createElement("a");
+            patientRecordsa2Element.href = "#";
+            patientRecordsa2Element.style = "text-decoration: none";
+            patientRecordsa2Element.textContent = "Active";
+
+            patientRecordstd4Element.appendChild(patientRecordsa2Element);
+            // append to row
+            patientRecordstrElement.appendChild(patientRecordstd1Element);
+            patientRecordstrElement.appendChild(patientRecordstd2Element);
+            patientRecordstrElement.appendChild(patientRecordstd3Element);
+            patientRecordstrElement.appendChild(patientRecordstd4Element);
+            
+            // append to body
+            patientRecordstbodyElement.appendChild(patientRecordstrElement);
+        } 
+     } 
 }
 
-// Simulating data retrieved from a database
-let peoples = [
-    {
-        firstName: 'John',
-        lastName: 'Doe',
-        email: 'john.doe@example.com',
-        mobile: '123-456-7890',
-        packageType: 'Half Day',
-        nokFullName: 'Mary',
-        nokMobile: '90908878',
-        medicalRecord: 'High Blood Pressure',
-        prescript: 'TBA',
-        nurse: 'Joe',
-        license: ''
-    },
-    {
-        firstName: 'Jane',
-        lastName: 'Smith',
-        email: 'jane.smith@example.com',
-        mobile: '987-654-3210',
-        packageType: 'Full Day',
-        nokFullName: 'Mary',
-        nokMobile: '90908878',
-        medicalRecord: 'High Cholesterol',
-        prescript: 'TBA',
-        nurse: 'May',
-        license: ''
-    },
-    {
-        firstName: 'Alice',
-        lastName: 'Johnson',
-        email: 'alice.johnson@example.com',
-        mobile: '555-123-4567',
-        packageType: 'Half Day',
-        nokFullName: 'Mary',
-        nokMobile: '90908878',
-        medicalRecord: 'Diabetes',
-        prescript: 'TBA',
-        nurse: 'momorunner',
-        license: ''
-    },
-    {
-        firstName: 'momorunner',
-        lastName: 'Lee',
-        email: 'momorunner.lee@example.com',
-        mobile: '444-987-1111',
-        packageType: '',
-        nokFullName: '',
-        nokMobile: '',
-        medicalRecord: '',
-        prescript: '',
-        nurse: '',
-        license: '123-456-789'
-    },
-    {
-        firstName: 'Robert',
-        lastName: 'Brown',
-        email: 'robert.brown@example.com',
-        mobile: '444-987-6543',
-        packageType: 'Half Day',
-        nokFullName: 'Mary',
-        nokMobile: '90908878',
-        medicalRecord: 'High Blood Pressure',
-        prescript: 'TBA',
-        nurse: 'Max',
-        license: ''
-    },
-    {
-        firstName: 'Max',
-        lastName: 'Stone',
-        email: 'Max.stone@example.com',
-        mobile: '444-987-1133',
-        packageType: '',
-        nokFullName: '',
-        nokMobile: '',
-        medicalRecord: '',
-        prescript: '',
-        nurse: '',
-        license: '123-456-888'
-    }
-];
-
-// Display the information for all patient using Bootstrap Accordion
-ftnPatientAccordion = (role, username) => {
+// populate patient information based on assigned nurse
+const ftnAddStaff = (role, username) => {
     
-    // Get the accordion container
-    const patientAccordion = document.getElementById('patientAccordion');
-    patientAccordion.className = 'accordion profile-section';
+    const staffRecordstbodyElement = document.getElementById("staffRecordstbody");
 
-    const patientAccordionHeading = document.createElement('h2');
-    patientAccordionHeading.innerHTML = 'Patient';
-    patientAccordionHeading.style = 'font-size: 2rem; font-weight: 600;';
+    for (let index = 0; index < persons.length; index++) {
 
-    patientAccordion.appendChild(patientAccordionHeading);
+        if (persons[index].license) {
 
-    // Create patient records
-    const ftnCreatePatientAccordion = (id='', labelText='', value='') => {
+            const staffRecordstrElement = document.createElement("tr");
 
-        const patientAccordionElement = document.createElement('div');
-        patientAccordionElement.className = 'col profile-subsection';
+            const staffRecordstd1Element = document.createElement("td");
+            staffRecordstd1Element.id = "staffRecordtd1" + index;
+            staffRecordstd1Element.innerHTML = persons[index].id;
 
-        const patientAccordionLabelElement = document.createElement('label');
-        patientAccordionLabelElement.htmlFor = '';
-        patientAccordionLabelElement.className = 'form-label';
-        patientAccordionLabelElement.textContent = labelText;
+            const staffRecordstd2Element = document.createElement("td");
+            staffRecordstd2Element.id = "staffRecordtd2" + index;
+            staffRecordstd2Element.innerHTML = persons[index].firstName + " " + persons[index].lastName;
 
-        const patientAccordionInputElement = document.createElement('input');
-        patientAccordionInputElement.type = 'text';
-        patientAccordionInputElement.className = 'form-control accordionInput';
-        patientAccordionInputElement.id = id;
-        patientAccordionInputElement.value = value;
-
-        
-        patientAccordionElement.appendChild(patientAccordionLabelElement);
-        patientAccordionElement.appendChild(patientAccordionInputElement);
-        
-        return patientAccordionElement;
-    }
-
-    // Loop through each patient and create the accordion items dynamically
-    
-    for (let i = 0; i < peoples.length; i++) {
-       
-        if (username === peoples[i].nurse || (role === 'ADMIN' && !peoples[i].license)) {
-            let patient = peoples[i];
-
-            // Create accordion item
-            const patientAccordionItemElement = document.createElement('div');
-            patientAccordionItemElement.className = 'accordion-item';
-
-            // Accordion header
-            const patientAccordionButtonElement = document.createElement('button');
-            patientAccordionButtonElement.className = 'accordion-button collapsed';
-            patientAccordionButtonElement.type = 'button';
-            patientAccordionButtonElement.setAttribute('data-bs-toggle', 'collapse');
-            patientAccordionButtonElement.setAttribute('data-bs-target', '#collapse' + i);
-            patientAccordionButtonElement.setAttribute('aria-expanded', false);
-            patientAccordionButtonElement.setAttribute('aria-controls', 'collapse' + i);
-            patientAccordionButtonElement.textContent = patient.firstName + ' ' + patient.lastName;
-
-            patientAccordionItemElement.appendChild(patientAccordionButtonElement);
-
-            // Accordion collapse body
-            const patientAccordionCollapseElement = document.createElement('div');
-            patientAccordionCollapseElement.id = 'collapse' + i;
-            patientAccordionCollapseElement.className = 'accordion-collapse collapse';
-            patientAccordionCollapseElement.setAttribute('aria-ladelledby', 'heading' + i);
-            patientAccordionCollapseElement.setAttribute('data-bs-parent', '#patientAccordion');
-
-            const patientAccordionBodyElement = document.createElement('div');
-            patientAccordionBodyElement.className = 'accordion-body';
-            patientAccordionBodyElement.id = 'accordion-info';
-
-            // Create form
-            const patientAccordionFormElement = document.createElement('form');
-            patientAccordionFormElement.id = 'formLogin';
-            patientAccordionFormElement.className = 'needs-validation';
-            patientAccordionFormElement.innerText = 'Patient';
-            patientAccordionFormElement.noValidate;
-
-            const patientAccordionFormContainerElement = document.createElement('div');
-            patientAccordionFormContainerElement.className = 'container';
-
-            // Add form input fields
-            patientAccordionFormElement.appendChild(ftnCreatePatientAccordion('accordionFirstName' + i, 'First Name', patient.firstName)); 
-            patientAccordionFormElement.appendChild(ftnCreatePatientAccordion('accordionLastName' + i, 'Last Name', patient.lastName)); 
-            patientAccordionFormElement.appendChild(ftnCreatePatientAccordion('accordionEmail' + i, 'Email', patient.email)); 
-            patientAccordionFormElement.appendChild(ftnCreatePatientAccordion('accordionMobile' + i, 'Mobile', patient.mobile));    
-            patientAccordionFormElement.appendChild(ftnCreatePatientAccordion('accordionNOKFullName' + i, 'Next-Of-Kin Full Name', patient.nokFullName)); 
-            patientAccordionFormElement.appendChild(ftnCreatePatientAccordion('accordionNOKMobile' + i, 'Next-Of-Kin Mobile', patient.nokMobile)); 
-            patientAccordionFormElement.appendChild(ftnCreatePatientAccordion('accordionPackageType' + i, 'Package Type', patient.packageType)); 
-            patientAccordionFormElement.appendChild(ftnCreatePatientAccordion('accordionMedicalCondition' + i, 'Medical Record', patient.medicalRecord)); 
-            patientAccordionFormElement.appendChild(ftnCreatePatientAccordion('accordionDoctorPrescription' + i, 'Doctor Prescription', patient.prescript)); 
-            patientAccordionFormElement.appendChild(ftnCreatePatientAccordion('accordionNurse' + i, 'Nurse Assigned', patient.nurse)); 
-            patientAccordionFormElement.appendChild(ftnCreatePatientAccordion('accordionLicense' + i, 'Nurse License Number', patient.license)); 
+            const staffRecordstd3Element = document.createElement("td");
+            staffRecordstd3Element.id = "staffRecordtd3" + index;
+            const staffRecordsbtn1Element = document.createElement("button");
+            staffRecordsbtn1Element.className = "btn btn-danger";
+            staffRecordsbtn1Element.style = "font-size: 0.7rem";
+            staffRecordsbtn1Element.setAttribute("data-bs-toggle", "modal");
+            staffRecordsbtn1Element.setAttribute("data-bs-target", "#staticBackdrop");
+            staffRecordsbtn1Element.textContent = "View Details";
             
-            // Add update button for Admin role only
-            if (role === "ADMIN") {
-                const updateButton = document.createElement('button');
-                updateButton.type = 'submit';
-                updateButton.className = 'btn btn-danger updatebtn';
-                updateButton.id = 'updatebtn' + i;
-                updateButton.textContent = 'Update';
-                patientAccordionFormElement.appendChild(updateButton);   
-            }
+            staffRecordstd3Element.appendChild(staffRecordsbtn1Element);
 
-            // Append the form to accordion body
-            patientAccordionBodyElement.appendChild(patientAccordionFormElement);
-            patientAccordionCollapseElement.appendChild(patientAccordionBodyElement);
-            patientAccordionItemElement.appendChild(patientAccordionCollapseElement);
+            const staffRecordstd4Element = document.createElement("td");
+            staffRecordstd4Element.id = "staffRecordtd4" + index;
+            const staffRecordsa2Element = document.createElement("a");
+            staffRecordsa2Element.href = "#";
+            staffRecordsa2Element.style = "text-decoration: none";
+            staffRecordsa2Element.textContent = "Active";
 
-            // Append the accordion item to the accordion container
-            patientAccordion.appendChild(patientAccordionItemElement);
+            staffRecordstd4Element.appendChild(staffRecordsa2Element);
+            // append to row
+            staffRecordstrElement.appendChild(staffRecordstd1Element);
+            staffRecordstrElement.appendChild(staffRecordstd2Element);
+            staffRecordstrElement.appendChild(staffRecordstd3Element);
+            staffRecordstrElement.appendChild(staffRecordstd4Element);
+            // append to body
+            staffRecordstbodyElement.appendChild(staffRecordstrElement);
+
         }
-    } 
-}
-
-// Display the information for all staff using Bootstrap Accordion
-ftnStaffAccordion = (role, username) => {
-    
-    // Get the accordion container
-    const staffAccordion = document.getElementById('staffAccordion');
-    staffAccordion.className = 'accordion profile-section';
-
-    const staffAccordionHeading = document.createElement('h2');
-    staffAccordionHeading.innerHTML = 'Staff';
-    staffAccordionHeading.style = 'font-size: 2rem; font-weight: 600;';
-
-    staffAccordion.appendChild(staffAccordionHeading);
-
-    // Create patient records
-    const ftnCreatestaffAccordion = (id='', labelText='', value='') => {
-
-        const staffAccordionElement = document.createElement('div');
-        staffAccordionElement.className = 'col profile-subsection';
-
-        const staffAccordionLabelElement = document.createElement('label');
-        staffAccordionLabelElement.htmlFor = '';
-        staffAccordionLabelElement.className = 'form-label';
-        staffAccordionLabelElement.textContent = labelText;
-
-        const staffAccordionInputElement = document.createElement('input');
-        staffAccordionInputElement.type = 'text';
-        staffAccordionInputElement.className = 'form-control accordionInput';
-        staffAccordionInputElement.id = id;
-        staffAccordionInputElement.value = value;
-
-        
-        staffAccordionElement.appendChild(staffAccordionLabelElement);
-        staffAccordionElement.appendChild(staffAccordionInputElement);
-        
-        return staffAccordionElement;
-    }
-
-    // Loop through each staff and create the accordion items dynamically
-    
-    for (let i = 0; i < peoples.length; i++) {
-       
-        // if (username === patients[i].nurse || role === 'ADMIN') {
-        if (peoples[i].license) {
-            let staff = peoples[i];
-
-            // Create accordion item
-            const staffAccordionItemElement = document.createElement('div');
-            staffAccordionItemElement.className = 'accordion-item';
-
-            // Accordion header
-            const staffAccordionButtonElement = document.createElement('button');
-            staffAccordionButtonElement.className = 'accordion-button collapsed';
-            staffAccordionButtonElement.type = 'button';
-            staffAccordionButtonElement.setAttribute('data-bs-toggle', 'collapse');
-            staffAccordionButtonElement.setAttribute('data-bs-target', '#collapse' + i);
-            staffAccordionButtonElement.setAttribute('aria-expanded', false);
-            staffAccordionButtonElement.setAttribute('aria-controls', 'collapse' + i);
-            staffAccordionButtonElement.textContent = staff.firstName + ' ' + staff.lastName;
-
-            staffAccordionItemElement.appendChild(staffAccordionButtonElement);
-
-            // Accordion collapse body
-            const staffAccordionCollapseElement = document.createElement('div');
-            staffAccordionCollapseElement.id = 'collapse' + i;
-            staffAccordionCollapseElement.className = 'accordion-collapse collapse';
-            staffAccordionCollapseElement.setAttribute('aria-ladelledby', 'heading' + i);
-            staffAccordionCollapseElement.setAttribute('data-bs-parent', '#staffAccordion');
-
-            const staffAccordionBodyElement = document.createElement('div');
-            staffAccordionBodyElement.className = 'accordion-body';
-            staffAccordionBodyElement.id = 'accordion-info';
-
-            // Create form
-            const staffAccordionFormElement = document.createElement('form');
-            staffAccordionFormElement.id = 'formLogin';
-            staffAccordionFormElement.className = 'needs-validation';
-            staffAccordionFormElement.noValidate;
-
-            const staffAccordionFormContainerElement = document.createElement('div');
-            staffAccordionFormContainerElement.className = 'container';
-
-            // Add form input fields
-            staffAccordionFormElement.appendChild(ftnCreatestaffAccordion('accordionFirstName' + i, 'First Name', staff.firstName)); 
-            staffAccordionFormElement.appendChild(ftnCreatestaffAccordion('accordionLastName' + i, 'Last Name', staff.lastName)); 
-            staffAccordionFormElement.appendChild(ftnCreatestaffAccordion('accordionEmail' + i, 'Email', staff.email)); 
-            staffAccordionFormElement.appendChild(ftnCreatestaffAccordion('accordionMobile' + i, 'Mobile', staff.mobile));    
-            staffAccordionFormElement.appendChild(ftnCreatestaffAccordion('accordionLicense' + i, 'Nurse License Number', staff.license)); 
-            
-            // Add update button for Admin role only
-            if (role === "ADMIN") {
-                const updateButton1 = document.createElement('button');
-                updateButton1.type = 'submit';
-                updateButton1.className = 'btn btn-danger updatebtn';
-                updateButton1.id = 'updatebtn1' + i;
-                updateButton1.textContent = 'Update';
-                staffAccordionFormElement.appendChild(updateButton1);   
-            }
-
-            // Append the form to accordion body
-            staffAccordionBodyElement.appendChild(staffAccordionFormElement);
-            staffAccordionCollapseElement.appendChild(staffAccordionBodyElement);
-            staffAccordionItemElement.appendChild(staffAccordionCollapseElement);
-
-            // Append the accordion item to the accordion container
-            staffAccordion.appendChild(staffAccordionItemElement);
-        }
-    } 
+     } 
 }
 
 const adminProfile = (role, username) => {
@@ -382,13 +265,11 @@ const adminProfile = (role, username) => {
     profileRole.style = 'background-color: #000000; color: #ffffffc3; font-size: 0.8rem; font-weight: 800;align-content: center; text-align: center; width: 7rem; height: 2.5rem; border-radius: 3rem';
 
     // set display active for admin
-    document.getElementById('admin-patient-section').style.display = 'block';
-    document.getElementById('admin-staff-section').style.display = 'block';
+    // document.querySelector('patientRecords').style.display = 'block';
+    // document.querySelector('staffRecords').style.display = 'block';
 
-    ftnPatientAccordion(role, username);
-    ftnStaffAccordion(role, username);
-    ftnInitDisabledAll();
-    ftnEditSave(role, username);
+    ftnAddPatient(role, username);
+    ftnAddStaff(role, username);
     
     // Toggle betwen update and save mode for patient section
     for (let index = 0; index < peoples.length; index++) {
@@ -513,7 +394,9 @@ const staffProfile = (role, username) => {
     profileRole.style = 'background-color: #000000; color: #ffffffc3; font-size: 0.8rem; font-weight: 800;align-content: center; text-align: center; width: 7rem; height: 2.5rem; border-radius: 3rem';
 
     // set display active for staff
-    document.getElementById('admin-patient-section').style.display = 'block';
+    document.getElementById('staffRecords').style.display = "none";
+    document.getElementById('staff-tab').style.display = "none";
+    document.getElementById("modal-edit-btn").style.display = "none";
 
     // create input field for nurse license number
     const staffLicenseLabelElement = document.createElement('label');
@@ -531,11 +414,11 @@ const staffProfile = (role, username) => {
     document.getElementById('staff-license').appendChild(staffLicenseLabelElement);
     document.getElementById('staff-license').appendChild(staffLicenseElement);
 
-    document.getElementById('staffLicenseNumber').disabled = true;
+    // document.getElementById('staffLicenseNumber').disabled = true;
 
-    ftnPatientAccordion(role, username);
     ftnInitDisabledAll();
-    ftnEditSave(role, username);
+    ftnEditSave();
+    ftnAddPatient(role, username);
 }
 
 const customerProfile = (role) => {
