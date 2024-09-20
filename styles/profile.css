@@ -104,6 +104,7 @@ body {
 .patient-summary-header-section, .patient-summary-detail-section {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
+  
   font-size: 1rem;
   font-weight: 600;
   background-color: #fff; 
