@@ -82,6 +82,7 @@ body {
   margin-top: 2rem;
 }
 
+
 .accordion {
   --bs-accordion-btn-bg:#fff;
   --bs-accordion-active-bg:#9ac7c8;
@@ -129,3 +130,32 @@ body {
 }
 
 /* end of profile section */
+
+
+.nav-link{
+  background-color: rgb(211, 211, 211, 0.3);
+}
+
+.modal-dialog
+
+.modal-content{
+  background-color:#9ac7c8;
+}
+
+.modal-body{
+  border-radius: 0.4rem;
+  background-color: white;
+  color: black;
+}
+
+.modal-body p{
+  text-align: left !important;
+}
+
+.modal-header, .modal-footer{
+  border:none;
+}
+
+.header-titles{
+  color: #9ac7c8;
+}
