@@ -1,25 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profile</title>
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
-      crossorigin="anonymous"
-    />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
     <!-- Import fonts awesome stylesheet -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+        integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="/styles/index.css">
     <link rel="stylesheet" href="/styles/profile.css">
     <link rel="stylesheet" href="/styles/navbar.css">
     <link rel="stylesheet" href="/styles/footer.css">
     <!-- <link rel="stylesheet" href="/styles/profile.css"> -->
 </head>
+
 <body>
-    
+
     <!-- start of offcanvas navigation -->
     <nav class="navbar navbar-default navbar-expand-sm fixed-top" style="width: 100%">
         <div class="container-fluid">
@@ -41,8 +41,8 @@
                 <div class="offcanvas-body bg-dark navbar-dark menu" id="navbarNav">
                     <div>
                         <!-- dynamic navbar -->
-                    </div>   
-                                  
+                    </div>
+
                 </div>
             </div>
         </div>
@@ -50,207 +50,237 @@
     <!-- end of offcanvasnavigation -->
 
     <!-- start of profile -->
-   
+
     <div class="container-fluid"></div>
-        <div class="row">
-    
-            <div class="col-md-4">
-                <form id="formLogin" class="needs-validation" novalidate> 
-                    <div class="container profile-section">            
-                        <div>
-                            <h2>Profile</h2>
-                        </div>
-                        <!-- firstname -->
-                        <div class="col profile-subsection">
-                            <label for="firstName" class="form-label">First Name</label>
-                            <input type="text" class="form-control" id="firstName" required />   
-                        </div>
-                        <!-- lastname -->
-                        <div class="col profile-subsection">
-                            <label for="lastName" class="form-label">Last/SurName</label>
-                            <input type="text" class="form-control" id="lastName" required />   
-                        </div>
-                        <!-- username/email -->
-                        <div class="col profile-subsection">
-                            <label for="email" class="form-label">Username &#40;email&#41;</label>
-                            <input type="email" class="form-control" id="email" placeholder="e.g. username@mail.com" required />
-                        </div>
-                        <!-- mobile number -->
-                        <div class="col profile-subsection">
-                            <label for="mobileNumber" class="form-label">Mobile Number</label>
-                            <input type="number" class="form-control" id="mobileNumber" required /> 
-                        </div>
+    <div class="row">
 
-                        <div class="col profile-subsection" id="staff-license">
-                            <!-- for staff license number input from JS -->
-                        </div>
+        <div class="col-md-4">
+            <form id="formLogin" class="needs-validation" novalidate>
+                <div class="container profile-section">
+                    <div>
+                        <h2>Profile</h2>
+                    </div>
+                    <!-- firstname -->
+                    <div class="col profile-subsection">
+                        <label for="firstName" class="form-label">First Name</label>
+                        <input type="text" class="form-control" id="firstName" required />
+                    </div>
+                    <!-- lastname -->
+                    <div class="col profile-subsection">
+                        <label for="lastName" class="form-label">Last/SurName</label>
+                        <input type="text" class="form-control" id="lastName" required />
+                    </div>
+                    <!-- username/email -->
+                    <div class="col profile-subsection">
+                        <label for="email" class="form-label">Username &#40;email&#41;</label>
+                        <input type="email" class="form-control" id="email" placeholder="e.g. username@mail.com"
+                            required />
+                    </div>
+                    <!-- mobile number -->
+                    <div class="col profile-subsection">
+                        <label for="mobileNumber" class="form-label">Mobile Number</label>
+                        <input type="number" class="form-control" id="mobileNumber" required />
+                    </div>
 
-                        <div class="spinnerProfile" id="spinnerProfile">
-                            <!-- spinner -->
-                        </div>
+                    <div class="col profile-subsection" id="staff-license">
+                        <!-- for staff license number input from JS -->
+                    </div>
 
-                        <!-- edit button -->
-                        <div class="edit-btn-section">  
-                            <div id="txtUserrole" class="role">
-                                <p></p>
-                            </div>               
-                            <div class="edit-btn">
-                                <button type="submit" id="btnEdit" class="btn btnEdit btn-danger">Edit</button>
-                            </div> 
-                        </div>                         
-                    </div>       
-                </form>
-            </div>
-    
-            <div class="col-md-8" id="patientdetail" style="display: none;">
-                <form class="needs-validation" novalidate> 
-                    <div class="container profile-section">            
-                        
-                        <!-- package type -->
-                        <div id="packageType" class="d-flex justify-content-sm-start">
-                            <p>Type of packages</p>
-                        
-                            <div class="form-check package-radio-btn">
-                                <input class="form-check-input" type="radio" name="Radios" id="Radios1" value="option1" checked>
-                                <label class="form-check-label" for="Radios1">
+                    <div class="spinnerProfile" id="spinnerProfile">
+                        <!-- spinner -->
+                    </div>
+
+                    <!-- edit button -->
+                    <div class="edit-btn-section">
+                        <div id="txtUserrole" class="role">
+                            <p></p>
+                        </div>
+                        <div class="edit-btn">
+                            <button type="submit" id="btnEdit" class="btn btnEdit btn-danger">Edit</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <div class="col-md-8" id="patientdetail" style="display: none;">
+            <form class="needs-validation" novalidate>
+                <div class="container profile-section">
+
+                    <!-- package type -->
+                    <div id="packageType" class="d-flex justify-content-sm-start">
+                        <p>Type of packages</p>
+
+                        <div class="form-check package-radio-btn">
+                            <input class="form-check-input" type="radio" name="Radios" id="Radios1" value="option1"
+                                checked>
+                            <label class="form-check-label" for="Radios1">
                                 Half Day Package
-                                </label>
-                            </div>
-                            <div class="form-check package-radio-btn">
-                                <input class="form-check-input" type="radio" name="Radios" id="Radios2" value="option2">
-                                <label class="form-check-label" for="Radios2">
-                                    Full Day Package
-                                </label>
-                            </div>
+                            </label>
                         </div>
-
-                        <!-- Next-Of-Kin full name -->
-                        <div class="col profile-subsection">
-                            <label for="firstName" class="form-label">Next-of-kin Name</label>
-                            <input type="text" class="form-control" id="next-of-kin-name" required />   
-                        </div>
-
-                        <!-- Next-Of-Kin mobile number -->
-                        <div class="col profile-subsection">
-                            <label for="mobileNumber" class="form-label">Next-of-kin Mobile Number</label>
-                            <input type="number" class="form-control" id="next-of-kin-mobile" required />
-                        </div>
-
-                        <div>
-                            <select class="form-select medical-condition" id="medical-condition" aria-label="Default select">
-                                <option selected>Medical Conditions</option>
-                                <option value="1">High Blood Pressure</option>
-                                <option value="2">High Cholesterol</option>
-                                <option value="3">Diabetes</option>
-                            </select>
-                        </div>
-
-                        <div class="form-floating text-black">
-                            <textarea class="form-control doctor-prescription" style="height: 10rem" placeholder="Leave a comment here" id="doctor-prescription"></textarea>
-                            <label for="doctor-prescription">Doctor's Prescreiptions</label>
-                        </div>
-
-                        <div class="spinnerRegister" id="spinnerRegister">
-                            <!-- spinner -->
-                        </div>
-                    
-                    </div>       
-                </form>
-            </div> 
-
-            <div class="col-md-8 profile-section staff-section admin-section">
-                <div class="col-md-4" style="width: 100%;">
-                    <nav aria-label="Page navigation example">
-                        <ul class="pagination justify-content-center" style=" width: 100%">
-                          <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-                          <li class="page-item"><a class="page-link" href="#">1</a></li>
-                          <li class="page-item"><a class="page-link" href="#">2</a></li>
-                          <li class="page-item"><a class="page-link" href="#">3</a></li>
-                          <li class="page-item"><a class="page-link" href="#">Next</a></li>
-                        </ul>
-                    </nav>
-                </div>
-
-                <ul class="nav nav-tabs" id="myTab" role="tablist">
-                    <li class="nav-item" role="presentation">
-                      <button class="nav-link bg-body-secondary fw-bold active" id="patient-tab" data-bs-toggle="tab" data-bs-target="#patient-tab-pane" type="button" role="tab" aria-controls="patient-tab-pane" aria-selected="true">Patient</button>
-                    </li>
-                    <li class="nav-item" role="presentation">
-                      <button class="nav-link bg-body-secondary fw-bold" id="staff-tab" data-bs-toggle="tab" data-bs-target="#staff-tab-pane" type="button" role="tab" aria-controls="staff-tab-pane" aria-selected="false">Staff</button>
-                    </li>
-                  </ul>
-                  <div class="tab-content" id="myTabContent">
-                    <div class="tab-pane show active" id="patient-tab-pane" role="tabpanel" aria-labelledby="patient-tab" tabindex="0">
-                        <div class="table-responsive small rounded-bottom pt-3 px-3 bg-body-secondary staff-section admin-section" id="patientRecords">
-                            <h3 style="color: #a0a0a0;">Patient</h3>
-                            <table class="table table-striped table-sm">
-                              <thead>
-                                <tr>
-                                  <th scope="col">ID</th>
-                                  <th scope="col">Name</th>
-                                  <th scope="col"></th>
-                                  <th scope="col">Status</th>
-                                </tr>
-                              </thead>
-                              <!-- start of dynamic -->
-                              <tbody class="" id="patientRecordstbody">
-                               <!-- dynamic insertion -->
-                              </tbody>
-                              <!-- end of dynamic -->
-                            </table>
+                        <div class="form-check package-radio-btn">
+                            <input class="form-check-input" type="radio" name="Radios" id="Radios2" value="option2">
+                            <label class="form-check-label" for="Radios2">
+                                Full Day Package
+                            </label>
                         </div>
                     </div>
-                    <div class="tab-pane" id="staff-tab-pane" role="tabpanel" aria-labelledby="staff-tab" tabindex="0">
-                        <div class="table-responsive small rounded-bottom pt-3 px-3 bg-body-secondary admin-section" id="staffRecords">
-                            <h3 style="color: #a0a0a0;">Staff</h3>
-                            <table class="table table-striped table-sm">
-                              <thead>
-                                <tr>
-                                  <th scope="col">ID</th>
-                                  <th scope="col">Name</th>
-                                  <th scope="col"></th>
-                                  <th scope="col">Status</th>
+
+                    <!-- Next-Of-Kin full name -->
+                    <div class="col profile-subsection">
+                        <label for="firstName" class="form-label">Next-of-kin Name</label>
+                        <input type="text" class="form-control" id="next-of-kin-name" required />
+                    </div>
+
+                    <!-- Next-Of-Kin mobile number -->
+                    <div class="col profile-subsection">
+                        <label for="mobileNumber" class="form-label">Next-of-kin Mobile Number</label>
+                        <input type="number" class="form-control" id="next-of-kin-mobile" required />
+                    </div>
+
+                    <div>
+                        <select class="form-select medical-condition" id="medical-condition"
+                            aria-label="Default select">
+                            <option selected>Medical Conditions</option>
+                            <option value="1">High Blood Pressure</option>
+                            <option value="2">High Cholesterol</option>
+                            <option value="3">Diabetes</option>
+                        </select>
+                    </div>
+
+                    <div class="form-floating text-black">
+                        <textarea class="form-control doctor-prescription" style="height: 10rem"
+                            placeholder="Leave a comment here" id="doctor-prescription"></textarea>
+                        <label for="doctor-prescription">Doctor's Prescreiptions</label>
+                    </div>
+
+                    <div class="spinnerRegister" id="spinnerRegister">
+                        <!-- spinner -->
+                    </div>
+
+                </div>
+            </form>
+        </div>
+
+        <div class="col-md-8 profile-section staff-section admin-section">
+            <div class="col-md-4" style="width: 100%;">
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination justify-content-center" style=" width: 100%">
+                        <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+                        <li class="page-item"><a class="page-link" href="#">1</a></li>
+                        <li class="page-item"><a class="page-link" href="#">2</a></li>
+                        <li class="page-item"><a class="page-link" href="#">3</a></li>
+                        <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                    </ul>
+                </nav>
+            </div>
+
+            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link  fw-bold active" id="patient-tab" data-bs-toggle="tab"
+                        data-bs-target="#patient-tab-pane" type="button" role="tab" aria-controls="patient-tab-pane"
+                        aria-selected="true">Patient</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link  fw-bold" id="staff-tab" data-bs-toggle="tab"
+                        data-bs-target="#staff-tab-pane" type="button" role="tab" aria-controls="staff-tab-pane"
+                        aria-selected="false">Staff</button>
+                </li>
+            </ul>
+            <div class="tab-content" id="myTabContent">
+                <div class="tab-pane show active" id="patient-tab-pane" role="tabpanel" aria-labelledby="patient-tab"
+                    tabindex="0">
+                    <div class="table-responsive small rounded-bottom pt-3 px-3 bg-body-secondary staff-section admin-section"
+                        id="patientRecords">
+                        <table class="table table-striped table-sm">
+                            <thead >
+                                <tr >
+                                    <th class="ps-3" scope="col">ID</th>
+                                    <th scope="col">Name</th>
+                                    <th scope="col"></th>
+                                    <th scope="col">Status</th>
                                 </tr>
-                              </thead>
-                              <!-- start of dynamic -->
-                              <tbody class="" id="staffRecordstbody">
-                               <!-- dynamic insertion -->
-                              </tbody>
-                              <!-- end of dynamic -->
-                            </table>
-                        </div>
+                            </thead>
+                            <!-- start of dynamic -->
+                            <tbody class="" id="patientRecordstbody">
+                                <!-- dynamic insertion -->
+                            </tbody>
+                            <!-- end of dynamic -->
+                        </table>
                     </div>
                 </div>
+                <div class="tab-pane" id="staff-tab-pane" role="tabpanel" aria-labelledby="staff-tab" tabindex="0">
+                    <div class="table-responsive small rounded-bottom pt-3 px-3 bg-body-secondary admin-section"
+                        id="staffRecords">
+                        <table class="table table-striped table-sm">
+                            <thead>
+                                <tr>
+                                    <th class="ps-3" scope="col">ID</th>
+                                    <th scope="col">Name</th>
+                                    <th scope="col"></th>
+                                    <th scope="col">Status</th>
+                                </tr>
+                            </thead>
+                            <!-- start of dynamic -->
+                            <tbody class="" id="staffRecordstbody">
+                                <!-- dynamic insertion -->
+                            </tbody>
+                            <!-- end of dynamic -->
+                        </table>
+                    </div>
+                </div>
+            </div>
 
-                <!-- Button trigger modal -->
-                <!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+            <!-- Button trigger modal -->
+            <!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
                     Launch static backdrop modal
                 </button> -->
-                
-                <!-- Modal -->
-                <div class="modal" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                    <div class="modal-dialog">
+
+            <!-- Modal -->
+            <div class="modal" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+                aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg">
                     <div class="modal-content">
                         <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="staticBackdropLabel">Modal title</h1>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            <div class="modal-title" id="staticBackdropLabel"><span
+                                    class="chooseProfile">p/s</span><span> ID: </span><span class="profileID"></span>
+                            </div>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
+
+                        <!-- Patient Modal Sample -->
                         <div class="modal-body">
-                        ...
+                            <div class="modal-first-row row">
+                                <!-- <div class="col-4 ">
+                                    <p class="header-titles d-block mb-0 fw-bold"> Name</p>
+                                    <p class="profileName d-block ">kai</p>
+                                </div>
+                                <div class="col-4">
+                                    <p class="header-titles d-block mb-0 fw-bold">Registration Date</p>
+                                    <p class="profileRegistrationDate d-block">24th Sep 2024</p>
+                                </div>
+                                <div class="col-4">
+                                    <p class="header-titles d-block mb-0 fw-bold">Package</p>
+                                    <p class="d-block">half-day</p>
+                                </div> -->
+                            </div>
+                            <div class="modal-second-row row">
+                            </div>
                         </div>
+
+
                         <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary" id="modal-edit-btn">Understood</button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                         </div>
-                    </div>
                     </div>
                 </div>
-  
+            </div>
 
-            </div>           
+
         </div>
     </div>
-        
+    </div>
+
     <!-- end of profile -->
 
     <!-- start of footer -->
@@ -260,8 +290,10 @@
         <div class="row py-3 pt-4 footer-top-section">
             <div class="row">
                 <div class="col-md-3 footer-image-section">
-                    <img src="/img/footer/logo-footer.svg" alt="logo" style="width: 40px; height: 40px; object-fit: cover" class="rounded-pill" />&nbsp;REBOUND>
-                    <p class="footer-description-section">We a VIP Concierge Nursing Care company. Our vision is to empower at-home patients to gain independence and quality lifestyle.
+                    <img src="/img/footer/logo-footer.svg" alt="logo"
+                        style="width: 40px; height: 40px; object-fit: cover" class="rounded-pill" />&nbsp;REBOUND>
+                    <p class="footer-description-section">We a VIP Concierge Nursing Care company. Our vision is to
+                        empower at-home patients to gain independence and quality lifestyle.
                     </p>
                 </div>
 
@@ -280,10 +312,11 @@
                     <p>Contact</p>
                     <a href="#"><img src="/img/footer/phone_icon.png" alt="phone"><span>+(65) 6877 7788</span></a>
                     <a href="#"><img src="/img/footer/message_icon.png" alt="message"><span>Info@rebound.com</span></a>
-                    <a href="#"><img src="/img/footer/location_icon.png" alt="location"><span>111 Vitality St. Singapore 877111</span></a>
-                    
+                    <a href="#"><img src="/img/footer/location_icon.png" alt="location"><span>111 Vitality St. Singapore
+                            877111</span></a>
+
                 </div>
-            </div>   
+            </div>
         </div>
 
         <div class="row footer-bottom-section">
@@ -295,25 +328,24 @@
     <!-- end of footer -->
 
     <!-- External Custom Script -->
-    <script src="/scripts/Mock.js"></script>  <!-- TODO: to remove in production env. --> 
+    <script src="/scripts/Mock.js"></script> <!-- TODO: to remove in production env. -->
     <script src="/scripts/const.js"></script>
-    
+
     <script src="/scripts/auth.js"></script>
     <script src="/scripts/components/NavController.js"></script>
     <script src="/scripts/components/Spinner.js"></script>
     <script src="/scripts/loader.js"></script>
-    <script src="/scripts/profileSelector.js"></script>
-    
+    <!-- <script src="/scripts/profileSelector.js"></script> -->
+    <script src="/scripts/patientdetails.js"></script>
     <script src="/scripts/boostrap-ftns.js"></script>
     <script src="/scripts/form-validate.js"></script>
 
-    <script 
-        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-        crossorigin="anonymous">
-    </script> 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
+        </script>
 
     <!-- Internal Custom Script -->
 
 </body>
+
 </html>
