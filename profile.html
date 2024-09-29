@@ -52,36 +52,15 @@
     <!-- start of profile -->
 
     <div class="container-fluid"></div>
-    <div class="row">
+    <div class="row m-0">
 
         <div class="col-md-4">
             <form id="formLogin" class="needs-validation" novalidate>
                 <div class="container profile-section">
-                    <div>
+                    <div id="profileSection">
                         <h2>Profile</h2>
                     </div>
-                    <!-- firstname -->
-                    <div class="col profile-subsection">
-                        <label for="firstName" class="form-label">First Name</label>
-                        <input type="text" class="form-control" id="firstName" required />
-                    </div>
-                    <!-- lastname -->
-                    <div class="col profile-subsection">
-                        <label for="lastName" class="form-label">Last/SurName</label>
-                        <input type="text" class="form-control" id="lastName" required />
-                    </div>
-                    <!-- username/email -->
-                    <div class="col profile-subsection">
-                        <label for="email" class="form-label">Username &#40;email&#41;</label>
-                        <input type="email" class="form-control" id="email" placeholder="e.g. username@mail.com"
-                            required />
-                    </div>
-                    <!-- mobile number -->
-                    <div class="col profile-subsection">
-                        <label for="mobileNumber" class="form-label">Mobile Number</label>
-                        <input type="number" class="form-control" id="mobileNumber" required />
-                    </div>
-
+                    <!-- insert dynamic -->
                     <div class="col profile-subsection" id="staff-license">
                         <!-- for staff license number input from JS -->
                     </div>
@@ -110,50 +89,13 @@
                     <!-- package type -->
                     <div id="packageType" class="d-flex justify-content-sm-start">
                         <p>Type of packages</p>
-
-                        <div class="form-check package-radio-btn">
-                            <input class="form-check-input" type="radio" name="Radios" id="Radios1" value="option1"
-                                checked>
-                            <label class="form-check-label" for="Radios1">
-                                Half Day Package
-                            </label>
-                        </div>
-                        <div class="form-check package-radio-btn">
-                            <input class="form-check-input" type="radio" name="Radios" id="Radios2" value="option2">
-                            <label class="form-check-label" for="Radios2">
-                                Full Day Package
-                            </label>
-                        </div>
+                        <!-- insert dynamic -->
                     </div>
-
-                    <!-- Next-Of-Kin full name -->
-                    <div class="col profile-subsection">
-                        <label for="firstName" class="form-label">Next-of-kin Name</label>
-                        <input type="text" class="form-control" id="next-of-kin-name" required />
+                    <!-- Package Selected -->
+                    <div class="col profile-subsection" id="packageSelectedRow">
+                        <!-- insert dynamic -->
                     </div>
-
-                    <!-- Next-Of-Kin mobile number -->
-                    <div class="col profile-subsection">
-                        <label for="mobileNumber" class="form-label">Next-of-kin Mobile Number</label>
-                        <input type="number" class="form-control" id="next-of-kin-mobile" required />
-                    </div>
-
-                    <div>
-                        <select class="form-select medical-condition" id="medical-condition"
-                            aria-label="Default select">
-                            <option selected>Medical Conditions</option>
-                            <option value="1">High Blood Pressure</option>
-                            <option value="2">High Cholesterol</option>
-                            <option value="3">Diabetes</option>
-                        </select>
-                    </div>
-
-                    <div class="form-floating text-black">
-                        <textarea class="form-control doctor-prescription" style="height: 10rem"
-                            placeholder="Leave a comment here" id="doctor-prescription"></textarea>
-                        <label for="doctor-prescription">Doctor's Prescreiptions</label>
-                    </div>
-
+                    <!-- insert dynamic -->
                     <div class="spinnerRegister" id="spinnerRegister">
                         <!-- spinner -->
                     </div>
@@ -162,7 +104,7 @@
             </form>
         </div>
 
-        <div class="col-md-8 profile-section staff-section admin-section">
+        <div class="col-md-8 profile-section staff-section admin-section" id="patient-section">
             <div class="col-md-4" style="width: 100%;">
                 <nav aria-label="Page navigation example">
                     <ul class="pagination justify-content-center" style=" width: 100%">
@@ -287,7 +229,7 @@
 
     <footer class="col footer-section">
 
-        <div class="row py-3 pt-4 footer-top-section">
+        <div class="row py-3 pt-4 footer-top-section m-0">
             <div class="row">
                 <div class="col-md-3 footer-image-section">
                     <img src="/img/footer/rebound1.png" alt="logo"
@@ -319,7 +261,7 @@
             </div>
         </div>
 
-        <div class="row footer-bottom-section">
+        <div class="row footer-bottom-section m-0">
             <p>&copy; 2024 REBOUND</p>
         </div>
 
