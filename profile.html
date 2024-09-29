@@ -103,7 +103,7 @@
             </form>
         </div>
 
-        <div class="col-md-8" id="patientdetail" style="display: none;">
+        <div class="col-md-8" id="patientdetail">
             <form class="needs-validation" novalidate>
                 <div class="container profile-section">
 
@@ -162,7 +162,7 @@
             </form>
         </div>
 
-        <div class="col-md-8 profile-section staff-section admin-section">
+        <div class="col-md-8 profile-section staff-section admin-section" id="staff-admin-section">
             <div class="col-md-4" style="width: 100%;">
                 <nav aria-label="Page navigation example">
                     <ul class="pagination justify-content-center" style=" width: 100%">
@@ -231,12 +231,6 @@
                 </div>
             </div>
 
-            <!-- Button trigger modal -->
-            <!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-                    Launch static backdrop modal
-                </button> -->
-
-            <!-- Modal -->
             <div class="modal" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
                 aria-labelledby="staticBackdropLabel" aria-hidden="true">
                 <div class="modal-dialog modal-lg">
@@ -250,7 +244,7 @@
 
                         <!-- Patient Modal Sample -->
                         <div class="modal-body">
-                            <div class="modal-first-row row">
+                            <div class="modal-first-row row"> <!-- Below commented code is what the js script produces -->
                                 <!-- <div class="col-4 ">
                                     <p class="header-titles d-block mb-0 fw-bold"> Name</p>
                                     <p class="profileName d-block ">kai</p>
@@ -266,10 +260,15 @@
                             </div>
                             <div class="modal-second-row row">
                             </div>
+                            <div class="modal-third-row form-group">
+                               <label for="additional-notes" class="header-titles d-block fw-bold">Additional Notes: </label>
+                               <textarea class="form-control" rows="3" id="additional-notes"></textarea>
+                            </div>
                         </div>
 
 
                         <div class="modal-footer">
+                            <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Save</button>
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                         </div>
                     </div>
@@ -286,7 +285,6 @@
     <!-- start of footer -->
 
     <footer class="col footer-section">
-
         <div class="row py-3 pt-4 footer-top-section">
             <div class="row">
                 <div class="col-md-3 footer-image-section">

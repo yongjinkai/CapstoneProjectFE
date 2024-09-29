@@ -1,10 +1,10 @@
 const patientIds = [16, 22, 29];
 const staffIds = [6, 7, 8];
 const adminIds = [1, 2, 3];
+
 let patientInfo;
 
-// console.log(data);
-
+// Function to fetch data from dummyJSON, returns a list of object of patient/staff info
 async function fetchPatients() {
     const response = await fetch("https://dummyjson.com/users");
     const resp = await response.json();
@@ -76,12 +76,13 @@ function fillTable(tableBody, profile) {
 }
 
 function fillPatientModal(patient) {
+    //Note: data input values is inaccurate, just for visualisation.
     const data1 = [
         { header: "Name", value: patient.firstName + " " + patient.lastName },
         { header: "Registration Date", value: patient.birthDate },
         {
             header: "Package",
-            value: patient.gender == "female" ? "Half-day" : "Full-Day",
+            value: patient.gender == "female" ? "Half-day" : "Full-Day", //Mock example to simulate random halfday or fullday package using gender
         },
     ];
     const data2 = [
@@ -95,11 +96,12 @@ function fillPatientModal(patient) {
 
     const modalFirstRow = document.querySelector(".modal-first-row");
     const modalSecondRow = document.querySelector(".modal-second-row");
-
+    const modalThirdRow = document.querySelector(".modal-third-row");
     modalFirstRow.innerHTML = "";
     modalSecondRow.innerHTML = "";
-
+    modalThirdRow.innerHTML = "";
     data1.forEach((item) => {
+        //Loop for filling in modal first row data
         const col = document.createElement("div");
         col.className = "col-4";
         const header = document.createElement("p");
@@ -116,6 +118,7 @@ function fillPatientModal(patient) {
     });
 
     data2.forEach((item) => {
+        //Loop for filling in modal second row data
         const col = document.createElement("div");
         col.className = "col-4";
 
@@ -131,6 +134,19 @@ function fillPatientModal(patient) {
         col.append(header);
         col.append(value);
     });
+
+    const label = document.createElement("label");
+    label.setAttribute("for", "additional-notes");
+    label.className = "header-titles d-block fw-bold";
+    label.textContent = "Additional Notes: ";
+
+    const textArea = document.createElement("textarea");
+    textArea.className = "form-control";
+    textArea.id = "additional-notes";
+    textArea.rows = 3;
+
+    modalThirdRow.append(label);
+    modalThirdRow.append(textArea);
 }
 
 function fillStaffModal(staff) {
@@ -173,7 +189,6 @@ function fillStaffModal(staff) {
     assignedPatientsP.className = "header-titles d-block mb-0 fw-bold";
     assignedPatientsP.textContent = "Assigned Patients";
 
-    
     const col2 = document.createElement("div");
     col2.className = "col-3";
 
@@ -196,8 +211,6 @@ function fillStaffModal(staff) {
 
     const dropDownUl = document.createElement("ul");
     dropDownUl.className = "dropdown-menu";
-
-
 
     patientInfo.forEach((patient) => {
         const patientList = document.createElement("li");
@@ -224,10 +237,13 @@ function fillStaffModal(staff) {
 }
 
 function assignPatient(patient) {
-    const assignedPatientsContainer = document.querySelector(".assignedPatientsContainer")
-    
+    const assignedPatientsContainer = document.querySelector(
+        ".assignedPatientsContainer"
+    );
+
     const assignedPatientsDiv = document.createElement("div");
-    assignedPatientsDiv.className = "d-flex justify-content-between pb-2 assignedPatientsDiv";
+    assignedPatientsDiv.className =
+        "d-flex justify-content-between pb-2 assignedPatientsDiv";
 
     const patientNameSpan = document.createElement("span");
     let patientName = patient.firstName + " " + patient.lastName;
@@ -242,24 +258,38 @@ function assignPatient(patient) {
         patientNameSpan.remove();
         unassignButton.remove();
     }
-    assignedPatientsContainer.append(assignedPatientsDiv)
-    assignedPatientsDiv.append(patientNameSpan)
-    assignedPatientsDiv.append(unassignButton)
-
+    assignedPatientsContainer.append(assignedPatientsDiv);
+    assignedPatientsDiv.append(patientNameSpan);
+    assignedPatientsDiv.append(unassignButton);
 }
 
-async function main() {
+async function adminProfile() {
+    document.querySelector("#patientdetail").remove();
+
     patientInfo = await fetchPatients();
     patientInfo.forEach((patient) => {
-        patient.role = "Patient";
+        patient.role = "Patient"; //Adds a mock patient role to the dummy JSON data
         addPatient(patient);
     });
 
     const staffInfo = await fetchStaffs();
     staffInfo.forEach((staff) => {
-        staff.role = "Staff";
+        staff.role = "Staff"; //Adds a mock Staff role to the dummy JSON data
         addStaff(staff);
     });
 }
 
-main();
+async function staffProfile() {
+    document.querySelector("#patientdetail").remove();
+    document.querySelector("#staff-tab").remove();
+
+    patientInfo = await fetchPatients();
+    patientInfo.forEach((patient) => {
+        patient.role = "Patient"; //Adds a mock patient role to the dummy JSON data
+        addPatient(patient);
+    });
+}
+
+function customerProfile() {
+    document.querySelector("#staff-admin-section").remove();
+}
