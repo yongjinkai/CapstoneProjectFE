@@ -131,10 +131,10 @@ body {
 
 /* end of profile section */
 
-
+/* Kai - I had commented this coz it change the background color on the profile navbar
 .nav-link{
   background-color: rgb(211, 211, 211, 0.3);
-}
+} */
 
 .modal-dialog
 
