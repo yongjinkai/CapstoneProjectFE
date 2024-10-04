@@ -46,13 +46,13 @@ class Mock{
     // !! Mock token containing the subscriber (sub: martin@example.com), and Unix Timestamps: issued at (iat: 1st Sept 2024) and expiry (exp: 1st Sept 2025)
 
     // Admin token 
-    // static mockToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im1vbW9ydW5uZXIiLCJlbWFpbCI6Im1hcnRpbkBleGFtcGxlLmNvbSIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTcyNTU5MDQwNywiZXhwIjoxNzU3MTI2NDA3fQ.zXMOdhfVq4ILL0JLKq0Iq2zR3f2fBdJA37F9dSQYSm4";
+    static mockToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im1vbW9ydW5uZXIiLCJlbWFpbCI6Im1hcnRpbkBleGFtcGxlLmNvbSIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTcyNTU5MDQwNywiZXhwIjoxNzU3MTI2NDA3fQ.zXMOdhfVq4ILL0JLKq0Iq2zR3f2fBdJA37F9dSQYSm4";
         
     // Staff token
     // static mockToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im1vbW9ydW5uZXIiLCJlbWFpbCI6Im1hcnRpbkBleGFtcGxlLmNvbSIsInJvbGUiOiJTVEFGRiIsImlhdCI6MTcyNTk0NDI4NywiZXhwIjoxNzU3NDgwMjg3fQ._HgaqW1v4Vwf6gwG15b6iA7e-PYpXX05xQjNXZudyyQ";
     
     //Customer token
-    static mockToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im1vbW9ydW5uZXIiLCJlbWFpbCI6Im1hcnRpbkBleGFtcGxlLmNvbSIsInJvbGUiOiIiLCJpYXQiOjE3MjYxMTk0MzcsImV4cCI6MTc1NzY1NTQzN30.QhM54GYIQORU7HfKs32lq3yBHIzjwbow_GqVj8flvpQ";
+    // static mockToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im1vbW9ydW5uZXIiLCJlbWFpbCI6Im1hcnRpbkBleGFtcGxlLmNvbSIsInJvbGUiOiIiLCJpYXQiOjE3MjYxMTk0MzcsImV4cCI6MTc1NzY1NTQzN30.QhM54GYIQORU7HfKs32lq3yBHIzjwbow_GqVj8flvpQ";
 
     // Static methods
     /* ************** */

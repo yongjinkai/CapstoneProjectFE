@@ -237,11 +237,7 @@ const ftnEditSave = (role, username, email) => {
             document.getElementById('packageSelected').disabled = false;
             document.getElementById('next-of-kin-name').disabled = false;
             document.getElementById('next-of-kin-mobile').disabled = false;
-            document.getElementById('medicalRecord').disabled = false;
             
-            if (role === "STAFF") {
-                document.getElementById('staffLicenseNumber').disabled = false;
-            }
         } else {
             editBtnElement.id = 'btnEdit';
             editBtnElement.classList.remove('btnSave');
@@ -258,12 +254,8 @@ const ftnEditSave = (role, username, email) => {
             document.getElementById('package2').disabled = true;
             document.getElementById('packageSelected').disabled = true;
             document.getElementById('next-of-kin-name').disabled = true;
-            document.getElementById('next-of-kin-mobile').disabled = true;
-            document.getElementById('medicalRecord').disabled = true;  
-
-            if (role === "STAFF") {
-                document.getElementById('staffLicenseNumber').disabled = true;
-            }  
+            document.getElementById('next-of-kin-mobile').disabled = true;  
+ 
         }  
     })
 }
@@ -571,8 +563,9 @@ async function staffProfile(role, username, email) {
     staffLicenseElement.type = 'number';
     staffLicenseElement.name = 'licenseNumber';
     staffLicenseElement.id = 'staffLicenseNumber';
-    staffLicenseElement.placeholder = 'enter your license number';
+    staffLicenseElement.placeholder = 'Nurse license number';
     staffLicenseElement.className = 'form-control';
+    staffLicenseElement.disabled = true;
 
     document.getElementById('staff-license').appendChild(staffLicenseLabelElement);
     document.getElementById('staff-license').appendChild(staffLicenseElement);
