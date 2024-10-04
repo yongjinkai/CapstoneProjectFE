@@ -81,11 +81,24 @@ function fillTable(tableBody, profile, restriction) {
 
 function fillPatientModal(patient, restriction) {
     //restriction=true: viewed from staff profile, unable to edit package/prescription details
-    console.log("fill patient modal activated");
+    let startDate;
+    let endDate;
+    if (restriction) {
+        startDate = "1/1/1990";
+        endDate = "1/1/1990";
+    } else {
+        startDate = document.createElement("input");
+        startDate.className = "form-control";
+        startDate.type = "date";
+        endDate = document.createElement("input");
+        endDate.className = "form-control";
+        endDate.type = "date";
+    }
+
     const data1 = [
         { header: "Name", value: patient.firstName + " " + patient.lastName },
-        { header: "Start Date", value: patient.birthDate },
-        { header: "End Date", value: patient.birthDate },
+        { header: "Start Date", value: startDate },
+        { header: "End Date", value: endDate },
     ];
 
     const modalFirstRow = document.querySelector(".modal-first-row");
@@ -104,9 +117,11 @@ function fillPatientModal(patient, restriction) {
         header.className = "header-titles d-block mb-0 fw-bold";
         header.textContent = item.header;
 
-        const value = document.createElement("p");
-        value.textContent = item.value;
-        value.className = "d-block";
+        let value = document.createElement("p");
+        if (typeof item.value == "string") {
+            value.textContent = item.value;
+            value.className = "d-block";
+        } else value = item.value;
 
         modalFirstRow.append(col);
         col.append(header);
@@ -191,16 +206,15 @@ function fillPatientModal(patient, restriction) {
     let prescriptionLabel;
     let prescriptionTextArea;
     if (!restriction) {
-        console.log("no restriction")
+        console.log("no restriction");
         prescriptionLabel = document.createElement("label");
         prescriptionLabel.setAttribute("for", "additional-notes");
-        
 
         prescriptionTextArea = document.createElement("textarea");
         prescriptionTextArea.className = "form-control";
         prescriptionTextArea.rows = 3;
     } else {
-        console.log("restricted")
+        console.log("restricted");
         prescriptionLabel = document.createElement("p");
         prescriptionLabel.className = "my-0 py-0";
         prescriptionTextArea = document.createElement("p");
@@ -211,7 +225,8 @@ function fillPatientModal(patient, restriction) {
     prescriptionLabel.className += "header-titles d-block fw-bold ";
     modalThirdRow.append(prescriptionLabel);
     modalThirdRow.append(prescriptionTextArea);
-    prescriptionTextArea.innerText = "Levodopa/Carbidopa 100/25mg three times daily; Sertraline 100mg daily"
+    prescriptionTextArea.innerText =
+        "Levodopa/Carbidopa 100/25mg three times daily; Sertraline 100mg daily";
 
     // Setting up additional notes entry
     const additonalNotesLabel = document.createElement("label");
