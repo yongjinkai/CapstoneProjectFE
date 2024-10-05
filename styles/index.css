@@ -21,3 +21,116 @@ body {
 }
 
 
+
+
+
+/* Home Section Start */
+
+.home{
+  padding-top: 6rem;
+  width: 100%;
+  height: 100vh;
+  background-repeat: no-repeat;
+  background-image: url(../img/Home_background.png);
+  background-size: cover;
+  background-position: 50%;
+  
+}
+
+.home .main-text{
+  text-align: center;
+  background-color: rgba(127, 227, 255, 0.297); /* Translucent blue background */
+  padding: 20px; /* Adds some padding to create space between the text and the edges */
+  border-radius: 10px; /* Adds rounded corners to the background */
+ 
+}
+
+.main-text h1{
+  font-size: 116px;
+    color: white;
+    font-weight: lighter;
+    
+}
+
+.main-text p{
+  color: #495048;
+  margin-top: 5px;
+  font-size: 30px;
+  font-weight: bold;
+}
+
+#home-btn{
+  width: 150px;
+  height: 60px;
+  font-weight: bold;
+  background: #50B5D2;
+  color: white;
+  letter-spacing: 1px;
+  padding: 10px 20px;
+  border-radius: 60px;
+  margin-top: 10px;
+  transition: 0.5s;
+  cursor: pointer;
+  font-size: 18px;
+  border: none;
+  
+}
+#home-btn:hover{
+  background-color: #388b6f;
+  color: rgb(7, 6, 6);
+}
+
+.home-cards{
+  display:flex;
+  justify-content: center;
+  gap: 5%;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  align-items: flex-start;
+ 
+}
+
+.home-cards .row{
+  position: relative;
+  border-radius: 10px;
+  width: 369px; /* Set a consistent width */
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center items within each row */
+  background-color: rgba(255, 255, 255, 0.8); /* Translucent white background */
+  padding: 0px; /* Adds some padding inside the row to create space between the content and the border */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Optional: Adds a subtle shadow for depth */
+
+}
+
+.home-cards .row img{
+  width: 100%; /* Ensure the image fills the row width */
+  height: 317px;
+  object-fit: cover;
+  padding: 0;
+}
+
+.card-body h3{
+  font-size: 18px;
+  color: #50B5D2;
+  text-align: center;
+  
+}
+
+.card-body p{
+  font-size: 19px;
+  color: #495048;
+  text-align: center;
+  margin: 0;
+  
+}
+
+.card-body {
+  padding: 10px;
+  height: 120px; 
+  text-align: center; /* Center text inside the card */
+}
+
+
+
+
