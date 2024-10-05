@@ -92,7 +92,7 @@ async function login(formData = {}){
     
 }
 
-// Funtion to login
+// Funtion to register
 async function register(formData = {}){
     
     if(Object.entries(formData).length === 0)                                               // Return if the object is empty
@@ -141,6 +141,11 @@ async function register(formData = {}){
         return;
     }
     
+}
+
+// Funtion to update
+async function update(formData = {}){
+    console.log(formData);
 }
 
 // Function to logout

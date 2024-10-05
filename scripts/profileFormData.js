@@ -1,19 +1,17 @@
-
-
 // Simulating data retrieved from a database
-let persons = [
+let formData = [
     {
         id: '001',
         firstName: 'John',
         lastName: 'Doe',
         email: 'john.doe@example.com',
-        mobile: '123-456-7890',
+        mobile: '98765432',
         packageType: 'Half Day',
         nokFullName: 'Mary',
         nokMobile: '90908878',
         medicalRecord: 'High Blood Pressure',
         prescript: 'TBA',
-        nurse: 'Joe',
+        nurse: 'momorunner',
         license: ''
     },
     {
@@ -21,7 +19,7 @@ let persons = [
         firstName: 'Jane',
         lastName: 'Smith',
         email: 'jane.smith@example.com',
-        mobile: '987-654-3210',
+        mobile: '90876987',
         packageType: 'Full Day',
         nokFullName: 'Mary',
         nokMobile: '90908878',
@@ -35,7 +33,7 @@ let persons = [
         firstName: 'Alice',
         lastName: 'Johnson',
         email: 'alice.johnson@example.com',
-        mobile: '555-123-4567',
+        mobile: '98647654',
         packageType: 'Half Day',
         nokFullName: 'Mary',
         nokMobile: '90908878',
@@ -49,21 +47,21 @@ let persons = [
         firstName: 'momorunner',
         lastName: 'Lee',
         email: 'momorunner.lee@example.com',
-        mobile: '444-987-1111',
+        mobile: '97864537',
         packageType: '',
         nokFullName: '',
         nokMobile: '',
         medicalRecord: '',
         prescript: '',
         nurse: '',
-        license: '123-456-789'
+        license: 'B5C1N8'
     },
     {
         id: '005',
         firstName: 'Robert',
         lastName: 'Brown',
         email: 'robert.brown@example.com',
-        mobile: '444-987-6543',
+        mobile: '97089123',
         packageType: 'Half Day',
         nokFullName: 'Mary',
         nokMobile: '90908878',
@@ -77,34 +75,36 @@ let persons = [
         firstName: 'Max',
         lastName: 'Stone',
         email: 'Max.stone@example.com',
-        mobile: '444-987-1133',
+        mobile: '98090745',
         packageType: '',
         nokFullName: '',
         nokMobile: '',
         medicalRecord: '',
         prescript: '',
         nurse: '',
-        license: '123-456-888'
+        license: 'M5N4P6'
     }
 ];
 
 // Disable all fields for the initial launch of the page
-const ftnInitDisabledAll = () => {
+const ftnInitDisabledAll = (role, username, email) => {
     document.getElementById('firstName').disabled = true;
     document.getElementById('lastName').disabled = true;
     document.getElementById('email').disabled = true;
     document.getElementById('mobileNumber').disabled = true;
-    document.getElementById('package1').disabled = true;
-    document.getElementById('package2').disabled = true;
-    document.getElementById('packageSelected').disabled = true;
-    document.getElementById('next-of-kin-name').disabled = true;
-    document.getElementById('next-of-kin-mobile').disabled = true;
-    document.getElementById('medical-condition').disabled = true;
-    document.getElementById('doctor-prescription').disabled = true;
-    document.getElementById('assignedNurse').disabled = true;
+    if (role === "") {
+        document.getElementById('package1').disabled = true;
+        document.getElementById('package2').disabled = true;
+        document.getElementById('packageSelected').disabled = true;
+        document.getElementById('next-of-kin-name').disabled = true;
+        document.getElementById('next-of-kin-mobile').disabled = true;
+        document.getElementById('medicalRecord').disabled = true;
+        document.getElementById('doctor-prescription').disabled = true;
+        document.getElementById('assignedNurse').disabled = true;
+    }
 }
 
-// All data for the initial launch of the page
+// Add data for the initial launch of the page
 const ftnAddData = (role, username, email) => {
 
     const profileSectionElement = document.getElementById('profileSection');
@@ -121,7 +121,7 @@ const ftnAddData = (role, username, email) => {
     firstNameElement.className = "form-control mb-3";
     firstNameElement.name = "firstName";
     firstNameElement.id = "firstName";
-    firstNameElement.value = username;
+    firstNameElement.value = formData[0].firstName;
 
     const lastNameLabelElement = document.createElement('label');
     lastNameLabelElement.for = "lastName";
@@ -133,7 +133,7 @@ const ftnAddData = (role, username, email) => {
     lastNameElement.className = "form-control mb-3";
     lastNameElement.name = "lastName";
     lastNameElement.id = "lastName";
-    lastNameElement.value = username;
+    lastNameElement.value = formData[0].lastName;
 
     const emailLabelElement = document.createElement('label');
     emailLabelElement.for = "email";
@@ -145,7 +145,7 @@ const ftnAddData = (role, username, email) => {
     emailElement.className = "form-control mb-3";
     emailElement.name = "email";
     emailElement.id = "email";
-    emailElement.value = email;
+    emailElement.value = formData[0].email;
 
     const mobileNumberLabelElement = document.createElement('label');
     mobileNumberLabelElement.for = "mobileNumber";
@@ -157,7 +157,7 @@ const ftnAddData = (role, username, email) => {
     mobileNumberElement.className = "form-control mb-3";
     mobileNumberElement.name = "mobileNumber";
     mobileNumberElement.id = "mobileNumber";
-    mobileNumberElement.value = "";
+    mobileNumberElement.value = formData[0].mobile;
 
     const package1SectionElement = document.createElement('div'); 
     package1SectionElement.className = "form-check package-radio-btn";
@@ -174,7 +174,7 @@ const ftnAddData = (role, username, email) => {
     package1Element.name = "package";
     package1Element.id = "package1";
     package1Element.value = "";
-    package1Element.checked = "true";
+    package1Element.checked = "";
 
     const package2SectionElement = document.createElement('div'); 
     package1SectionElement.className = "form-check package-radio-btn";
@@ -202,54 +202,51 @@ const ftnAddData = (role, username, email) => {
     packageSelectedElement.className = "form-control mb-3";
     packageSelectedElement.name = "packageSelected";
     packageSelectedElement.id = "packageSelected";
-    packageSelectedElement.value = "";
+    packageSelectedElement.value = formData[0].packageType;
 
-    const NOKNameLabelElement = document.createElement('label');
-    NOKNameLabelElement.for = "next-of-kin-name";
-    NOKNameLabelElement.className = "form-control-plaintext; py-2 fw-semibold";
-    NOKNameLabelElement.innerText = "Next-Of-Kin Name";
+    package1Element.addEventListener("click", () => {
+        packageSelectedElement.value = "Half Day";
+    })
 
-    const NOKNameElement = document.createElement('input');
-    NOKNameElement.type = "text";
-    NOKNameElement.className = "form-control mb-3";
-    NOKNameElement.name = "next-of-kin-name";
-    NOKNameElement.id = "next-of-kin-name";
-    NOKNameElement.value = "";
+    package2Element.addEventListener("click", () => {
+        packageSelectedElement.value = "Full Day";
+    })
 
-    const NOKmobileNumberLabelElement = document.createElement('label');
-    NOKmobileNumberLabelElement.for = "next-of-kin-mobile";
-    NOKmobileNumberLabelElement.className = "form-control-plaintext; py-2 fw-semibold";
-    NOKmobileNumberLabelElement.innerText = "Next-Of-Kin Mobile Number";
+    const nokNameLabelElement = document.createElement('label');
+    nokNameLabelElement.for = "next-of-kin-name";
+    nokNameLabelElement.className = "form-control-plaintext; py-2 fw-semibold";
+    nokNameLabelElement.innerText = "Next-Of-Kin Name";
 
-    const NOKmobileNumberElement = document.createElement('input');
-    NOKmobileNumberElement.type = "number";
-    NOKmobileNumberElement.className = "form-control mb-3";
-    NOKmobileNumberElement.name = "next-of-kin-mobile";
-    NOKmobileNumberElement.id = "next-of-kin-mobile";
-    NOKmobileNumberElement.value = "";
+    const nokNameElement = document.createElement('input');
+    nokNameElement.type = "text";
+    nokNameElement.className = "form-control mb-3";
+    nokNameElement.name = "next-of-kin-name";
+    nokNameElement.id = "next-of-kin-name";
+    nokNameElement.value = formData[0].nokFullName;
 
-    const medicalConditionElement = document.createElement('select');
-    medicalConditionElement.className = "form-select medical-condition";
-    medicalConditionElement.id = "medical-condition";
-    medicalConditionElement.setAttribute('aria-label', "Default select");
-    
-    const option1Element = document.createElement('option');
-    option1Element.selected = 
-    option1Element.innerText = "Medical Conditions";
+    const nokmobileNumberLabelElement = document.createElement('label');
+    nokmobileNumberLabelElement.for = "next-of-kin-mobile";
+    nokmobileNumberLabelElement.className = "form-control-plaintext; py-2 fw-semibold";
+    nokmobileNumberLabelElement.innerText = "Next-Of-Kin Mobile Number";
 
-    medicalConditionElement.appendChild(option1Element);
-    const option2Element = document.createElement('option');
-    option2Element.value = "1";
-    option2Element.innerText = "High Blood Pressure";
-    medicalConditionElement.appendChild(option2Element);
-    const option3Element = document.createElement('option');
-    option3Element.value = "2";
-    option3Element.innerText = "High Cholesterol";
-    medicalConditionElement.appendChild(option3Element);
-    const option4Element = document.createElement('option');
-    option4Element.value = "3";
-    option4Element.innerText = "Diabetes";
-    medicalConditionElement.appendChild(option4Element);
+    const nokmobileNumberElement = document.createElement('input');
+    nokmobileNumberElement.type = "number";
+    nokmobileNumberElement.className = "form-control mb-3";
+    nokmobileNumberElement.name = "next-of-kin-mobile";
+    nokmobileNumberElement.id = "next-of-kin-mobile";
+    nokmobileNumberElement.value = formData[0].nokMobile;
+
+    const medicalRecordLabelElement = document.createElement('label');
+    medicalRecordLabelElement.for = "medicalRecord";
+    medicalRecordLabelElement.className = "form-control-plaintext; py-2 fw-semibold";
+    medicalRecordLabelElement.innerText = "Medical Record";
+
+    const medicalRecordElement = document.createElement('input');
+    medicalRecordElement.type = "text";
+    medicalRecordElement.className = "form-control mb-3";
+    medicalRecordElement.name = "medicalRecord";
+    medicalRecordElement.id = "medicalRecord";
+    medicalRecordElement.value = formData[0].medicalRecord;
 
     const doctorPrescriptionContainerElement = document.createElement('div');
     doctorPrescriptionContainerElement.className = "form-floating text-black";
@@ -258,6 +255,7 @@ const ftnAddData = (role, username, email) => {
     doctorPrescriptionTextElement.style = "height: 10rem";
     doctorPrescriptionTextElement.placeholder = "Leave a comment here";
     doctorPrescriptionTextElement.id = "doctor-prescription";
+    doctorPrescriptionTextElement.value = formData[0].prescript;
     const doctorPrescriptionLabelElement = document.createElement('label')
     doctorPrescriptionLabelElement.innerText = "Doctor's Prescriptions";
 
@@ -274,7 +272,7 @@ const ftnAddData = (role, username, email) => {
     assignedNurseElement.className = "form-control mb-3";
     assignedNurseElement.name = "assignedNurse";
     assignedNurseElement.id = "assignedNurse";
-    assignedNurseElement.value = "";
+    assignedNurseElement.value = formData[0].nurse;
 
     profileSectionElement.appendChild(firstNameLabelElement);
     profileSectionElement.appendChild(firstNameElement);
@@ -285,26 +283,30 @@ const ftnAddData = (role, username, email) => {
     profileSectionElement.appendChild(mobileNumberLabelElement);
     profileSectionElement.appendChild(mobileNumberElement);
 
-    packageTypeElement.appendChild(package1SectionElement);
-    package1SectionElement.appendChild(package1LabelElement);
-    package1SectionElement.appendChild(package1Element);
-    package1SectionElement.appendChild(package2SectionElement);
-    package2SectionElement.appendChild(package2LabelElement);
-    package2SectionElement.appendChild(package2Element);
+    if (role === "") {
+        packageTypeElement.appendChild(package1SectionElement);
+        package1SectionElement.appendChild(package1LabelElement);
+        package1SectionElement.appendChild(package1Element);
+        package1SectionElement.appendChild(package2SectionElement);
+        package2SectionElement.appendChild(package2LabelElement);
+        package2SectionElement.appendChild(package2Element);
 
-    packageSelectedRow.appendChild(packageSelectedLabelElement);
-    packageSelectedRow.appendChild(packageSelectedElement);
-    packageSelectedRow.appendChild(NOKNameLabelElement);
-    packageSelectedRow.appendChild(NOKNameElement);
-    packageSelectedRow.appendChild(NOKmobileNumberLabelElement);
-    packageSelectedRow.appendChild(NOKmobileNumberElement);
-    packageSelectedRow.appendChild(medicalConditionElement);
-    packageSelectedRow.appendChild(doctorPrescriptionContainerElement);
-    packageSelectedRow.appendChild(assignedNurseLabelElement);
-    packageSelectedRow.appendChild(assignedNurseElement);
+        packageSelectedRow.appendChild(packageSelectedLabelElement);
+        packageSelectedRow.appendChild(packageSelectedElement);
+        packageSelectedRow.appendChild(nokNameLabelElement);
+        packageSelectedRow.appendChild(nokNameElement);
+        packageSelectedRow.appendChild(nokmobileNumberLabelElement);
+        packageSelectedRow.appendChild(nokmobileNumberElement);
+        packageSelectedRow.appendChild(medicalRecordLabelElement);
+        packageSelectedRow.appendChild(medicalRecordElement);
+        packageSelectedRow.appendChild(doctorPrescriptionContainerElement);
+        packageSelectedRow.appendChild(assignedNurseLabelElement);
+        packageSelectedRow.appendChild(assignedNurseElement);
+    }
 }
 
-const ftnEditSave = (role, username) => {
+// Edit and save profile
+const ftnEditSave = (role, username, email) => {
     // Toggle betwen edit and save mode for profile section
     const editBtnElement = document.getElementById('btnEdit');
     editBtnElement.addEventListener('click', (e) => {
@@ -321,63 +323,77 @@ const ftnEditSave = (role, username) => {
             document.getElementById('lastName').disabled = false;
             document.getElementById('email').disabled = false;
             document.getElementById('mobileNumber').disabled = false;
-            document.getElementById('package1').disabled = false;
-            document.getElementById('package2').disabled = false;
-            document.getElementById('packageSelected').disabled = false;
-            document.getElementById('next-of-kin-name').disabled = false;
-            document.getElementById('next-of-kin-mobile').disabled = false;
-            document.getElementById('medical-condition').disabled = false;
-            
-            if (role === "STAFF") {
-                document.getElementById('staffLicenseNumber').disabled = false;
+            if (role === "") {
+                document.getElementById('package1').disabled = false;
+                document.getElementById('package2').disabled = false;
+                document.getElementById('packageSelected').disabled = false;
+                document.getElementById('next-of-kin-name').disabled = false;
+                document.getElementById('next-of-kin-mobile').disabled = false;
             }
+
         } else {
             editBtnElement.id = 'btnEdit';
             editBtnElement.classList.remove('btnSave');
             editBtnElement.classList.add('btnEdit');
             editBtnElement.innerHTML = 'Edit';
             
-            //TODO: Update patient, staff, admin data if any
-
             document.getElementById('firstName').disabled = true;
             document.getElementById('lastName').disabled = true;
             document.getElementById('email').disabled = true;
             document.getElementById('mobileNumber').disabled = true;   
-            document.getElementById('package1').disabled = true;
-            document.getElementById('package2').disabled = true;
-            document.getElementById('packageSelected').disabled = true;
-            document.getElementById('next-of-kin-name').disabled = true;
-            document.getElementById('next-of-kin-mobile').disabled = true;
-            document.getElementById('medical-condition').disabled = true;  
+            if (role === "") {
+                document.getElementById('package1').disabled = true;
+                document.getElementById('package2').disabled = true;
+                document.getElementById('packageSelected').disabled = true;
+                document.getElementById('next-of-kin-name').disabled = true;
+                document.getElementById('next-of-kin-mobile').disabled = true;
+            }
 
-            if (role === "STAFF") {
-                document.getElementById('staffLicenseNumber').disabled = true;
-            }  
+            const firstName = document.getElementById('firstName');
+            const lastName = document.getElementById('lastName');
+            const email = document.getElementById('email');
+            const mobile = document.getElementById('mobileNumber');
+            const package = document.getElementById('packageSelected');
+            const nokName = document.getElementById('next-of-kin-name');
+            const nokMobile = document.getElementById('next-of-kin-mobile');
+            const nurseLicense = document.getElementById('nurseLicenseNumber');
+            
+            // FETCH request - send data or retrieve data by calling an api endpoint
+            // create Javascript Object to store the form data 
+            if (role === "") {
+                const formData = {
+                    firstName: firstName.value,
+                    lastName: lastName.value,
+                    email: email.value,
+                    mobile: mobile.value,
+                    package: package.value,
+                    nokName: nokName.value,
+                    nokMobile: nokMobile.value
+                };
+                return update(formData);
+            } else if (role === "STAFF") {
+                const formData = {
+                    firstName: firstName.value,
+                    lastName: lastName.value,
+                    email: email.value,
+                    mobile: mobile.value,
+                    nurseLicenseNumber: nurseLicense.value
+                };
+                return update(formData);    
+            } else {
+                const formData = {
+                    firstName: firstName.value,
+                    lastName: lastName.value,
+                    email: email.value,
+                    mobile: mobile.value,
+                };
+                return update(formData);
+            }
         }  
     })
 }
 
-const adminProfile = (role, username, email) => {
-
-    // display role mode
-    const profileRole = document.getElementById("txtUserrole");
-    profileRole.innerText = role.charAt(0).toUpperCase() 
-                                    + role.slice(1).toLowerCase() + " mode";
-    profileRole.style = 'background-color: #000000; color: #ffffffc3; font-size: 0.8rem; font-weight: 800;align-content: center; text-align: center; width: 7rem; height: 2.5rem; border-radius: 3rem';
-
-    ftnAddData(role, username, email)
-    ftnInitDisabledAll();
-    ftnEditSave(role, username);
-    
-}
-
-const staffProfile = (role, username, email) => {
-
-    // display role mode
-    const profileRole = document.getElementById("txtUserrole");
-    profileRole.innerText = role.charAt(0).toUpperCase() 
-                                    + role.slice(1).toLowerCase() + " mode";   
-    profileRole.style = 'background-color: #000000; color: #ffffffc3; font-size: 0.8rem; font-weight: 800;align-content: center; text-align: center; width: 7rem; height: 2.5rem; border-radius: 3rem';
+const ftnStaffLicenseNumber = (role, username, email) => {
 
     // create input field for nurse license number
     const staffLicenseLabelElement = document.createElement('label');
@@ -386,34 +402,18 @@ const staffProfile = (role, username, email) => {
     staffLicenseLabelElement.innerHTML = 'License Number';
 
     const staffLicenseElement = document.createElement('input');
-    staffLicenseElement.type = 'number';
+    staffLicenseElement.type = 'text';
     staffLicenseElement.name = 'licenseNumber';
-    staffLicenseElement.id = 'staffLicenseNumber';
-    staffLicenseElement.placeholder = 'enter your license number';
+    staffLicenseElement.id = 'nurseLicenseNumber';
+    staffLicenseElement.placeholder = 'Nurse license number';
     staffLicenseElement.className = 'form-control';
+    staffLicenseElement.value = formData[5].license;
+    staffLicenseElement.disabled = true;
 
     document.getElementById('staff-license').appendChild(staffLicenseLabelElement);
     document.getElementById('staff-license').appendChild(staffLicenseElement);
-
-    ftnAddData(role, username, email);
-    ftnInitDisabledAll();
-    ftnEditSave(role, username);
 }
 
-const customerProfile = (role, username, email) => {
-
-    const profileRole = document.getElementById("txtUserrole");
-    profileRole.innerText = role.charAt(0).toUpperCase() 
-                                    + role.slice(1).toLowerCase();  
-          
-    // set display active for patient
-    document.getElementById('patientdetail').style.display = 'block';
-    document.getElementById('patient-section').style.display = 'none';
-    
-    ftnAddData(role, username, email);
-    ftnInitDisabledAll(); 
-    ftnEditSave(role, username);
-}
 
 
     
