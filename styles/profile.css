@@ -156,6 +156,11 @@ body {
   border:none;
 }
 
+.assign-patient-dropdown-menu{
+  overflow-y: auto;
+  max-height: 20rem;
+}
+
 .header-titles{
   color: #9ac7c8;
 }
