@@ -34,11 +34,11 @@ document.addEventListener("DOMContentLoaded", (event) => {
 
         window.onload = () => {
             if (user.role === "ADMIN") {
-                adminProfile(user.role, user.username);
+                adminProfile(user.role, user.username, user.email);
             } else if (user.role === "STAFF") {
                 staffProfile(user.role, "ethanw@gmail.com");
             } else {
-                customerProfile(user.role);
+                customerProfile(user.role, user.username, user.email);
             }
         }   
     }    
