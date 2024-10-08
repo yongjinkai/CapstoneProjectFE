@@ -1,9 +1,18 @@
 const patientIds = [16, 22, 29];
 const staffIds = [6, 7, 8];
 const adminIds = [1, 2, 3];
+let today = new Date();
+let userList = [];
+let staffList = [];
+let patientList = [];
 
-let patientInfo;
+async function fetchLists() {
+    userList = await fetchUserApi();
+    staffList = await fetchStaffsApi();
+    patientList = await fetchPatientsApi();
+}
 
+console.log("printing user List: " + userList + "end");
 // Function to fetch data from dummyJSON, returns a list of object of patient/staff info
 async function fetchPatients() {
     const response = await fetch("https://dummyjson.com/users");
@@ -12,36 +21,37 @@ async function fetchPatients() {
     patientIds.forEach(
         (id) => (patientInfo = [...patientInfo, resp.users[id - 1]])
     );
+    // fetchAPI();
     return patientInfo;
 }
 
 async function fetchStaffs() {
     const response = await fetch("https://dummyjson.com/users");
     const resp = await response.json();
-    let staffInfo = [];
+
     staffIds.forEach((id) => (staffInfo = [...staffInfo, resp.users[id - 1]]));
     return staffInfo;
 }
 
-function addPatient(patient) {
+function addPatient(patient, restriction) {
     const tableBody = document.querySelector("#patientRecordstbody");
-    fillTable(tableBody, patient);
+    fillTable(tableBody, patient, restriction);
 }
 
-function addStaff(staff) {
+function addStaff(staff, restriction) {
     const tableBody = document.querySelector("#staffRecordstbody");
-    fillTable(tableBody, staff);
+    fillTable(tableBody, staff, restriction);
 }
 
-function fillTable(tableBody, profile) {
+async function fillTable(tableBody, profile, restriction) {
+    await fetchLists();
     const tableRow = document.createElement("tr");
-
     const id = document.createElement("td");
-    id.textContent = profile.id;
+    id.textContent = profile.userId;
     id.className = "ps-3";
 
     const name = document.createElement("td");
-    name.textContent = profile.firstName + " " + profile.lastName;
+    name.textContent = profile.name;
 
     const details = document.createElement("td");
 
@@ -54,18 +64,36 @@ function fillTable(tableBody, profile) {
     detailsLink.setAttribute("data-bs-target", "#staticBackdrop");
     detailsLink.addEventListener("click", handleClick);
 
-    function handleClick() {
-        const role = profile.role;
+    async function handleClick() {
         const chooseProfile = document.querySelector(".chooseProfile");
-        chooseProfile.textContent = role;
+        chooseProfile.textContent = profile.role;
         const profileID = document.querySelector(".profileID");
         profileID.textContent = profile.id;
-        if (role == "Patient") fillPatientModal(profile);
-        else if (role == "Staff") fillStaffModal(profile);
+        if (profile.role == "Patient") {
+            patientList.forEach((patient) => {
+                if (profile.userId == patient.user.userId)
+                    fillPatientModal(patient, restriction);
+            });
+        } else if (profile.role == "Nurse") {
+            staffList.forEach((nurse) => {
+                if (profile.userId == nurse.user.userId)
+                    fillStaffModal(nurse, profile);
+            });
+        }
     }
 
     const status = document.createElement("td");
     status.textContent = "Active";
+    if (profile.role == "Patient") {
+        let patientList = await fetchPatientsApi();
+        patientList.forEach((patient) => {
+            if (patient.user.userId == profile.userId) {
+                if (!patient.endDate || Date(patient.endDate) < today) {
+                    status.textContent = "Inactive";
+                }
+            }
+        });
+    }
 
     tableBody.append(tableRow);
     tableRow.append(id);
@@ -75,31 +103,44 @@ function fillTable(tableBody, profile) {
     tableRow.append(status);
 }
 
-function fillPatientModal(patient) {
-    //Note: data input values is inaccurate, just for visualisation.
+async function fillPatientModal(patient, restriction) {
+    //restriction=true: viewed from staff profile, unable to edit package/prescription details/start end date
+    //restrction=false: viewed from admin profile, all edit options available
+
+    //preparing start and end date data to be appended
+    await fetchLists();
+    let startDate;
+    let endDate;
+    if (restriction) {
+        startDate = !patient.startDate ? "No start Date" : patient.startDate;
+        endDate = !patient.endDate ? "No End Date" : patient.endDate;
+    } else {
+        startDate = document.createElement("input");
+        startDate.className = "form-control start-date";
+        startDate.type = "date";
+        startDate.value = patient.startDate;
+        endDate = document.createElement("input");
+        endDate.className = "form-control end-date";
+        endDate.type = "date";
+        endDate.value = patient.endDate;
+    }
+
     const data1 = [
-        { header: "Name", value: patient.firstName + " " + patient.lastName },
-        { header: "Registration Date", value: patient.birthDate },
-        {
-            header: "Package",
-            value: patient.gender == "female" ? "Half-day" : "Full-Day", //Mock example to simulate random halfday or fullday package using gender
-        },
-    ];
-    const data2 = [
-        {
-            header: "Medical Profile",
-            value: `Blood Type:  ${patient.bloodGroup}`,
-        },
-        { header: "Next-Of-Kin", value: patient.maidenName },
-        { header: "Documents", value: "NA" },
+        { header: "Name", value: patient.user.name },
+        { header: "Start Date", value: startDate },
+        { header: "End Date", value: endDate },
     ];
 
     const modalFirstRow = document.querySelector(".modal-first-row");
     const modalSecondRow = document.querySelector(".modal-second-row");
     const modalThirdRow = document.querySelector(".modal-third-row");
+    const modalFourthRow = document.querySelector(".modal-fourth-row");
     modalFirstRow.innerHTML = "";
     modalSecondRow.innerHTML = "";
     modalThirdRow.innerHTML = "";
+    modalFourthRow.innerHTML = "";
+
+    //Populating modal first row data
     data1.forEach((item) => {
         //Loop for filling in modal first row data
         const col = document.createElement("div");
@@ -108,14 +149,31 @@ function fillPatientModal(patient) {
         header.className = "header-titles d-block mb-0 fw-bold";
         header.textContent = item.header;
 
-        const value = document.createElement("p");
-        value.textContent = item.value;
-        value.className = "d-block";
+        let value = document.createElement("p");
+        if (typeof item.value == "string") {
+            value.textContent = item.value;
+            value.className = "d-block";
+        } else value = item.value;
 
         modalFirstRow.append(col);
         col.append(header);
         col.append(value);
     });
+
+    // preparing  modal 2nd row data
+    let packageDropdownDiv = document.createElement("div");
+    if (restriction)
+        packageDropdownDiv = !patient._package
+            ? "No Package"
+            : patient._package.packageName;
+    const data2 = [
+        {
+            header: "Medical Rescords",
+            value: patient.medicalRecords,
+        },
+        { header: "Next-Of-Kin", value: patient.nextOfKinName },
+        { header: "Package", value: packageDropdownDiv },
+    ];
 
     data2.forEach((item) => {
         //Loop for filling in modal second row data
@@ -126,44 +184,122 @@ function fillPatientModal(patient) {
         header.className = "header-titles d-block mb-0 fw-bold";
         header.textContent = item.header;
 
-        const value = document.createElement("p");
-        value.textContent = item.value;
-        value.className = "d-block";
+        let value = document.createElement("p");
+        if (typeof item.value == "string") {
+            value.textContent = item.value;
+            value.className = "d-block";
+        } else value = item.value;
 
         modalSecondRow.append(col);
         col.append(header);
         col.append(value);
     });
 
-    const label = document.createElement("label");
-    label.setAttribute("for", "additional-notes");
-    label.className = "header-titles d-block fw-bold";
-    label.textContent = "Additional Notes: ";
+    // Setting up dropdown menu for package selection
+    // const col = document.createElement("div");
+    // col.className = "col-4";
+    if (!restriction) {
+        //If no restriction, create dropdown for package selection
+        packageDropdownDiv.className = "dropdown";
+        const packageDropdownBtn = document.createElement("button");
+        packageDropdownBtn.className =
+            "btn btn-secondary btn-sm dropdown-toggle w-100";
+        packageDropdownBtn.type = "button";
+        packageDropdownBtn.setAttribute("data-bs-toggle", "dropdown");
+        packageDropdownBtn.innerText = !patient._package
+            ? "Select Package"
+            : patient._package.packageName;
+        const packageDropdownUl = document.createElement("ul");
+        packageDropdownUl.className = "dropdown-menu";
+        const packageDropdownItems = [
+            { text: "No Package", href: "#" },
+            { text: "Half-Day", href: "#" },
+            { text: "Full-Day", href: "#" },
+        ];
+        packageDropdownItems.forEach((item) => {
+            const li = document.createElement("li");
+            const a = document.createElement("a");
+            a.className = "dropdown-item packageOptions";
+            a.href = item.href;
+            a.textContent = item.text;
+            li.append(a);
+            packageDropdownUl.append(li);
+        });
+        // modalSecondRow.append(col);
+        // col.append(packageDropdownDiv);
+        packageDropdownDiv.append(packageDropdownBtn);
+        packageDropdownDiv.append(packageDropdownUl);
 
-    const textArea = document.createElement("textarea");
-    textArea.className = "form-control";
-    textArea.id = "additional-notes";
-    textArea.rows = 3;
+        // Setting up click event handler to update button text
+        document.querySelectorAll(".packageOptions").forEach((item) => {
+            item.addEventListener("click", function (event) {
+                event.preventDefault();
+                packageDropdownBtn.textContent = this.textContent;
 
-    modalThirdRow.append(label);
-    modalThirdRow.append(textArea);
+                //store the selected item value in a variable if needed
+                const selectedItemValue = this.getAttribute("data-value");
+            });
+        });
+    }
+
+    // Setting up Medical Prescription entry
+    let prescriptionLabel;
+    let prescriptionTextArea;
+    if (!restriction) {
+        prescriptionLabel = document.createElement("label");
+        prescriptionLabel.setAttribute("for", "additional-notes");
+
+        prescriptionTextArea = document.createElement("textarea");
+        prescriptionTextArea.className = "form-control";
+        prescriptionTextArea.rows = 3;
+        prescriptionTextArea.innerText = patient.medicalPrescriptions;
+    } else {
+        prescriptionLabel = document.createElement("p");
+        prescriptionLabel.className = "my-0 py-0";
+        prescriptionTextArea = document.createElement("p");
+        prescriptionTextArea.className = "d-block";
+    }
+    prescriptionLabel.textContent = "Medical Prescription: ";
+    prescriptionTextArea.id = "additional-notes";
+    prescriptionLabel.className += "header-titles d-block fw-bold ";
+    modalThirdRow.append(prescriptionLabel);
+    modalThirdRow.append(prescriptionTextArea);
+    prescriptionTextArea.innerText = patient.medicalPrescriptions;
+
+    // Setting up additional notes entry
+    const additonalNotesLabel = document.createElement("label");
+    additonalNotesLabel.setAttribute("for", "additional-notes");
+    additonalNotesLabel.className = "header-titles d-block fw-bold";
+    additonalNotesLabel.textContent = "Additional Notes: ";
+
+    const notesTextArea = document.createElement("textarea");
+    notesTextArea.className = "form-control";
+    notesTextArea.id = "additional-notes";
+    notesTextArea.rows = 3;
+
+    modalFourthRow.append(additonalNotesLabel);
+    modalFourthRow.append(notesTextArea);
 }
 
-function fillStaffModal(staff) {
+async function fillStaffModal(nurse, user) {
+    await fetchLists();
     const data1 = [
-        { header: "Name", value: staff.firstName + " " + staff.lastName },
-        { header: "License Number", value: staff.ein },
+        { header: "Name", value: user.name },
+        { header: "License Number", value: nurse.licenceNo },
         {
-            header: "Nurse Rating",
-            value: "9/10",
+            header: "Expertise",
+            value: nurse.expertise,
         },
     ];
 
     const modalFirstRow = document.querySelector(".modal-first-row");
     const modalSecondRow = document.querySelector(".modal-second-row");
-
+    const modalThirdRow = document.querySelector(".modal-third-row");
+    const modalFourthRow = document.querySelector(".modal-fourth-row");
     modalFirstRow.innerHTML = "";
     modalSecondRow.innerHTML = "";
+    modalThirdRow.innerHTML = "";
+    modalFourthRow.innerHTML = "";
 
     data1.forEach((item) => {
         const col = document.createElement("div");
@@ -210,20 +346,24 @@ function fillStaffModal(staff) {
     dropDownBtn.textContent = "Select Patient";
 
     const dropDownUl = document.createElement("ul");
-    dropDownUl.className = "dropdown-menu";
+    dropDownUl.className = "dropdown-menu assign-patient-dropdown-menu";
 
-    patientInfo.forEach((patient) => {
-        const patientList = document.createElement("li");
-        const patientListItem = document.createElement("a");
-        patientListItem.href = "#";
-        patientListItem.className = "dropdown-item";
-        patientListItem.addEventListener("click", () => assignPatient(patient));
+    userList.forEach((user) => {
+        if (user.role == "Patient") {
+            const patientList = document.createElement("li");
+            const patientListItem = document.createElement("a");
+            patientListItem.href = "#";
+            patientListItem.className = "dropdown-item";
+            patientListItem.addEventListener("click", () =>
+                assignPatient(user)
+            );
 
-        let patientName = patient.firstName + " " + patient.lastName;
-        patientListItem.textContent = `${patientName} (ID: ${patient.id})`;
+            let patientName = user.name;
+            patientListItem.textContent = `${patientName} (ID: ${user.userId})`;
 
-        dropDownUl.append(patientList);
-        patientList.append(patientListItem);
+            dropDownUl.append(patientList);
+            patientList.append(patientListItem);
+        }
     });
 
     modalSecondRow.append(col);
@@ -283,7 +423,9 @@ async function adminProfile(role, username, email) {
     });
 }
 
-async function staffProfile(role, username, email) {
+async function staffProfile(role, email) {
+    let restricted = true;
+    console.log("triggered");
     document.querySelector("#patientdetail").remove();
     document.querySelector("#staff-tab").remove();
 
@@ -291,11 +433,14 @@ async function staffProfile(role, username, email) {
     ftnAddData(role, username, email);
     ftnInitDisabledAll(role, username, email);
     ftnEditSave(role, username, email);
-
-    patientInfo = await fetchPatients();
-    patientInfo.forEach((patient) => {
-        patient.role = "Patient"; //Adds a mock patient role to the dummy JSON data
-        addPatient(patient);
+    await fetchLists();
+    patientList.forEach((patient) => {
+        if (patient.nurse && patient.nurse.user.email == email) {
+            userList.forEach((user) => {
+                if (patient.user.userId == user.userId)
+                    addPatient(user, (restriction = true));
+            });
+        }
     });
 }
 
