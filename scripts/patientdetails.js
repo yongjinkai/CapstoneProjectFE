@@ -105,7 +105,7 @@ async function fillPatientModal(patient, restriction) {
     }
 
     const data1 = [
-        { header: "Name", value: patient.user.name },
+        { header: "Name", value: patient.user.name},
         { header: "Start Date", value: startDate },
         { header: "End Date", value: endDate },
     ];
@@ -125,7 +125,7 @@ async function fillPatientModal(patient, restriction) {
         const col = document.createElement("div");
         col.className = "col-4";
         const header = document.createElement("p");
-        header.className = "header-titles d-block mb-0 fw-bold";
+        header.className = `header-titles d-block mb-0 fw-bold `;
         header.textContent = item.header;
 
         let value = document.createElement("p");
@@ -141,17 +141,24 @@ async function fillPatientModal(patient, restriction) {
 
     // preparing  modal 2nd row data
     let packageDropdownDiv = document.createElement("div");
-    if (restriction)
+    //If staff mode, package is not a dropdown
+    if (restriction) {
         packageDropdownDiv = !patient._package
             ? "No Package"
             : patient._package.packageName;
+    }
     const data2 = [
         {
-            header: "Medical Rescords",
+            header: "Medical Records",
             value: patient.medicalRecords,
+            classname: "medical-records",
         },
-        { header: "Next-Of-Kin", value: patient.nextOfKinName },
-        { header: "Package", value: packageDropdownDiv },
+        {
+            header: "Next-Of-Kin",
+            value: patient.nextOfKinName,
+            classname: "next-of-kin",
+        },
+        { header: "Package", value: packageDropdownDiv, classname: "" },
     ];
 
     data2.forEach((item) => {
@@ -160,29 +167,27 @@ async function fillPatientModal(patient, restriction) {
         col.className = "col-4";
 
         const header = document.createElement("p");
-        header.className = "header-titles d-block mb-0 fw-bold";
+        header.className = `header-titles d-block mb-0 fw-bold `;
         header.textContent = item.header;
 
         let value = document.createElement("p");
         if (typeof item.value == "string") {
             value.textContent = item.value;
-            value.className = "d-block";
+            value.className = `d-block ${item.classname}`;
         } else value = item.value;
 
         modalSecondRow.append(col);
         col.append(header);
         col.append(value);
     });
-
+    let selectedItemValue;
     // Setting up dropdown menu for package selection
-    // const col = document.createElement("div");
-    // col.className = "col-4";
     if (!restriction) {
         //If no restriction, create dropdown for package selection
         packageDropdownDiv.className = "dropdown";
         const packageDropdownBtn = document.createElement("button");
         packageDropdownBtn.className =
-            "btn btn-secondary btn-sm dropdown-toggle w-100";
+            "btn btn-secondary btn-sm dropdown-toggle w-100 package-name";
         packageDropdownBtn.type = "button";
         packageDropdownBtn.setAttribute("data-bs-toggle", "dropdown");
         packageDropdownBtn.innerText = !patient._package
@@ -201,11 +206,11 @@ async function fillPatientModal(patient, restriction) {
             a.className = "dropdown-item packageOptions";
             a.href = item.href;
             a.textContent = item.text;
+            a.setAttribute("data-value", item.text);
             li.append(a);
             packageDropdownUl.append(li);
         });
-        // modalSecondRow.append(col);
-        // col.append(packageDropdownDiv);
+
         packageDropdownDiv.append(packageDropdownBtn);
         packageDropdownDiv.append(packageDropdownUl);
 
@@ -216,7 +221,7 @@ async function fillPatientModal(patient, restriction) {
                 packageDropdownBtn.textContent = this.textContent;
 
                 //store the selected item value in a variable if needed
-                const selectedItemValue = this.getAttribute("data-value");
+                selectedItemValue = this.getAttribute("data-value");
             });
         });
     }
@@ -229,18 +234,18 @@ async function fillPatientModal(patient, restriction) {
         prescriptionLabel.setAttribute("for", "additional-notes");
 
         prescriptionTextArea = document.createElement("textarea");
-        prescriptionTextArea.className = "form-control";
+        prescriptionTextArea.className = "form-control medical-prescriptions";
         prescriptionTextArea.rows = 3;
         prescriptionTextArea.innerText = patient.medicalPrescriptions;
     } else {
         prescriptionLabel = document.createElement("p");
-        prescriptionLabel.className = "my-0 py-0";
+        prescriptionLabel.className = "my-0 py-0 ";
         prescriptionTextArea = document.createElement("p");
-        prescriptionTextArea.className = "d-block";
+        prescriptionTextArea.className = "d-block medical-prescriptions";
     }
     prescriptionLabel.textContent = "Medical Prescription: ";
     prescriptionTextArea.id = "additional-notes";
-    prescriptionLabel.className += "header-titles d-block fw-bold ";
+    prescriptionLabel.className += " header-titles d-block fw-bold ";
     modalThirdRow.append(prescriptionLabel);
     modalThirdRow.append(prescriptionTextArea);
     prescriptionTextArea.innerText = patient.medicalPrescriptions;
@@ -252,12 +257,34 @@ async function fillPatientModal(patient, restriction) {
     additonalNotesLabel.textContent = "Additional Notes: ";
 
     const notesTextArea = document.createElement("textarea");
-    notesTextArea.className = "form-control";
-    notesTextArea.id = "additional-notes";
+    notesTextArea.className = "form-control additional-notes";
     notesTextArea.rows = 3;
-
+    notesTextArea.textContent = patient.additionalNotes
     modalFourthRow.append(additonalNotesLabel);
     modalFourthRow.append(notesTextArea);
+
+    //Setting up classes for save button
+    const saveBtn = document.querySelector(".save-button");
+    if (!restriction) {
+        //selected item value is defined previously
+        saveBtn.onclick = () => {
+            let requestBody = {
+                medicalPrescriptions: document.querySelector(
+                    ".medical-prescriptions"
+                ).value,
+                additionalNotes:
+                    document.querySelector(".additional-notes").value,
+                startDate: document.querySelector(".start-date").value,
+                endDate: document.querySelector(".end-date").value,
+            };
+            console.log(requestBody);
+            if (selectedItemValue == "Half-Day")
+                putPatientInfo(patient.patientId, null, requestBody, 201);
+            else if (selectedItemValue == "Full-Day")
+                putPatientInfo(patient.patientId, null, requestBody, 202);
+            else putPatientInfo(patient.patientId, null, requestBody, null);
+        };
+    }
 }
 
 async function fillStaffModal(nurse, user) {
@@ -329,19 +356,24 @@ async function fillStaffModal(nurse, user) {
 
     userList.forEach((user) => {
         if (user.role == "Patient") {
-            const patientList = document.createElement("li");
+            let patient;
+            patientList.forEach((_patient) => {
+                if (user.userId == _patient.user.userId) patient = _patient;
+            });
+
+            const patientLi = document.createElement("li");
             const patientListItem = document.createElement("a");
             patientListItem.href = "#";
             patientListItem.className = "dropdown-item";
             patientListItem.addEventListener("click", () =>
-                assignPatient(user)
+                assignPatient(user, patient)
             );
 
             let patientName = user.name;
             patientListItem.textContent = `${patientName} (ID: ${user.userId})`;
 
-            dropDownUl.append(patientList);
-            patientList.append(patientListItem);
+            dropDownUl.append(patientLi);
+            patientLi.append(patientListItem);
         }
     });
 
@@ -353,9 +385,54 @@ async function fillStaffModal(nurse, user) {
     col3.append(dropDownDiv);
     dropDownDiv.append(dropDownBtn);
     dropDownDiv.append(dropDownUl);
+
+    //call assign patients function to populate assigned patients column
+    patientList.forEach((patient) => {
+        if (patient.nurse && patient.nurse.nurseId == nurse.nurseId) {
+            //check if patient's nurse matches current nurse's id
+            userList.forEach((user) => {
+                if (user.userId == patient.user.userId)
+                    //check if patient's id matches user Id
+                    assignPatient(user, patient);
+            });
+        }
+    });
+
+    //Add in class for save button
+    const saveBtn = document.querySelector(".save-button");
+
+    saveBtn.onclick = () => saveStaffInfo(nurse);
 }
 
-function assignPatient(patient) {
+function saveStaffInfo(nurse) {
+    let oldPatientsIdList = [];
+    let newPatientsIdList = [];
+
+    patientList.forEach((patient) => {
+        if (patient.nurse && patient.nurse.nurseId == nurse.nurseId)
+            oldPatientsIdList.push(patient.patientId);
+    });
+
+    let tempList = document.querySelectorAll(".assignedPatientsContainer span");
+    tempList.forEach((span) => newPatientsIdList.push(Number(span.className)));
+
+    const patientIdsToAssign = newPatientsIdList.filter(
+        (num) => !oldPatientsIdList.includes(num)
+    );
+    const patientIdsToUnassign = oldPatientsIdList.filter(
+        (num) => !newPatientsIdList.includes(num)
+    );
+    console.log("to assign: " + patientIdsToAssign);
+    console.log("to unassign: " + patientIdsToUnassign);
+    patientIdsToAssign.forEach((patientId) => {
+        putPatientInfo(patientId, nurse.nurseId);
+    });
+    patientIdsToUnassign.forEach((patientId) => {
+        putPatientInfo(patientId, "remove");
+    });
+}
+
+function assignPatient(user, patient) {
     const assignedPatientsContainer = document.querySelector(
         ".assignedPatientsContainer"
     );
@@ -365,8 +442,8 @@ function assignPatient(patient) {
         "d-flex justify-content-between pb-2 assignedPatientsDiv";
 
     const patientNameSpan = document.createElement("span");
-    let patientName = patient.firstName + " " + patient.lastName;
-    patientNameSpan.textContent = `${patientName} (ID: ${patient.id})`;
+    patientNameSpan.textContent = `${user.name} (ID: ${patient.patientId})`;
+    patientNameSpan.className = patient.patientId;
 
     const unassignButton = document.createElement("button");
     unassignButton.className = "btn btn-danger btn-sm";
