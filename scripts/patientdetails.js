@@ -12,27 +12,6 @@ async function fetchLists() {
     patientList = await fetchPatientsApi();
 }
 
-console.log("printing user List: " + userList + "end");
-// Function to fetch data from dummyJSON, returns a list of object of patient/staff info
-async function fetchPatients() {
-    const response = await fetch("https://dummyjson.com/users");
-    const resp = await response.json();
-    patientInfo = [];
-    patientIds.forEach(
-        (id) => (patientInfo = [...patientInfo, resp.users[id - 1]])
-    );
-    // fetchAPI();
-    return patientInfo;
-}
-
-async function fetchStaffs() {
-    const response = await fetch("https://dummyjson.com/users");
-    const resp = await response.json();
-
-    staffIds.forEach((id) => (staffInfo = [...staffInfo, resp.users[id - 1]]));
-    return staffInfo;
-}
-
 function addPatient(patient, restriction) {
     const tableBody = document.querySelector("#patientRecordstbody");
     fillTable(tableBody, patient, restriction);
@@ -403,36 +382,30 @@ function assignPatient(patient) {
     assignedPatientsDiv.append(unassignButton);
 }
 
-async function adminProfile(role, username, email) {
+async function adminProfile(role, email) {
     document.querySelector("#patientdetail").remove();
 
-    ftnAddData(role, username, email)
-    ftnInitDisabledAll(role, username, email);
-    ftnEditSave(role, username, email);
+    ftnAddData(role, email);
+    ftnInitDisabledAll(role, email);
+    ftnEditSave(role, email);
 
-    patientInfo = await fetchPatients();
-    patientInfo.forEach((patient) => {
-        patient.role = "Patient"; //Adds a mock patient role to the dummy JSON data
-        addPatient(patient);
-    });
-
-    const staffInfo = await fetchStaffs();
-    staffInfo.forEach((staff) => {
-        staff.role = "Staff"; //Adds a mock Staff role to the dummy JSON data
-        addStaff(staff);
+    await fetchLists();
+    userList.forEach((user) => {
+        if (user.role == "Patient") addPatient(user, (restricted = false));
+        if (user.role == "Nurse") addStaff(user, (restricted = false));
     });
 }
 
 async function staffProfile(role, email) {
     let restricted = true;
-    console.log("triggered");
     document.querySelector("#patientdetail").remove();
     document.querySelector("#staff-tab").remove();
 
-    ftnStaffLicenseNumber(role, username, email);
-    ftnAddData(role, username, email);
-    ftnInitDisabledAll(role, username, email);
-    ftnEditSave(role, username, email);
+    ftnStaffLicenseNumber(role, email);
+    ftnAddData(role, email);
+    ftnInitDisabledAll(role, email);
+    ftnEditSave(role, email);
+
     await fetchLists();
     patientList.forEach((patient) => {
         if (patient.nurse && patient.nurse.user.email == email) {
@@ -444,10 +417,10 @@ async function staffProfile(role, email) {
     });
 }
 
-function customerProfile(role, username, email) {
+function customerProfile(role, email) {
     document.querySelector("#staff-admin-section").remove();
-    
-    ftnAddData(role, username, email);
-    ftnInitDisabledAll(role, username, email); 
-    ftnEditSave(role, username, email);
+
+    ftnAddData(role, email);
+    ftnInitDisabledAll(role, email);
+    ftnEditSave(role, email);
 }

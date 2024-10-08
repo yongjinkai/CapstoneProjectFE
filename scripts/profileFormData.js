@@ -87,7 +87,7 @@ let formData = [
 ];
 
 // Disable all fields for the initial launch of the page
-const ftnInitDisabledAll = (role, username, email) => {
+const ftnInitDisabledAll = (role, email) => {
     document.getElementById('firstName').disabled = true;
     document.getElementById('lastName').disabled = true;
     document.getElementById('email').disabled = true;
@@ -105,7 +105,7 @@ const ftnInitDisabledAll = (role, username, email) => {
 }
 
 // Add data for the initial launch of the page
-const ftnAddData = (role, username, email) => {
+const ftnAddData = (role, email) => {
 
     const profileSectionElement = document.getElementById('profileSection');
     const packageTypeElement = document.getElementById('packageType');
@@ -306,7 +306,7 @@ const ftnAddData = (role, username, email) => {
 }
 
 // Edit and save profile
-const ftnEditSave = (role, username, email) => {
+const ftnEditSave = (role, email) => {
     // Toggle betwen edit and save mode for profile section
     const editBtnElement = document.getElementById('btnEdit');
     editBtnElement.addEventListener('click', (e) => {
@@ -393,7 +393,7 @@ const ftnEditSave = (role, username, email) => {
     })
 }
 
-const ftnStaffLicenseNumber = (role, username, email) => {
+const ftnStaffLicenseNumber = (role, email) => {
 
     // create input field for nurse license number
     const staffLicenseLabelElement = document.createElement('label');
@@ -413,8 +413,3 @@ const ftnStaffLicenseNumber = (role, username, email) => {
     document.getElementById('staff-license').appendChild(staffLicenseLabelElement);
     document.getElementById('staff-license').appendChild(staffLicenseElement);
 }
-
-
-
-    
-    
