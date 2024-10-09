@@ -95,8 +95,8 @@ async function login(formData = {}){
 // Funtion to register
 async function register(formData = {}){
     
-    if(Object.entries(formData).length === 0)                                               // Return if the object is empty
-        return;
+    // if(Object.entries(formData).length === 0)                                               // Return if the object is empty
+    //     return;
 
     // !! Try/catch block (exception handling) to send data to login enpoint
     try {
