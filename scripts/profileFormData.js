@@ -2,8 +2,7 @@
 let formData = [
     {
         id: '001',
-        firstName: 'John',
-        lastName: 'Doe',
+        name: 'John Doe',
         email: 'john.doe@example.com',
         mobile: '98765432',
         packageType: 'Half Day',
@@ -16,8 +15,7 @@ let formData = [
     },
     {
         id: '002',
-        firstName: 'Jane',
-        lastName: 'Smith',
+        name: 'Jane Smith',
         email: 'jane.smith@example.com',
         mobile: '90876987',
         packageType: 'Full Day',
@@ -30,8 +28,7 @@ let formData = [
     },
     {
         id: '003',
-        firstName: 'Alice',
-        lastName: 'Johnson',
+        name: 'Alice Johnson',
         email: 'alice.johnson@example.com',
         mobile: '98647654',
         packageType: 'Half Day',
@@ -44,8 +41,7 @@ let formData = [
     },
     {
         id: '004',
-        firstName: 'momorunner',
-        lastName: 'Lee',
+        name: 'momorunner Lee',
         email: 'momorunner.lee@example.com',
         mobile: '97864537',
         packageType: '',
@@ -58,8 +54,7 @@ let formData = [
     },
     {
         id: '005',
-        firstName: 'Robert',
-        lastName: 'Brown',
+        name: 'Robert Brown',
         email: 'robert.brown@example.com',
         mobile: '97089123',
         packageType: 'Half Day',
@@ -72,8 +67,7 @@ let formData = [
     },
     {
         id: '006',
-        firstName: 'Max',
-        lastName: 'Stone',
+        name: 'Max Stone',
         email: 'Max.stone@example.com',
         mobile: '98090745',
         packageType: '',
@@ -88,8 +82,7 @@ let formData = [
 
 // Disable all fields for the initial launch of the page
 const ftnInitDisabledAll = (role, email) => {
-    document.getElementById('firstName').disabled = true;
-    document.getElementById('lastName').disabled = true;
+    document.getElementById('name').disabled = true;
     document.getElementById('email').disabled = true;
     document.getElementById('mobileNumber').disabled = true;
     if (role === "") {
@@ -111,29 +104,17 @@ const ftnAddData = (role, email) => {
     const packageTypeElement = document.getElementById('packageType');
     const packageSelectedRow = document.getElementById('packageSelectedRow');
 
-    const firstNameLabelElement = document.createElement('label');
-    firstNameLabelElement.for = "firstName";
-    firstNameLabelElement.className = "form-control-plaintext; py-2 fw-semibold";
-    firstNameLabelElement.innerText = "First Name";
+    const nameLabelElement = document.createElement('label');
+    nameLabelElement.for = "name";
+    nameLabelElement.className = "form-control-plaintext; py-2 fw-semibold";
+    nameLabelElement.innerText = "Name";
 
-    const firstNameElement = document.createElement('input');
-    firstNameElement.type = "text";
-    firstNameElement.className = "form-control mb-3";
-    firstNameElement.name = "firstName";
-    firstNameElement.id = "firstName";
-    firstNameElement.value = formData[0].firstName;
-
-    const lastNameLabelElement = document.createElement('label');
-    lastNameLabelElement.for = "lastName";
-    lastNameLabelElement.className = "form-control-plaintext; py-2 fw-semibold";
-    lastNameLabelElement.innerText = "Last Name";
-
-    const lastNameElement = document.createElement('input');
-    lastNameElement.type = "text";
-    lastNameElement.className = "form-control mb-3";
-    lastNameElement.name = "lastName";
-    lastNameElement.id = "lastName";
-    lastNameElement.value = formData[0].lastName;
+    const nameElement = document.createElement('input');
+    nameElement.type = "text";
+    nameElement.className = "form-control mb-3";
+    nameElement.name = "name";
+    nameElement.id = "name";
+    nameElement.value = formData[0].name;
 
     const emailLabelElement = document.createElement('label');
     emailLabelElement.for = "email";
@@ -274,10 +255,8 @@ const ftnAddData = (role, email) => {
     assignedNurseElement.id = "assignedNurse";
     assignedNurseElement.value = formData[0].nurse;
 
-    profileSectionElement.appendChild(firstNameLabelElement);
-    profileSectionElement.appendChild(firstNameElement);
-    profileSectionElement.appendChild(lastNameLabelElement);
-    profileSectionElement.appendChild(lastNameElement);
+    profileSectionElement.appendChild(nameLabelElement);
+    profileSectionElement.appendChild(nameElement);
     profileSectionElement.appendChild(emailLabelElement);
     profileSectionElement.appendChild(emailElement);
     profileSectionElement.appendChild(mobileNumberLabelElement);
@@ -319,8 +298,7 @@ const ftnEditSave = (role, email) => {
             editBtnElement.classList.add('btnSave');
             editBtnElement.innerHTML = 'Save';
             
-            document.getElementById('firstName').disabled = false;
-            document.getElementById('lastName').disabled = false;
+            document.getElementById('name').disabled = false;
             document.getElementById('email').disabled = false;
             document.getElementById('mobileNumber').disabled = false;
             if (role === "") {
@@ -337,8 +315,7 @@ const ftnEditSave = (role, email) => {
             editBtnElement.classList.add('btnEdit');
             editBtnElement.innerHTML = 'Edit';
             
-            document.getElementById('firstName').disabled = true;
-            document.getElementById('lastName').disabled = true;
+            document.getElementById('name').disabled = true;
             document.getElementById('email').disabled = true;
             document.getElementById('mobileNumber').disabled = true;   
             if (role === "") {
@@ -349,8 +326,7 @@ const ftnEditSave = (role, email) => {
                 document.getElementById('next-of-kin-mobile').disabled = true;
             }
 
-            const firstName = document.getElementById('firstName');
-            const lastName = document.getElementById('lastName');
+            const name = document.getElementById('name');
             const email = document.getElementById('email');
             const mobile = document.getElementById('mobileNumber');
             const package = document.getElementById('packageSelected');
@@ -362,8 +338,7 @@ const ftnEditSave = (role, email) => {
             // create Javascript Object to store the form data 
             if (role === "") {
                 const formData = {
-                    firstName: firstName.value,
-                    lastName: lastName.value,
+                    name: name.value,
                     email: email.value,
                     mobile: mobile.value,
                     package: package.value,
@@ -373,8 +348,7 @@ const ftnEditSave = (role, email) => {
                 return update(formData);
             } else if (role === "STAFF") {
                 const formData = {
-                    firstName: firstName.value,
-                    lastName: lastName.value,
+                    name: name.value,
                     email: email.value,
                     mobile: mobile.value,
                     nurseLicenseNumber: nurseLicense.value
@@ -382,8 +356,7 @@ const ftnEditSave = (role, email) => {
                 return update(formData);    
             } else {
                 const formData = {
-                    firstName: firstName.value,
-                    lastName: lastName.value,
+                    name: name.value,
                     email: email.value,
                     mobile: mobile.value,
                 };
