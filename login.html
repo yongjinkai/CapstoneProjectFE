@@ -181,7 +181,7 @@
             
             // create constant variables to capture form inputs
             // call the document object of the file 'login.html' to refer to inputs objects 'inputUsername' and 'inputPassword'
-            const username = document.getElementById("inputUsername");
+            const email = document.getElementById("inputUsername");
             const password = document.getElementById("inputPassword");
 
             // get the toast elements as objects
@@ -189,13 +189,13 @@
             const toastBodyElement = document.getElementById("msg-toast-body");
 
             // trap unsuccesful event for inputUsername and inputPassword
-            if (isEmpty(username.value) || isEmpty(password.value)) {
+            if (isEmpty(email.value) || isEmpty(password.value)) {
                 showToast({toastElement, toastBodyElement, bgColor: "danger", msg: "All inputs must not be empty."});
                 return;
             }
 
             // trap unsuccessful event for invalid inputUsername using a regex
-            if(!isUsername(username.value)) {
+            if(!isUsername(email.value)) {
                 showToast({toastElement, toastBodyElement, bgColor: "danger", msg: "Username is invalid."});
                 return;
             }
@@ -211,18 +211,60 @@
             spinner.createSpinner("spinnerLogin");
             spinner.displaySpinner(true);
 
-            // FETCH request - send data or retrieve data by calling an api endpoint
-            // create Javascript Object to store the form data 
-            const formData = {
-                        email: username.value,
-                        password: password.value
+            // Send the information from the form here to authenticate
+            const api = "http://localhost:8080/auth/api/signin";
+            const result = await logIn({email: email.value, password: password.value, api: api});
+           
+             // Log in to server
+            async function logIn({email, password, api}){
+
+            const request = {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    email: email,
+                    password: password
+                })
             };
+
+            // send email and password to server
+            const response = await fetch(api, request);
+            const status = response.status;
+            const data = await response.json();
+
+            spinner.displaySpinner(false);
+            window.location = _PROFILE_URL;
+
+            // Return the result only if the status is 200 (OK), else return false
+            return status === 200 ? data : false;
+
+            }
+            // const responseData = JSON.parse(result);
+            // console.log(responseData);
+           
+            // If the result is false, display an error message and return
+            // if (!result)
+            // {
+            //     showToast({toastElement, toastBodyElement, bgColor: "danger" , msg: "Unable to sign in."});
+            //     // document.getElementById("displaySubmissionCompleted").classList.add("text-danger");
+            //     // document.getElementById("displaySubmissionCompleted").textContent = "Unable to sign-in. Please try again.";
+            //     return;
+            // }
+
+            // Store the token and refresh token in local storage and display a success message
+            const access = result.token;
+            const refresh = result.refreshToken;
+            window.localStorage.setItem("token", access);
+            window.localStorage.setItem("refreshToken", refresh);
+            window.localStorage.setItem("tokenRole", result.role);
 
             // showToast for successful submission of the login form
             showToast({toastElement, toastBodyElement, bgColor: "success", msg: "Logging...."});
 
             // Invoke login() function, and end (return)
-            return login(formData);                                                 
+            // return login(formData);                                                 
 
         });
     </script>  

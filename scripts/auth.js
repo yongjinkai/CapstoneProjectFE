@@ -1,7 +1,8 @@
 // Function to authenticate the user via site's JWT token
 function isAuthenticated(){
 
-    const token = window.localStorage.getItem(_USERTOKEN);          // Retrieve usertoken from local storage
+    //const token = window.localStorage.getItem(_USERTOKEN);          // Retrieve usertoken from local storage
+    const token = window.localStorage.getItem("token");  
     
     const expired = isTokenExpired(token);                          // Check the token's expiry 
     
@@ -16,13 +17,13 @@ function isTokenExpired(token) {
 
     if (!token) return true;                                        // Return true if token passed in is undefined 
 
-    const payload = JSON.parse(atob(token.split('.')[1]));          // Decode the JWT token (a base64-encoded JSON payload)
+    // const payload = JSON.parse(atob(token.split('.')[1]));          // Decode the JWT token (a base64-encoded JSON payload)
 
-    const expirationTime = payload.exp;                             // Get the expiration time from the token payload
+    // const expirationTime = payload.exp;                             // Get the expiration time from the token payload
 
-    const currentTime = Math.floor(Date.now() / 1000);              // Current time in seconds
+    // const currentTime = Math.floor(Date.now() / 1000);              // Current time in seconds
 
-    return expirationTime < currentTime;                            // Return true ONLY when currentTime is LESS THAN token's expirationTime
+    // return expirationTime < currentTime;                            // Return true ONLY when currentTime is LESS THAN token's expirationTime
 }
 
 // Function to decode the user's email from the parameter
@@ -31,10 +32,11 @@ function decodeUser(token){
     // !! Extract authenticated user's email from the token
     const arrToken = token.split(".");                              
     const decodedToken = JSON.parse(window.atob(arrToken[1]));
-    const email = decodedToken.email;
-    const username = decodedToken.username;
-    const role = decodedToken.role;
-    return {email: email, username: username, role: role};
+    const email = decodedToken.sub;
+    // const username = decodedToken.username;
+    // const role = decodedToken.role;
+    // return {email: email, username: username, role: role};
+    return {email: email};
 
 }
 
@@ -43,23 +45,24 @@ function decodeUser(token){
 // ?? In an async function, await pauses execution for the function until a Promise is resolved/rejected. 
 
 // Funtion to login
-async function login(formData = {}){
-    
+async function logins(formData = {}){
+    console.log(formData.email);
     if(Object.entries(formData).length === 0)                                               // Return if the object is empty
         return;
 
     // !! Try/catch block (exception handling) to send data to login enpoint
     try {
         // FETCH requests - send data or retrive data by calling an API endpoint            // TODO: refactor when end-point is available
-        /* 
-            const response = await fetch(_ENDPOINT_LOGIN, {                                 // Perform an async POST request to process the form data
+            
+        /*  
+            const response = await fetch(`http://localhost:8080/api/user/${formData.email}` , {                                 // Perform an async POST request to process the form data
                 method: "POST",
                 headers: {"Content-Type": "application/json"},
-                body: JSON.stringify(formData)
+                //body: JSON.stringify(formData)
             });
         */
 
-        const response = Mock.getMockSuccess();                                             // TODO: remove when endpoint request is available (remove in production env.)  
+        //const response = Mock.getMockSuccess();                                             // TODO: remove when endpoint request is available (remove in production env.)  
 
         if(response.ok){                                                                    // If response is ok
             
@@ -73,15 +76,15 @@ async function login(formData = {}){
 
         }
 
-         // const loginSuccess = await login(formData);
-            // if (!loginSuccess) {
-            //     spinner.displaySpinner(false);                                           // if login unsuccessful, hid spinner
-            // if login unsuccessful, provide feedback
-            //     showToast({toastElement, toastBodyElement, bgColor: "danger", msg: "Unable to log in. Try again."});
-            //     document.getElementById("formLogin").classList.remove("was-validated");
-            //     username.value = "";
-            //     password.value = "";
-            // }
+         const loginSuccess = await login(formData);
+            if (!loginSuccess) {
+                spinner.displaySpinner(false);                                           // if login unsuccessful, hid spinner
+                                                                                         //if login unsuccessful, provide feedback
+                showToast({toastElement, toastBodyElement, bgColor: "danger", msg: "Unable to log in. Try again."});
+                document.getElementById("formLogin").classList.remove("was-validated");
+                username.value = "";
+                password.value = "";
+            }
         
         return;                                                                              // Else return false
 
@@ -92,17 +95,18 @@ async function login(formData = {}){
     
 }
 
+
 // Funtion to register
-async function register(formData = {}){
-    
-    // if(Object.entries(formData).length === 0)                                               // Return if the object is empty
-    //     return;
+async function registers(formData = {}){
+    console.log(formData);
+    if(Object.entries(formData).length === 0)                                               // Return if the object is empty
+        return;
 
     // !! Try/catch block (exception handling) to send data to login enpoint
     try {
         // FETCH requests - send data or retrive data by calling an API endpoint            // TODO: refactor when end-point is available
         /* 
-            const response = await fetch(_ENDPOINT_LOGIN, {                                 // Perform an async POST request to process the form data
+            const response = await fetch("http://localhost:8080/api/user", {                                 // Perform an async POST request to process the form data
                 method: "POST",
                 headers: {"Content-Type": "application/json"},
                 body: JSON.stringify(formData)
@@ -110,7 +114,7 @@ async function register(formData = {}){
         */
 
         
-        const response = Mock.getMockSuccess();                                             // TODO: remove when endpoint request is available (remove in production env.)  
+        //const response = Mock.getMockSuccess();                                             // TODO: remove when endpoint request is available (remove in production env.)  
 
         if(response.ok){                                                                    // If response is ok
             
@@ -144,12 +148,91 @@ async function register(formData = {}){
 }
 
 // Funtion to update
-async function update(formData = {}){
-    console.log(formData);
+async function update(formData1, formData2 = {}){
+    const token = window.localStorage.getItem("token");
+    console.log(formData1);
+    console.log(formData2);
+
+    // Step 1: Create FormData from the object
+    // const formData = new FormData();
+    // for (const key in formData1) {
+    //     if (formData1.hasOwnProperty(key)) {
+    //         formData.append(key, formData1[key]);
+    //     }
+    // }
+
+    // Step 2: Calculate content length
+    let contentLength = 0;
+    // for (const [key, value] of formData.entries()) {
+    //     if (typeof value === "string") {
+    //         contentLength += new TextEncoder().encode(value).length;
+    //     } else if (value instanceof Blob) {
+    //         contentLength += value.size;
+    //     }
+    // }
+    
+    // console.log(contentLength); // Length in bytes
+
+
+    try {
+        await fetch(`http://localhost:8080/api/user/${formData1.userId}`, {
+            method: 'PUT',
+            // mode: 'no-cors',
+            headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(formData1)
+        });
+        const role = formData1.role;
+        console.log(role);
+        if (role === "Patient") {
+            await fetch(`http://localhost:8080/api/patient/${formData2.patientId}`, {
+                method: 'PUT',
+                //mode: 'no-cors',
+                headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formData2)
+            });
+        }
+
+        // if (role === "Nurse") {
+        //     await fetch(`http://localhost:8080/api/user/${formData1.userId}`, {
+        //         method: 'PUT',
+        //         //mode: 'no-cors',
+        //         headers: {
+        //         'Authorization': `Bearer ${token}`,
+        //         'Content-Type': 'application/json',
+        //         },
+        //         body: JSON.stringify(formData1)
+        //     });
+        //     }
+
+        // if (role === "Admin") {
+        //     await fetch(`http://localhost:8080/api/user/${formData1.userId}`, {
+        //         method: 'PUT',
+        //         //mode: 'no-cors',
+        //         headers: {
+        //         'Authorization': `Bearer ${token}`,
+        //         'Content-Type': 'application/json',
+        //         },
+        //         body: JSON.stringify(formData1)
+        //     });
+        //     }
+
+        console.log(JSON.stringify(formData1));
+        console.log(JSON.stringify(formData2));
+    } catch (error) {
+        console.log("Exception error gotten is: ", error.message);
+        return;
+    }
 }
 
 // Function to logout
 function logout(){
-    window.localStorage.removeItem(_USERTOKEN);                                             // Store the string in localStorage with the key 'token'
+    window.localStorage.removeItem("token");                                                // Store the string in localStorage with the key 'token'
+    // window.localStorage.removeItem(_USERTOKEN);
     window.location = _HOME_URL;                                                            // Redirect the user to homepage
 }

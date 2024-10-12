@@ -15,7 +15,7 @@ const _LOGOUT_URL = "logout.html";
 const _PROFILE_URL = "profile.html";
 
 // token name
-const _USERTOKEN = "usertoken";
+// const _USERTOKEN = "usertoken";
 
 // endponts
 const _ENDPOINT_LOGIN = "TBC";

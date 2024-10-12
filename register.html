@@ -1,36 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Register</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
+    <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+    crossorigin="anonymous"
+  />
     <!-- <link rel="stylesheet" href="../styles/index.css"> -->
     <link rel="stylesheet" href="/styles/index.css">
     <link rel="stylesheet" href="/styles//register.css">
     <link rel="stylesheet" href="/styles/navbar.css">
     <link rel="stylesheet" href="/styles/footer.css">
 </head>
-
 <body>
 
     <!-- toast -->
-    <!-- https://getbootstrap.com/docs/5.3/components/toasts/ -->
-    <div class="toast-container p-3 top-0 start-50 translate-middle-x">
-        <!-- Put toasts within -->
-        <div id="msg-toast" class="toast align-items-center mt-2" role="alert" aria-live="assertive" aria-atomic="true"
-            data-bs-autohide="true" data-bs-delay="4000">
-            <div class="d-flex">
-                <div id="msg-toast-body" class="toast-body ms-auto">
+        <!-- https://getbootstrap.com/docs/5.3/components/toasts/ --> 
+        <div class="toast-container p-3 top-0 start-50 translate-middle-x">
+            <!-- Put toasts within -->
+            <div id="msg-toast" class="toast align-items-center mt-2" role="alert" aria-live="assertive" aria-atomic="true" data-bs-autohide="true" data-bs-delay="4000">
+                <div class="d-flex">
+                    <div id="msg-toast-body" class="toast-body ms-auto"> 
                     <!-- Message to be added here -->
+                    </div>
+                    <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
                 </div>
-                <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
             </div>
         </div>
-    </div>
-
+    
     <!-- start of offcanvas navigation -->
     <nav class="navbar navbar-default navbar-expand-sm fixed-top" style="width: 100%">
         <div class="container-fluid">
@@ -51,9 +52,9 @@
                 </div>
                 <div class="offcanvas-body bg-dark navbar-dark menu" id="navbarNav">
                     <div>
-                        <!-- dynamic navbar -->
-                    </div>
-
+                      <!-- dynamic navbar -->
+                    </div>   
+                                  
                 </div>
             </div>
         </div>
@@ -67,10 +68,10 @@
             <div class="col-md-0 col-lg-4">
                 <!-- empty column -->
             </div>
-
+    
             <div class="col-md-12 col-lg-4">
-                <form id="formLogin" class="needs-validation" novalidate>
-                    <div class="container register-section">
+                <form id="formLogin" class="needs-validation" novalidate> 
+                    <div class="container register-section">            
                         <div>
                             <h2>Create my account</h2>
                             <p>Please fill in the information below</p>
@@ -78,16 +79,13 @@
                         <!-- username input (email) -->
                         <div class="col register-subsection">
                             <label for="inputUsername" class="form-label">Username &#40;email&#41;</label>
-                            <input type="email" class="form-control" id="inputUsername" aria-describedby="usrnameHelp"
-                                placeholder="e.g. username@mail.com" required />
-                            <div id="usernameHelp" class="form-text">We'll never share your username with anyone else.
-                            </div>
+                            <input type="email" class="form-control" id="inputUsername" aria-describedby="usrnameHelp" placeholder="e.g. username@mail.com" required />
+                            <div id="usernameHelp" class="form-text">We'll never share your username with anyone else.</div>
                         </div>
                         <!-- password input -->
                         <div class="col register-subsection">
                             <label for="inputPassword" class="form-label">Password</label>
-                            <input type="password" class="form-control" id="inputPassword"
-                                placeholder="Min 8 characters, at least 1 letter and 1 number" required />
+                            <input type="password" class="form-control" id="inputPassword" placeholder="Min 8 characters, at least 1 letter and 1 number" required />
                             <div class="form-text">
                                 Min 8 characters, at least 1 letter and 1 number
                             </div>
@@ -96,15 +94,15 @@
                             </div>
                         </div>
                         <!-- submit button -->
-                        <div class="register-btn">
+                        <div class="register-btn">                 
                             <div class="login-submit-btn">
                                 <button type="submit" id="btnRegister" class="btn btn-danger">Register</button>
-                            </div>
-                        </div>
-                    </div>
+                            </div> 
+                        </div>                
+                    </div>       
                 </form>
             </div>
-
+    
             <div class="col-md-0 col-lg-4">
                 <!-- empty column -->
             </div>
@@ -120,10 +118,8 @@
         <div class="row py-3 pt-4 footer-top-section m-0">
             <div class="row">
                 <div class="col-md-3 footer-image-section">
-                    <img src="/img/footer/rebound1.png" alt="logo" style="width: 150px; height: 40px; object-fit: cover"
-                        class="rounded-pill" />
-                    <p class="footer-description-section">We a VIP Concierge Nursing Care company. Our vision is to
-                        empower at-home patients to gain independence and quality lifestyle.
+                    <img src="/img/footer/rebound1.png" alt="logo" style="width: 150px; height: 40px; object-fit: cover" class="rounded-pill" />
+                    <p class="footer-description-section">We a VIP Concierge Nursing Care company. Our vision is to empower at-home patients to gain independence and quality lifestyle.
                     </p>
                 </div>
 
@@ -142,11 +138,10 @@
                     <p>Contact</p>
                     <a href="#"><img src="/img/footer/phone_icon.png" alt="phone"><span>+(65) 6877 7788</span></a>
                     <a href="#"><img src="/img/footer/message_icon.png" alt="message"><span>Info@rebound.com</span></a>
-                    <a href="#"><img src="/img/footer/location_icon.png" alt="location"><span>111 Vitality St. Singapore
-                            877111</span></a>
-
+                    <a href="#"><img src="/img/footer/location_icon.png" alt="location"><span>111 Vitality St. Singapore 877111</span></a>
+                    
                 </div>
-            </div>
+            </div>   
         </div>
 
         <div class="row footer-bottom-section m-0">
@@ -155,35 +150,37 @@
 
     </footer>
 
-    <!-- External Custom Script -->
-    <script src="/scripts/Mock.js"></script> <!-- TODO: to remove in production env. -->
-    <script src="/scripts/const.js"></script>
-    <script src="/scripts/apiservice.js"></script>
-    <script src="/scripts/auth.js"></script>
-    <script src="/scripts/components/NavController.js"></script>
-    <script src="/scripts/components/Spinner.js"></script>
-    <script src="/scripts/loader.js"></script>
-
-    <script src="/scripts/boostrap-ftns.js"></script>
-    <script src="/scripts/form-validate.js"></script>
+     <!-- External Custom Script -->
+     <script src="/scripts/Mock.js"></script>  <!-- TODO: to remove in production env. --> 
+     <script src="/scripts/const.js"></script>
+     
+     <script src="/scripts/auth.js"></script>
+     <script src="/scripts/components/NavController.js"></script>
+     <script src="/scripts/components/Spinner.js"></script>
+     <script src="/scripts/loader.js"></script>
+     
+     <script src="/scripts/boostrap-ftns.js"></script>
+     <script src="/scripts/form-validate.js"></script>
 
     <!-- end of footer -->
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
-        </script>
+    <script 
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous">
+    </script>
 
-    <!-- Internal Custome Script -->
+        <!-- Internal Custome Script -->
     <script>
 
         // Custom JS statement and function
-        document.getElementById("formLogin").addEventListener("submit", async (event) => {
+        document.getElementById("formLogin").addEventListener("submit", async(event) => {
 
             event.preventDefault(); /* prevent default browser events from happening */
-
+            
             // create constant variables to capture form inputs
             // call the document object of the file 'login.html' to refer to inputs objects 'inputUsername' and 'inputPassword'
-            const username = document.getElementById("inputUsername");
+            const email = document.getElementById("inputUsername");
             const password = document.getElementById("inputPassword");
 
             // get the toast elements as objects
@@ -191,21 +188,21 @@
             const toastBodyElement = document.getElementById("msg-toast-body");
 
             // trap unsuccesful event for inputUsername and inputPassword
-            if (isEmpty(username.value) || isEmpty(password.value)) {
-                showToast({ toastElement, toastBodyElement, bgColor: "danger", msg: "All inputs must not be empty." });
+            if (isEmpty(email.value) || isEmpty(password.value)) {
+                showToast({toastElement, toastBodyElement, bgColor: "danger", msg: "All inputs must not be empty."});
                 return;
             }
 
             // trap unsuccessful event for invalid inputUsername using a regex
-            if (!isUsername(username.value)) {
-                showToast({ toastElement, toastBodyElement, bgColor: "danger", msg: "Username is invalid." });
+            if(!isUsername(email.value)) {
+                showToast({toastElement, toastBodyElement, bgColor: "danger", msg: "Username is invalid."});
                 return;
             }
 
             // trap unsuccessful event for invalid inputPassword using a regex
             // only allow specific characters as per the description on the regex 
-            if (!isPassword(password.value)) {
-                showToast({ toastElement, toastBodyElement, bgColor: "danger", msg: "Incorrectly password entered." });
+            if(!isPassword(password.value)) {
+                showToast({toastElement, toastBodyElement, bgColor: "danger", msg: "Incorrectly password entered."});
                 return;
             }
 
@@ -215,29 +212,61 @@
 
             // FETCH request - send data or retrieve data by calling an api endpoint
             // create Javascript Object to store the form data 
-            const formData = {
-                        email: username.value,
-                        password: password.value
+
+            const api = "http://localhost:8080/auth/api/signup";
+            const result = await register({email: email.value, password: password.value, role: "Patient", api: api});
+
+            // Register to server
+            async function register({email, password, role, api}){
+
+            const request = {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    email: email,
+                    password: password,
+                    role: role
+                })
             };
 
+            // send email and password to server
+            const response = await fetch(api, request);
+            const status = response.status;
+            const data = await response.json();
+            spinner.displaySpinner(false);
+            window.location = _LOGIN_URL;
+
+            // Return the result only if the status is 200 (OK), else return false
+            return status === 200 ? data : false;
+
+            }
+            // If the result is false, display an error message and return
+            // if (!result)
+            // {
+            //     showToast({toastElement, toastBodyElement, bgColor: "danger" , msg: "Unable to sign in."});
+            //     // document.getElementById("displaySubmissionCompleted").classList.add("text-danger");
+            //     // document.getElementById("displaySubmissionCompleted").textContent = "Unable to sign-in. Please try again.";
+            //     return;
+            // }
+
+            // Store the token and refresh token in local storage and display a success message
+            // const access = result.token;
+            // const refresh = result.refreshToken;
+            // window.localStorage.setItem("token", access);
+            // window.localStorage.setItem("refreshToken", refresh);
+
             // showToast for successful submission of the login form
-            showToast({ toastElement, toastBodyElement, bgColor: "success", msg: "Processing registration...." });
+            showToast({toastElement, toastBodyElement, bgColor: "success", msg: "Processing registration...."});
 
             // Invoke login() function, and end (return)
-
-
-            postUser({
-                email: username.value,
-                role: "Patient"
-            })
-
-            return register();
+            //return register(formData);                                                 
 
         });
 
-
+        
     </script>
 
 </body>
-
 </html>
