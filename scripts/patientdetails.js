@@ -462,9 +462,9 @@ function assignPatient(user, patient) {
 async function adminProfile(role, email) {
     document.querySelector("#patientdetail").remove();
 
-    ftnAddData(role, email);
-    ftnInitDisabledAll(role, email);
-    ftnEditSave(role, email);
+    ftnAddProfileData(userData);
+    ftnInitDisabledAll(role);
+    ftnEditSaveProfile(role, userData);
 
     await fetchLists();
     userList.forEach((user) => {
@@ -478,10 +478,10 @@ async function staffProfile(role, email) {
     document.querySelector("#patientdetail").remove();
     document.querySelector("#staff-tab").remove();
 
-    ftnStaffLicenseNumber(role, email);
-    ftnAddData(role, email);
-    ftnInitDisabledAll(role, email);
-    ftnEditSave(role, email);
+    ftnStaffLicenseNumber(role, nurseData);
+    ftnAddProfileData(userData);
+    ftnInitDisabledAll(role);
+    ftnEditSaveProfile(role, userData, nurseData);
 
     await fetchLists();
     patientList.forEach((patient) => {
@@ -497,7 +497,8 @@ async function staffProfile(role, email) {
 function customerProfile(role, email) {
     document.querySelector("#staff-admin-section").remove();
 
-    ftnAddData(role, email);
-    ftnInitDisabledAll(role, email);
-    ftnEditSave(role, email);
+    ftnAddProfileData(userData);
+    ftnAddPatientData(patientData);
+    ftnInitDisabledAll(role);
+    ftnEditSaveProfile(role, userData, patientData);
 }
