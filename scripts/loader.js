@@ -56,18 +56,6 @@ document.addEventListener("DOMContentLoaded", (event) => {
             })
             .then(userData => {
                 console.log('User data:', userData); // Handle the data
-
-            // fetch(`http://localhost:8080/api/patient/${userData.userId}`, {
-            //     method: 'POST',
-            //     mode: 'no-cors',
-            //     headers: {
-            //     'Authorization': `Bearer ${token}`,
-            //     'Content-Type': 'application/json',
-            //     },
-            //     body: JSON.stringify({
-            //         userId: user.userId
-            // })
-            // });
          
             if (userData.role === "Admin") {
                 adminProfile(userData.role, userData);
@@ -127,8 +115,4 @@ document.addEventListener("DOMContentLoaded", (event) => {
     } else {
         console.error('No token found in localStorage');
     }
-       
-  
-
-         
-    });
+});
