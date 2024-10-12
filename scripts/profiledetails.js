@@ -518,11 +518,11 @@ async function staffProfile(role, userData, nurseData) {
     });
 }
 
-function customerProfile(role, userData, patientData) {
+function customerProfile(role, userData, patientData, nurseData) {
     document.querySelector("#staff-admin-section").remove();
 
     ftnAddProfileData(userData);
-    ftnAddPatientData(patientData);
+    ftnAddPatientData(patientData, nurseData);
     ftnInitDisabledAll(role);
     ftnEditSaveProfile(role, userData, patientData);
 }

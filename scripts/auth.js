@@ -150,29 +150,6 @@ async function registers(formData = {}){
 // Funtion to update
 async function update(formData1, formData2 = {}){
     const token = window.localStorage.getItem("token");
-    console.log(formData1);
-    console.log(formData2);
-
-    // Step 1: Create FormData from the object
-    // const formData = new FormData();
-    // for (const key in formData1) {
-    //     if (formData1.hasOwnProperty(key)) {
-    //         formData.append(key, formData1[key]);
-    //     }
-    // }
-
-    // Step 2: Calculate content length
-    let contentLength = 0;
-    // for (const [key, value] of formData.entries()) {
-    //     if (typeof value === "string") {
-    //         contentLength += new TextEncoder().encode(value).length;
-    //     } else if (value instanceof Blob) {
-    //         contentLength += value.size;
-    //     }
-    // }
-    
-    // console.log(contentLength); // Length in bytes
-
 
     try {
         await fetch(`http://localhost:8080/api/user/${formData1.userId}`, {
@@ -197,33 +174,7 @@ async function update(formData1, formData2 = {}){
                 body: JSON.stringify(formData2)
             });
         }
-
-        // if (role === "Nurse") {
-        //     await fetch(`http://localhost:8080/api/user/${formData1.userId}`, {
-        //         method: 'PUT',
-        //         //mode: 'no-cors',
-        //         headers: {
-        //         'Authorization': `Bearer ${token}`,
-        //         'Content-Type': 'application/json',
-        //         },
-        //         body: JSON.stringify(formData1)
-        //     });
-        //     }
-
-        // if (role === "Admin") {
-        //     await fetch(`http://localhost:8080/api/user/${formData1.userId}`, {
-        //         method: 'PUT',
-        //         //mode: 'no-cors',
-        //         headers: {
-        //         'Authorization': `Bearer ${token}`,
-        //         'Content-Type': 'application/json',
-        //         },
-        //         body: JSON.stringify(formData1)
-        //     });
-        //     }
-
-        console.log(JSON.stringify(formData1));
-        console.log(JSON.stringify(formData2));
+   
     } catch (error) {
         console.log("Exception error gotten is: ", error.message);
         return;

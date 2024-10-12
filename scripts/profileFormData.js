@@ -66,7 +66,7 @@ const ftnAddProfileData = (userData) => {
 }
 
 // Add data for the initial launch of the page
-const ftnAddPatientData = (patientData) => {
+const ftnAddPatientData = (patientData, nurseData) => {
     const packageTypeElement = document.getElementById('packageType');
     const packageSelectedRow = document.getElementById('packageSelectedRow');
 
@@ -113,7 +113,7 @@ const ftnAddPatientData = (patientData) => {
     packageSelectedElement.className = "form-control mb-3";
     packageSelectedElement.name = "packageSelected";
     packageSelectedElement.id = "packageSelected";
-    packageSelectedElement.value = patientData.packageName;
+    packageSelectedElement.value = patientData._package.packageName;
 
     package1Element.addEventListener("click", () => {
         packageSelectedElement.value = "Half Day";
@@ -183,7 +183,7 @@ const ftnAddPatientData = (patientData) => {
     assignedNurseElement.className = "form-control mb-3";
     assignedNurseElement.name = "assignedNurse";
     assignedNurseElement.id = "assignedNurse";
-    assignedNurseElement.value = patientData.nurse;
+    assignedNurseElement.value = patientData.nurse.user.name;
 
     packageTypeElement.appendChild(package1SectionElement);
     package1SectionElement.appendChild(package1LabelElement);
@@ -254,7 +254,7 @@ const ftnEditSaveProfile = (role, userData, patientData) => {
             const package = document.getElementById('packageSelected');
             const nokName = document.getElementById('next-of-kin-name');
             const nokMobile = document.getElementById('next-of-kin-mobile');
-            //const nurseLicense = document.getElementById('nurseLicenseNumber');
+
             // FETCH request - send data or retrieve data by calling an api endpoint
             // create Javascript Object to store the form data 
             
@@ -274,15 +274,6 @@ const ftnEditSaveProfile = (role, userData, patientData) => {
                     nextOfKinPhone: nokMobile.value
                 };
                 return update(formData1, formData2);
-            // } else if (role === "Nurse") {
-            //     const formData1 = {
-            //         userId: userData.userId,
-            //         role: userData.role,
-            //         name: name.value,
-            //         email: email.value,
-            //         mobile: mobile.value,
-            //     };
-            //     return update(formData1);    
             } else {
                 const formData1 = {
                     userId: userData.userId,
