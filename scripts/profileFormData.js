@@ -113,7 +113,10 @@ const ftnAddPatientData = (patientData, nurseData) => {
     packageSelectedElement.className = "form-control mb-3";
     packageSelectedElement.name = "packageSelected";
     packageSelectedElement.id = "packageSelected";
-    packageSelectedElement.value = patientData._package.packageName;
+    if (!patientData._package)
+        packageSelectedElement.value = "";
+    else
+        packageSelectedElement.value = patientData._package.packageName;
 
     package1Element.addEventListener("click", () => {
         packageSelectedElement.value = "Half Day";
@@ -183,7 +186,11 @@ const ftnAddPatientData = (patientData, nurseData) => {
     assignedNurseElement.className = "form-control mb-3";
     assignedNurseElement.name = "assignedNurse";
     assignedNurseElement.id = "assignedNurse";
-    assignedNurseElement.value = patientData.nurse.user.name;
+
+    if (!patientData.nurse)
+        assignedNurseElement.value = "";
+    else
+        assignedNurseElement.value = patientData.nurse.user.name;
 
     packageTypeElement.appendChild(package1SectionElement);
     package1SectionElement.appendChild(package1LabelElement);
@@ -266,7 +273,7 @@ const ftnEditSaveProfile = (role, userData, patientData) => {
                     email: email.value,
                     phone: mobile.value
                 };
-
+                
                 const formData2 = {
                     patientId: patientData.patientId,
                     packageId: package.value == "Half Day" ? 201 : 202,

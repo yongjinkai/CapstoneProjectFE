@@ -214,58 +214,29 @@
             // create Javascript Object to store the form data 
 
             const api = "http://localhost:8080/auth/api/signup";
-            const result = await register({email: email.value, password: password.value, role: "Patient", api: api});
-
-            // Register to server
-            async function register({email, password, role, api}){
-
-            const request = {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({
-                    email: email,
-                    password: password,
-                    role: role
-                })
-            };
-
-            // send email and password to server
-            const response = await fetch(api, request);
-            const status = response.status;
-            const data = await response.json();
-            spinner.displaySpinner(false);
-            window.location = _LOGIN_URL;
-
-            // Return the result only if the status is 200 (OK), else return false
-            return status === 200 ? data : false;
-
+            const formData = {
+                email: email.value,
+                password: password.value,
+                role: "Patient"
             }
-            // If the result is false, display an error message and return
-            // if (!result)
-            // {
-            //     showToast({toastElement, toastBodyElement, bgColor: "danger" , msg: "Unable to sign in."});
-            //     // document.getElementById("displaySubmissionCompleted").classList.add("text-danger");
-            //     // document.getElementById("displaySubmissionCompleted").textContent = "Unable to sign-in. Please try again.";
-            //     return;
-            // }
-
-            // Store the token and refresh token in local storage and display a success message
-            // const access = result.token;
-            // const refresh = result.refreshToken;
-            // window.localStorage.setItem("token", access);
-            // window.localStorage.setItem("refreshToken", refresh);
 
             // showToast for successful submission of the login form
             showToast({toastElement, toastBodyElement, bgColor: "success", msg: "Processing registration...."});
 
-            // Invoke login() function, and end (return)
-            //return register(formData);                                                 
+            // Register to server
+            const result = await register(formData, api);    
 
+            // If the result is false, display an error message and return
+            if (!result)
+            {
+                showToast({toastElement, toastBodyElement, bgColor: "danger" , msg: "Unable to sign in."});
+                // document.getElementById("displaySubmissionCompleted").classList.add("text-danger");
+                // document.getElementById("displaySubmissionCompleted").textContent = "Unable to sign-in. Please try again.";
+                return;
+            }
+                                   
         });
-
-        
+       
     </script>
 
 </body>
