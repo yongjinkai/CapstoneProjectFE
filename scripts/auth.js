@@ -45,22 +45,33 @@ function decodeUser(token){
 // ?? In an async function, await pauses execution for the function until a Promise is resolved/rejected. 
 
 // Funtion to login
-async function logins(formData = {}){
-    console.log(formData.email);
+async function logIn(formData, api){
+    console.log(formData);
     if(Object.entries(formData).length === 0)                                               // Return if the object is empty
         return;
 
     // !! Try/catch block (exception handling) to send data to login enpoint
     try {
         // FETCH requests - send data or retrive data by calling an API endpoint            // TODO: refactor when end-point is available
-            
-        /*  
-            const response = await fetch(`http://localhost:8080/api/user/${formData.email}` , {                                 // Perform an async POST request to process the form data
+
+            const request = {
                 method: "POST",
-                headers: {"Content-Type": "application/json"},
-                //body: JSON.stringify(formData)
-            });
-        */
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(formData)
+            };
+
+            // send email and password to server
+            const response = await fetch(api, request);
+            const status = response.status;
+            const data = await response.json();
+
+            spinner.displaySpinner(false);
+            window.location = _PROFILE_URL;
+
+            // Return the result only if the status is 200 (OK), else return false
+            return status === 200 ? data : false;
 
         //const response = Mock.getMockSuccess();                                             // TODO: remove when endpoint request is available (remove in production env.)  
 
@@ -76,7 +87,7 @@ async function logins(formData = {}){
 
         }
 
-         const loginSuccess = await login(formData);
+         const loginSuccess = await logIn(formData);
             if (!loginSuccess) {
                 spinner.displaySpinner(false);                                           // if login unsuccessful, hid spinner
                                                                                          //if login unsuccessful, provide feedback
@@ -95,26 +106,50 @@ async function logins(formData = {}){
     
 }
 
+// Function to create new patient upon registration
+async function postPatient(userId) {
+    const url = `http://localhost:8080/api/patient/${userId}`;
+    const response = await fetch(url, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+            
+        }),
+    });
+}
 
 // Funtion to register
-async function registers(formData = {}){
+async function register(formData, api){
     console.log(formData);
+    
     if(Object.entries(formData).length === 0)                                               // Return if the object is empty
         return;
 
     // !! Try/catch block (exception handling) to send data to login enpoint
     try {
         // FETCH requests - send data or retrive data by calling an API endpoint            // TODO: refactor when end-point is available
-        /* 
-            const response = await fetch("http://localhost:8080/api/user", {                                 // Perform an async POST request to process the form data
+
+            const request =  {                                 // Perform an async POST request to process the form data
                 method: "POST",
                 headers: {"Content-Type": "application/json"},
                 body: JSON.stringify(formData)
-            });
-        */
-
+            };
         
-        //const response = Mock.getMockSuccess();                                             // TODO: remove when endpoint request is available (remove in production env.)  
+            // send email and password to server
+            const response = await fetch(api, request);
+            const status = response.status;
+            const data = await response.json();
+            console.log(data.user.userId);
+
+            postPatient(data.user.userId);
+
+            spinner.displaySpinner(false);
+            window.location = _LOGIN_URL;
+
+            // Return the result only if the status is 200 (OK), else return false
+            return status === 200 ? data : false;
+    
+            // TODO: remove when endpoint request is available (remove in production env.)  
 
         if(response.ok){                                                                    // If response is ok
             
@@ -162,7 +197,7 @@ async function update(formData1, formData2 = {}){
             body: JSON.stringify(formData1)
         });
         const role = formData1.role;
-        console.log(role);
+
         if (role === "Patient") {
             await fetch(`http://localhost:8080/api/patient/${formData2.patientId}`, {
                 method: 'PUT',
