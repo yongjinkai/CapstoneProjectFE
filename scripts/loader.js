@@ -2,7 +2,7 @@ let spinner = null;
 let initPage = true;
 
 // EventListener to instantiate the navController
-document.addEventListener("DOMContentLoaded", (event) => {
+document.addEventListener("DOMContentLoaded", async (event) => {
     
     // Instantiate an instance of the siteMenu
     const navController = new NavController("navbarNav");
@@ -25,94 +25,98 @@ document.addEventListener("DOMContentLoaded", (event) => {
     const profilePageExists = window.location.pathname.includes(_PROFILE_URL);     // If _PROFILE_URL exists
     
     if(profilePageExists){                                                         // If _PROFILE_URL exists, profilePageExists = true
-        const token = isAuthenticated();    
-       
-        //const tokenRole = window.localStorage.getItem("tokenRole");                                    
+        const token = isAuthenticated();                                       
                                                                             
         if(!token)                                                                 // Redirect the user to index.html if token does not exist 
-            window.location = _HOME_URL;                                           // Otherwise, set up and display authenticated user in the profile page
-        
-         // Retrieve the token from localStorage
-        //const token = localStorage.getItem('token'); // Make sure the token is stored as 'token' in localStorage
-
-        //if (token) {    
+            window.location = _HOME_URL;                                           // Otherwise, set up and display authenticated user in the profile page  
      
         const user = decodeUser(token);
 
-
         // Perform the fetch request with the token for user profile
-        fetch(`http://localhost:8080/api/user/${user.email}`, {
-            method: 'GET',
-            headers: {
-            'Authorization': `Bearer ${token}`,
-            'Content-Type': 'application/json'
-            }
-            })
-            .then(response => {
+        async function fetchUserData(userEmail, token) {
+            try {
+                const response = await fetch(`http://localhost:8080/api/user/${userEmail}`, {
+                    method: 'GET',
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Content-Type': 'application/json'
+                    }
+                });
+        
                 if (!response.ok) {
-                    throw new Error('Network response was not ok');
-            }
-            return response.json(); // Parse the JSON response
-            })
-            .then(userData => {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+        
+                const userData = await response.json(); // Parse the JSON response
                 console.log('User data:', userData); // Handle the data
+                return userData; // Return userData
+        
+            } catch (error) {
+                console.error('There was a problem with the fetch operation:', error); // Handle errors
+                throw error; // Rethrow the error if you want to handle it later
+            }
+        }
+
+        // Perform the fetch request with the token for nurse profile
+        async function fetchNurseData(userData, token) {
+            try {
+                const response = await fetch(`http://localhost:8080/api/nurse/user/${userData}`, {
+                    method: 'GET',
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Content-Type': 'application/json'
+                    }
+                });
+        
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+        
+                const nurseData = await response.json(); // Parse the JSON response
+                console.log('User data:', nurseData); // Handle the data
+                return nurseData; // Return userData
+        
+            } catch (error) {
+                console.error('There was a problem with the fetch operation:', error); // Handle errors
+                throw error; // Rethrow the error if you want to handle it later
+            }
+        } 
+
+        // Perform the fetch request with the token for patient profile
+        async function fetchPatientData(userData, token) {
+            try {
+                const response = await fetch(`http://localhost:8080/api/patient/user/${userData}`, {
+                    method: 'GET',
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Content-Type': 'application/json'
+                    }
+                });
+        
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+        
+                const patientData = await response.json(); // Parse the JSON response
+                console.log('User data:', patientData); // Handle the data
+                return patientData; // Return userData
+        
+            } catch (error) {
+                console.error('There was a problem with the fetch operation:', error); // Handle errors
+                throw error; // Rethrow the error if you want to handle it later
+            }
+        } 
          
-            if (userData.role === "Admin") {
-                adminProfile(userData.role, userData);
-            } else if (userData.role === "Nurse") {
-                
-                // Perform the fetch request with the token for nurse profile
-                fetch(`http://localhost:8080/api/nurse/user/${userData.userId}`, {
-                    method: 'GET',
-                    headers: {
-                    'Authorization': `Bearer ${token}`,
-                    'Content-Type': 'application/json'
-                    }
-                    })
-                    .then(response => {
-                    if (!response.ok) {
-                        throw new Error('Network response was not ok');
-                    }
-                    return response.json(); // Parse the JSON response
-                    })
-                    .then(nurseData => {
-                    console.log('User data:', nurseData); // Handle the data
+        const userData = await fetchUserData(user.email, token);   
 
-                    staffProfile(userData.role, userData, nurseData);
-                })
-                
-                .catch(error => {
-                console.error('There was a problem with the fetch operation:', error);
-                });
-            
-            } else if (userData.role === "Patient") {  
-
-                 // Perform the fetch request with the token patient profile
-                fetch(`http://localhost:8080/api/patient/user/${userData.userId}`, {
-                    method: 'GET',
-                    headers: {
-                    'Authorization': `Bearer ${token}`,
-                    'Content-Type': 'application/json'
-                    }
-                    })
-                    .then(response => {
-                    if (!response.ok) {
-                        throw new Error('Network response was not ok');
-                    }
-                    return response.json(); // Parse the JSON response
-                    })
-                    .then(patientData => {
-                    console.log('User data:', patientData); // Handle the data
-
-                    customerProfile(userData.role, userData, patientData);
-                })
-                 
-                .catch(error => {
-                console.error('There was a problem with the fetch operation:', error);
-                });
-            }  
-        })  
-    } else {
-        console.error('No token found in localStorage');
+        if (userData.role === "Admin") {
+            adminProfile(userData.role, userData);
+        } else if (userData.role === "Nurse") {           
+            const nurseData = await fetchNurseData(userData.userId, token); 
+            staffProfile(userData.role, userData, nurseData);
+        } else if (userData.role === "Patient") {  
+            const patientData = await fetchPatientData(userData.userId, token);
+            customerProfile(userData.role, userData, patientData);
+        }
     }
-});
+})    
