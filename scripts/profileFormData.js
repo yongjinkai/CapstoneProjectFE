@@ -5,8 +5,6 @@ const ftnInitDisabledAll = (role) => {
     document.getElementById('email').disabled = true;
     document.getElementById('mobileNumber').disabled = true;
     if (role === "Patient") {
-        // document.getElementById('package1').disabled = true;
-        // document.getElementById('package2').disabled = true;
         document.getElementById('packageSelected').disabled = true;
         document.getElementById('next-of-kin-name').disabled = true;
         document.getElementById('next-of-kin-mobile').disabled = true;
@@ -70,39 +68,6 @@ const ftnAddPatientData = (patientData, nurseData) => {
     const packageTypeElement = document.getElementById('packageType');
     const packageSelectedRow = document.getElementById('packageSelectedRow');
 
-    // const package1SectionElement = document.createElement('div'); 
-    // package1SectionElement.className = "form-check package-radio-btn";
-    // package1SectionElement.id = "package1Section";
-
-    // const package1LabelElement = document.createElement('label');
-    // package1LabelElement.for = "package1";
-    // package1LabelElement.className = "form-check-label; fw-semibold";
-    // package1LabelElement.innerText = "Half Day Package";
-
-    // const package1Element = document.createElement('input');
-    // package1Element.type = "radio";
-    // package1Element.className = "form-check-input mb-3";
-    // package1Element.name = "package";
-    // package1Element.id = "package1";
-    // package1Element.value = 201;
-    // package1Element.checked = "";
-
-    // const package2SectionElement = document.createElement('div'); 
-    // package1SectionElement.className = "form-check package-radio-btn";
-    // package1SectionElement.id = "package2Section";
-
-    // const package2LabelElement = document.createElement('label');
-    // package2LabelElement.for = "package2";
-    // package2LabelElement.className = "form-check-label; fw-semibold";
-    // package2LabelElement.innerText = "Full Day Package";
-
-    // const package2Element = document.createElement('input');
-    // package2Element.type = "radio";
-    // package2Element.className = "form-check-input mb-3";
-    // package2Element.name = "package";
-    // package2Element.id = "package2";
-    // package2Element.value = 202;
-
     const packageSelectedLabelElement = document.createElement('label');
     packageSelectedLabelElement.for = "packageSelected";
     packageSelectedLabelElement.className = "form-control-plaintext; py-2 fw-semibold";
@@ -114,17 +79,9 @@ const ftnAddPatientData = (patientData, nurseData) => {
     packageSelectedElement.name = "packageSelected";
     packageSelectedElement.id = "packageSelected";
     if (!patientData._package)
-        packageSelectedElement.value = "";
+        packageSelectedElement.value = "No Package";
     else
         packageSelectedElement.value = patientData._package.packageName;
-
-    // package1Element.addEventListener("click", () => {
-    //     packageSelectedElement.value = "Half Day";
-    // })
-
-    // package2Element.addEventListener("click", () => {
-    //     packageSelectedElement.value = "Full Day";
-    // })
 
     const nokNameLabelElement = document.createElement('label');
     nokNameLabelElement.for = "next-of-kin-name";
@@ -188,16 +145,9 @@ const ftnAddPatientData = (patientData, nurseData) => {
     assignedNurseElement.id = "assignedNurse";
 
     if (!patientData.nurse)
-        assignedNurseElement.value = "";
+        assignedNurseElement.value = "Not Assigned";
     else
         assignedNurseElement.value = patientData.nurse.user.name;
-
-    // packageTypeElement.appendChild(package1SectionElement);
-    // package1SectionElement.appendChild(package1LabelElement);
-    // package1SectionElement.appendChild(package1Element);
-    // package1SectionElement.appendChild(package2SectionElement);
-    // package2SectionElement.appendChild(package2LabelElement);
-    // package2SectionElement.appendChild(package2Element);
 
     packageSelectedRow.appendChild(packageSelectedLabelElement);
     packageSelectedRow.appendChild(packageSelectedElement);
@@ -231,9 +181,6 @@ const ftnEditSaveProfile = (role, userData, patientData) => {
             document.getElementById('email').disabled = false;
             document.getElementById('mobileNumber').disabled = false;
             if (role === "Patient") {
-                // document.getElementById('package1').disabled = false;
-                // document.getElementById('package2').disabled = false;
-                // document.getElementById('packageSelected').disabled = false;
                 document.getElementById('next-of-kin-name').disabled = false;
                 document.getElementById('next-of-kin-mobile').disabled = false;
             }
@@ -248,8 +195,6 @@ const ftnEditSaveProfile = (role, userData, patientData) => {
             document.getElementById('email').disabled = true;
             document.getElementById('mobileNumber').disabled = true;   
             if (role === "Patient") {
-                // document.getElementById('package1').disabled = true;
-                // document.getElementById('package2').disabled = true;
                 document.getElementById('packageSelected').disabled = true;
                 document.getElementById('next-of-kin-name').disabled = true;
                 document.getElementById('next-of-kin-mobile').disabled = true;
@@ -276,7 +221,6 @@ const ftnEditSaveProfile = (role, userData, patientData) => {
                 
                 const formData2 = {
                     patientId: patientData.patientId,
-                    // packageId: package.value == "Half Day" ? 201 : 202,
                     nextOfKinName: nokName.value,
                     nextOfKinPhone: nokMobile.value
                 };
