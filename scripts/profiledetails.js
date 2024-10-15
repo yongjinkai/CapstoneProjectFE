@@ -509,7 +509,7 @@ async function staffProfile(role, userData, nurseData) {
 
     await fetchLists();
     patientList.forEach((patient) => {
-        if (patient.nurse && patient.nurse.user.email == email) {
+        if (patient.nurse && (patient.nurse.nurseId == nurseData.nurseId)) {
             userList.forEach((user) => {
                 if (patient.user.userId == user.userId)
                     addPatient(user, (restriction = true));

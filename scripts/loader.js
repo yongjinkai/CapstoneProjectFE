@@ -30,15 +30,9 @@ document.addEventListener("DOMContentLoaded", (event) => {
         //const tokenRole = window.localStorage.getItem("tokenRole");                                    
                                                                             
         if(!token)                                                                 // Redirect the user to index.html if token does not exist 
-            window.location = _HOME_URL;                                           // Otherwise, set up and display authenticated user in the profile page
-        
-         // Retrieve the token from localStorage
-        //const token = localStorage.getItem('token'); // Make sure the token is stored as 'token' in localStorage
-
-        //if (token) {    
+            window.location = _HOME_URL;                                           // Otherwise, set up and display authenticated user in the profile page  
      
         const user = decodeUser(token);
-
 
         // Perform the fetch request with the token for user profile
         fetch(`http://localhost:8080/api/user/${user.email}`, {
@@ -105,14 +99,11 @@ document.addEventListener("DOMContentLoaded", (event) => {
                     console.log('User data:', patientData); // Handle the data
 
                     customerProfile(userData.role, userData, patientData);
-                })
-                 
+                })                
                 .catch(error => {
                 console.error('There was a problem with the fetch operation:', error);
                 });
             }  
         })  
-    } else {
-        console.error('No token found in localStorage');
     }
 });

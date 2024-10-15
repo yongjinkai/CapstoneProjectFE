@@ -227,13 +227,19 @@
             const result = await register(formData, api);    
 
             // If the result is false, display an error message and return
-            if (!result)
-            {
-                showToast({toastElement, toastBodyElement, bgColor: "danger" , msg: "Unable to sign in."});
-                // document.getElementById("displaySubmissionCompleted").classList.add("text-danger");
-                // document.getElementById("displaySubmissionCompleted").textContent = "Unable to sign-in. Please try again.";
-                return;
-            }
+            // if (!result)
+            // {
+                
+            //     showToast({toastElement, toastBodyElement, bgColor: "danger" , msg: "Unable to sign in."});
+            
+            //     spinner.displaySpinner(false);
+            //     window.location = _REGISTER_URL;
+            //     document.getElementById("formLogin").classList.remove("was-validated");
+            //     username.value = "";
+            //     password.value = "";
+
+            //     return;
+            // }
                                    
         });
        

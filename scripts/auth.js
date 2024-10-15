@@ -139,7 +139,6 @@ async function register(formData, api){
             const response = await fetch(api, request);
             const status = response.status;
             const data = await response.json();
-            console.log(data.user.userId);
 
             postPatient(data.user.userId);
 
@@ -148,38 +147,11 @@ async function register(formData, api){
 
             // Return the result only if the status is 200 (OK), else return false
             return status === 200 ? data : false;
-    
-            // TODO: remove when endpoint request is available (remove in production env.)  
-
-        if(response.ok){                                                                    // If response is ok
-            
-            // const token = Mock.getToken(true);                                              // TODO: refactor when token is retrieved from response, (remove in production env.) 
-            // window.localStorage.setItem(_USERTOKEN, token);                                 // Store the string in localStorage with the key 'usertoken'
-
-            const sleep = (delay) => new Promise((resolve) => setTimeout(resolve, delay));  // TODO: remove delay when endpoint is instated
-            await sleep(2000);
-
-            window.location = _LOGIN_URL;                                                 // Redirect the user to homepage
-
-        }
-
-         // const loginSuccess = await login(formData);
-            // if (!loginSuccess) {
-            //     spinner.displaySpinner(false);                                             // if login unsuccessful, hid spinner
-            // if login unsuccessful, provide feedback
-            //     showToast({toastElement, toastBodyElement, bgColor: "danger", msg: "Unable to log in. Try again."});
-            //     document.getElementById("formLogin").classList.remove("was-validated");
-            //     username.value = "";
-            //     password.value = "";
-            // }
-        
-        return;                                                                              // Else return false
 
     } catch (error) {
         console.log("Exception error gotten is: ", error.message);
         return;
-    }
-    
+    }   
 }
 
 // Funtion to update
