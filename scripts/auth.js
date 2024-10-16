@@ -54,6 +54,8 @@ async function login(formData = {}){
             body: JSON.stringify(formData)
         });
 
+        const status = response.status;
+
         if(response.ok){                                                                    // If response status == 200 (ok)
             const result = await response.json();
             const token = result.token;                                                   
@@ -64,14 +66,11 @@ async function login(formData = {}){
             window.location = _PROFILE_URL;
         }
 
-        if (response.status === 401)
-            return response.status;
-
-        return;                                                                             // Else return false
-
+        return status === 200 ? data : false;                                               // Else return false  
+                                                                         
     } catch (error) {
         console.log("Exception error gotten is: ", error.message);
-        return;
+        return error.message;
     }
     
 }
@@ -89,7 +88,7 @@ async function postPatient(userId) {
 }
 
 // Funtion to register
-async function register(formData, api){
+async function register(formData){
     console.log(formData);
     
     if(Object.entries(formData).length === 0)                                               // Return if the object is empty
@@ -99,16 +98,18 @@ async function register(formData, api){
     try {
         // FETCH requests - send data or retrive data by calling an API endpoint            // TODO: refactor when end-point is available
 
-            const request =  {                                                              // Perform an async POST request to process the form data
+            const response = await fetch(_ENDPOINT_SIGNUP, {                                                              // Perform an async POST request to process the form data
                 method: "POST",
                 headers: {"Content-Type": "application/json"},
                 body: JSON.stringify(formData)
-            };
+            });
         
             // send email and password to server
-            const response = await fetch(api, request);
             const status = response.status;
             const data = await response.json();
+
+            if (status === 226)                                                             // return 226 if account is already in use
+                return status;
 
             postPatient(data.user.userId);
 
@@ -120,9 +121,7 @@ async function register(formData, api){
 
     } catch (error) {
         console.log("Exception error gotten is: ", error.message);
-        alert("Account already exist");
-        window.location = _REGISTER_URL;
-        return;
+        return error.message;
     }   
 }
 

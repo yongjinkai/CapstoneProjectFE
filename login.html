@@ -211,13 +211,26 @@
             spinner.createSpinner("spinnerLogin");
             spinner.displaySpinner(true);
 
+            // showToast for submission of the login form
+            showToast({toastElement, toastBodyElement, bgColor: "success", msg: "Logging In...."});
+
             const formData = { email: email.value, password: password.value };           // JavaScript Object formData stores the form's input values
             
             const loginSuccess = await login(formData);  
 
-            if(loginSuccess === 401){
+            // showToast for incorrect username/password
+            if(!loginSuccess){
                 spinner.displaySpinner(false);                                                                              // If login unsuccessful, hide spinner
                 showToast({toastElement, toastBodyElement, bgColor: "danger", msg: "Incorrect username or password."});     // If login unsuccessful, provide feeback
+                document.getElementById("formLogin").classList.remove("was-validated");
+                email.value = "";
+                password.value = "";
+            }
+
+            // showToast for failed to fetch
+            if(loginSuccess === "Failed to fetch"){
+                spinner.displaySpinner(false);                                                                      // If login unsuccessful, hide spinner
+                showToast({toastElement, toastBodyElement, bgColor: "danger", msg: "Server is unreachable."});      // If login unsuccessful, provide feeback
                 document.getElementById("formLogin").classList.remove("was-validated");
                 email.value = "";
                 password.value = "";

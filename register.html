@@ -212,20 +212,36 @@
 
             // FETCH request - send data or retrieve data by calling an api endpoint
             // create Javascript Object to store the form data 
-
-            const api = "http://localhost:8080/auth/api/signup";
             const formData = {
                 email: email.value,
                 password: password.value,
                 role: "Patient"
             }
 
-            // showToast for successful submission of the login form
+            // showToast for submission of the registration form
             showToast({toastElement, toastBodyElement, bgColor: "success", msg: "Processing registration...."});
 
             // Register to server
-            const result = await register(formData, api);    
-                                   
+            const result = await register(formData);   
+
+            // showToast for account already in use
+            if(result === 226){
+                spinner.displaySpinner(false);                                                                      // If login unsuccessful, hide spinner
+                showToast({toastElement, toastBodyElement, bgColor: "danger", msg: "Account already exist."});      // If login unsuccessful, provide feeback
+                document.getElementById("formLogin").classList.remove("was-validated");
+                email.value = "";
+                password.value = "";
+            }
+
+            // showToast for failed to fetch
+            if(result === "Failed to fetch"){
+                spinner.displaySpinner(false);                                                                      // If login unsuccessful, hide spinner
+                showToast({toastElement, toastBodyElement, bgColor: "danger", msg: "Server is unreachable."});      // If login unsuccessful, provide feeback
+                document.getElementById("formLogin").classList.remove("was-validated");
+                email.value = "";
+                password.value = "";
+            }
+                
         });
        
     </script>
