@@ -22,15 +22,15 @@ document.addEventListener("DOMContentLoaded", async (event) => {
     // Instantiate a spinner, currently used in login.html and register.html
     spinner = new Spinner();
 
-    const profilePageExists = window.location.pathname.includes(_PROFILE_URL);     // If _PROFILE_URL exists
+    const profilePageExists = window.location.pathname.includes(_PROFILE_URL);      // If _PROFILE_URL exists
     
-    if(profilePageExists){                                                         // If _PROFILE_URL exists, profilePageExists = true
-        const token = isAuthenticated();                                       
+    if(profilePageExists){                                                          // If _PROFILE_URL exists, profilePageExists = true
+        const token = isAuthenticated();                                     
                                                                             
-        if(!token)                                                                 // Redirect the user to index.html if token does not exist 
-            window.location = _HOME_URL;                                           // Otherwise, set up and display authenticated user in the profile page  
+        if(!token)                                                                  // Redirect the user to index.html if token does not exist 
+            window.location = _HOME_URL;                                            // Otherwise, set up and display authenticated user in the profile page  
      
-        const user = decodeUser(token);
+        const user = decodeUser(token);                                             // decode the token for the role
 
         // Perform the fetch request with the token for user profile
         async function fetchUserData(userEmail, token) {

@@ -211,34 +211,16 @@
             spinner.createSpinner("spinnerLogin");
             spinner.displaySpinner(true);
 
-            // Send the information from the form here to authenticate
-            const api = "http://localhost:8080/auth/api/signin";
-            const formData = {
-                email: email.value,
-                password: password.value
-            }
-
-            // showToast for successful submission of the login form
-            showToast({toastElement, toastBodyElement, bgColor: "success", msg: "Logging...."});
-
-            // Invoke login() function, and end (return)
-            // return logIn(formData, api); 
-            const result = await logIn(formData, api);         
+            const formData = { email: email.value, password: password.value };           // JavaScript Object formData stores the form's input values
             
-            // Store the token and refresh token in local storage and display a success message
-            const access = result.token;
-            const refresh = result.refreshToken;
-            window.localStorage.setItem("token", access);
-            window.localStorage.setItem("refreshToken", refresh);
-            window.localStorage.setItem("tokenRole", result.role);
+            const loginSuccess = await login(formData);  
 
-            // If the result is false, display an error message and return
-            if (!result)
-            {
-                showToast({toastElement, toastBodyElement, bgColor: "danger" , msg: "Unable to sign in."});
-                // document.getElementById("displaySubmissionCompleted").classList.add("text-danger");
-                // document.getElementById("displaySubmissionCompleted").textContent = "Unable to sign-in. Please try again.";
-                return;
+            if(loginSuccess === 401){
+                spinner.displaySpinner(false);                                                                              // If login unsuccessful, hide spinner
+                showToast({toastElement, toastBodyElement, bgColor: "danger", msg: "Incorrect username or password."});     // If login unsuccessful, provide feeback
+                document.getElementById("formLogin").classList.remove("was-validated");
+                email.value = "";
+                password.value = "";
             }
 
         });
