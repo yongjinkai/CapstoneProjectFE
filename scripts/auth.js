@@ -81,9 +81,7 @@ async function postPatient(userId) {
     const response = await fetch(url, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-            
-        }),
+        body: JSON.stringify({}),
     });
 }
 
@@ -98,7 +96,7 @@ async function register(formData){
     try {
         // FETCH requests - send data or retrive data by calling an API endpoint            // TODO: refactor when end-point is available
 
-            const response = await fetch(_ENDPOINT_SIGNUP, {                                                              // Perform an async POST request to process the form data
+            const response = await fetch(_ENDPOINT_SIGNUP, {                                // Perform an async POST request to process the form data
                 method: "POST",
                 headers: {"Content-Type": "application/json"},
                 body: JSON.stringify(formData)
@@ -150,11 +148,12 @@ async function update(formData1, formData2 = {}){
                 body: JSON.stringify(formData2)
             });
         }
-   
+
     } catch (error) {
         console.log("Exception error gotten is: ", error.message);
         return;
     }
+    ftnUpdatedMessge();
 }
 
 // Function to logout

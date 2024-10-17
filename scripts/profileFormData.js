@@ -19,6 +19,13 @@ const ftnAddProfileData = (userData) => {
 
     const profileSectionElement = document.getElementById('profileSection');
 
+    const profileHeaderElement = document.getElementById('profileHeader');
+    if (userData.role === "Patient") {
+        profileHeaderElement.innerText = " Client Profile";
+    } else {
+        profileHeaderElement.innerText = userData.role + " Profile";
+    }
+
     const nameLabelElement = document.createElement('label');
     nameLabelElement.for = "name";
     nameLabelElement.className = "form-control-plaintext; py-2 fw-semibold";
@@ -203,7 +210,6 @@ const ftnEditSaveProfile = (role, userData, patientData) => {
             const name = document.getElementById('name');
             const email = document.getElementById('email');
             const mobile = document.getElementById('mobileNumber');
-            const package = document.getElementById('packageSelected');
             const nokName = document.getElementById('next-of-kin-name');
             const nokMobile = document.getElementById('next-of-kin-mobile');
 

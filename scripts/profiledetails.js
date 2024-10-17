@@ -46,7 +46,7 @@ async function fillTable(tableBody, profile, restriction) {
         const chooseProfile = document.querySelector(".chooseProfile");
         chooseProfile.textContent = profile.role;
         const profileID = document.querySelector(".profileID");
-        profileID.textContent = profile.id;
+        profileID.textContent = profile.userId;
         if (profile.role == "Patient") {
             patientList.forEach((patient) => {
                 if (profile.userId == patient.user.userId)
@@ -180,7 +180,7 @@ async function fillPatientModal(patient, restriction) {
 
         let value = document.createElement("p");
         if (typeof item.value == "string") {
-            value.textContent = item.value;
+            value.textContent = item.value;            
             value.className = `d-block ${item.classname}`;
         } else value = item.value;
 
@@ -501,6 +501,7 @@ async function staffProfile(role, userData, nurseData) {
     let restricted = true;
     document.querySelector("#patientdetail").remove();
     document.querySelector("#staff-tab").remove();
+    document.getElementById("btnSave").style.display = "none";
 
     ftnStaffLicenseNumber(role, nurseData);
     ftnAddProfileData(userData);

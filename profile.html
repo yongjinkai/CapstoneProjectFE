@@ -20,6 +20,20 @@
 
 <body>
 
+    <!-- toast -->
+        <!-- https://getbootstrap.com/docs/5.3/components/toasts/ --> 
+        <div class="toast-container p-3 top-0 start-50 translate-middle-x">
+            <!-- Put toasts within -->
+            <div id="msg-toast" class="toast align-items-center mt-2" role="alert" aria-live="assertive" aria-atomic="true" data-bs-autohide="true" data-bs-delay="4000">
+                <div class="d-flex">
+                    <div id="msg-toast-body" class="toast-body ms-auto"> 
+                    <!-- Message to be added here -->
+                    </div>
+                    <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+                </div>
+            </div>
+        </div>
+
     <!-- start of offcanvas navigation -->
     <nav class="navbar navbar-default navbar-expand-sm fixed-top" style="width: 100%">
         <div class="container-fluid">
@@ -58,7 +72,7 @@
             <form id="formLogin" class="needs-validation" novalidate>
                 <div class="container profile-section">
                     <div id="profileSection">
-                        <h2>Profile</h2>
+                        <h2 id="profileHeader"></h2>
                     </div>
                     <!-- insert dynamic -->
                     <div class="col profile-subsection" id="staff-license">
@@ -225,7 +239,7 @@
 
 
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-primary save-button" data-bs-dismiss="modal">Save</button>
+                            <button type="button" id="btnSave" class="btn btn-primary save-button" data-bs-dismiss="modal">Save</button>
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                         </div>
                     </div>
@@ -302,6 +316,17 @@
         </script>
 
     <!-- Internal Custom Script -->
+     <script>
+        
+        // get the toast elements as objects
+        const toastElement = document.getElementById("msg-toast");
+        const toastBodyElement = document.getElementById("msg-toast-body");
+
+        function ftnUpdatedMessge() {
+            showToast({toastElement, toastBodyElement, bgColor: "success", msg: "Profile Updated."});
+        }
+
+     </script>
 
 </body>
 
