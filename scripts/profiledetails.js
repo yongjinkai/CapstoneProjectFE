@@ -501,7 +501,6 @@ async function staffProfile(role, userData, nurseData) {
     let restricted = true;
     document.querySelector("#patientdetail").remove();
     document.querySelector("#staff-tab").remove();
-    document.getElementById("btnSave").style.display = "none";
 
     ftnStaffLicenseNumber(role, nurseData);
     ftnAddProfileData(userData);
