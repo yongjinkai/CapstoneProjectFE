@@ -63,11 +63,11 @@ async function fillTable(tableBody, profile, restriction) {
 
     const status = document.createElement("td");
     status.textContent = "Inactive";
-    if (profile.role == "Nurse") status.textContent = "Active"
+    if (profile.role == "Nurse") status.textContent = "Active";
     if (profile.role == "Patient") {
-        await fetchLists();
         patientList.forEach((patient) => {
-            if (patient.user.userId == profile.userId) {
+            if (!patient.user) console.log(patient);
+            if (patient.user && patient.user.userId == profile.userId) {
                 // console.log("today's date: " + today);
                 // console.log("patient's end date: " + new Date(patient.endDate));
                 if (patient.endDate && patient.startDate) {
@@ -149,16 +149,23 @@ async function fillPatientModal(patient, restriction) {
 
     // preparing  modal 2nd row data
     let packageDropdownDiv = document.createElement("div");
-    //If staff mode, package is not a dropdown
+    let medicalRecordsContainer = document.createElement("textarea");
+    medicalRecordsContainer.className = "form-control medical-records";
+    medicalRecordsContainer.rows = 2;
+    medicalRecordsContainer.textContent = patient.medicalRecords;
+
+    //If in Nurse mode, only additional notes is editable
     if (restriction) {
         packageDropdownDiv = !patient._package
             ? "No Package"
             : patient._package.packageName;
+
+        medicalRecordsContainer = patient.medicalRecords;
     }
     const data2 = [
         {
             header: "Medical Records",
-            value: patient.medicalRecords,
+            value: medicalRecordsContainer,
             classname: "medical-records",
         },
         {
@@ -180,7 +187,7 @@ async function fillPatientModal(patient, restriction) {
 
         let value = document.createElement("p");
         if (typeof item.value == "string") {
-            value.textContent = item.value;            
+            value.textContent = item.value;
             value.className = `d-block ${item.classname}`;
         } else value = item.value;
 
@@ -281,6 +288,8 @@ async function fillPatientModal(patient, restriction) {
             start_date = !start_date ? null : start_date;
             end_date = !end_date ? null : end_date;
             let requestBody = {
+                medicalRecords:
+                    document.querySelector(".medical-records").value,
                 medicalPrescriptions: document.querySelector(
                     ".medical-prescriptions"
                 ).value,
@@ -289,12 +298,20 @@ async function fillPatientModal(patient, restriction) {
                 startDate: start_date,
                 endDate: end_date,
             };
-            if (selectedPackageName == "Half-Day")
-                putPatientInfo(patient.patientId, null, requestBody, 201);
-            else if (selectedPackageName == "Full-Day")
-                putPatientInfo(patient.patientId, null, requestBody, 202);
-            else putPatientInfo(patient.patientId, null, requestBody, 200);
-            // location.reload();
+            switch (selectedPackageName) {
+                case "Half-Day":
+                    putPatientInfo(patient.patientId, null, requestBody, 201);
+                    break;
+                case "Full-Day":
+                    putPatientInfo(patient.patientId, null, requestBody, 202);
+                    break;
+                case "No Package":
+                    putPatientInfo(patient.patientId, null, requestBody, 200);
+                    break;
+                default:
+                    putPatientInfo(patient.patientId, null, requestBody, null);
+                    break;
+            }
             ftnUpdatedMessge();
         };
     }
@@ -310,8 +327,7 @@ async function fillPatientModal(patient, restriction) {
             ftnUpdatedMessge();
         };
     }
-    }
-    
+}
 
 async function fillStaffModal(nurse, user) {
     await fetchLists();
@@ -513,7 +529,7 @@ async function staffProfile(role, userData, nurseData) {
 
     await fetchLists();
     patientList.forEach((patient) => {
-        if (patient.nurse && (patient.nurse.nurseId == nurseData.nurseId)) {
+        if (patient.nurse && patient.nurse.nurseId == nurseData.nurseId) {
             userList.forEach((user) => {
                 if (patient.user.userId == user.userId)
                     addPatient(user, (restriction = true));
