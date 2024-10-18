@@ -185,7 +185,6 @@ const ftnEditSaveProfile = (role, userData, patientData) => {
             editBtnElement.innerHTML = 'Save';
             
             document.getElementById('name').disabled = false;
-            document.getElementById('email').disabled = false;
             document.getElementById('mobileNumber').disabled = false;
             if (role === "Patient") {
                 document.getElementById('next-of-kin-name').disabled = false;
@@ -199,7 +198,6 @@ const ftnEditSaveProfile = (role, userData, patientData) => {
             editBtnElement.innerHTML = 'Edit';
             
             document.getElementById('name').disabled = true;
-            document.getElementById('email').disabled = true;
             document.getElementById('mobileNumber').disabled = true;   
             if (role === "Patient") {
                 document.getElementById('packageSelected').disabled = true;
@@ -208,7 +206,6 @@ const ftnEditSaveProfile = (role, userData, patientData) => {
             }
 
             const name = document.getElementById('name');
-            const email = document.getElementById('email');
             const mobile = document.getElementById('mobileNumber');
             const nokName = document.getElementById('next-of-kin-name');
             const nokMobile = document.getElementById('next-of-kin-mobile');
@@ -221,7 +218,6 @@ const ftnEditSaveProfile = (role, userData, patientData) => {
                     userId: userData.userId,
                     role: userData.role,
                     name: name.value,
-                    email: email.value,
                     phone: mobile.value
                 };
                 
@@ -236,7 +232,6 @@ const ftnEditSaveProfile = (role, userData, patientData) => {
                     userId: userData.userId,
                     role: userData.role,
                     name: name.value,
-                    email: email.value,
                     phone: mobile.value,
                 };
                 return update(formData1);
