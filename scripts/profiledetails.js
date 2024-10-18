@@ -295,6 +295,7 @@ async function fillPatientModal(patient, restriction) {
                 putPatientInfo(patient.patientId, null, requestBody, 202);
             else putPatientInfo(patient.patientId, null, requestBody, 200);
             // location.reload();
+            ftnUpdatedMessge();
         };
     }
 
@@ -306,9 +307,11 @@ async function fillPatientModal(patient, restriction) {
             };
             putPatientInfo(patient.patientId, null, requestBody, null);
             // location.reload();
+            ftnUpdatedMessge();
         };
     }
-}
+    }
+    
 
 async function fillStaffModal(nurse, user) {
     await fetchLists();
@@ -453,6 +456,7 @@ function saveStaffInfo(nurse) {
     patientIdsToUnassign.forEach((patientId) => {
         putPatientInfo(patientId, "remove");
     });
+    ftnUpdatedMessge();
 }
 
 function assignPatient(user, patient) {
